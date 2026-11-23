@@ -135,6 +135,76 @@
   text-align: center;
 }
 
+/* ---------- 照片 ---------- */
+
+.photo {
+  display: flex;
+  gap: var(--sp-md);
+  margin-top: var(--sp-md);
+  padding: var(--sp-sm);
+  background: var(--c-bg);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-base);
+}
+
+.photo__img {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+}
+
+.photo__side {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-sm);
+  min-width: 0;
+}
+
+.photo__meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+}
+
+.photo__remove {
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-error);
+  background: transparent;
+  border: 1px solid var(--c-error);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+
+.photo__hint {
+  margin-top: var(--sp-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-success);
+  line-height: 1.5;
+}
+
+.photo__notice {
+  margin-top: var(--sp-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-error);
+  line-height: 1.5;
+}
+
+.entry__photo {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+}
+
 /* ---------- 打一句话 ---------- */
 
 .sentence {

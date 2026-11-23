@@ -3,14 +3,19 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Sheet } from '../../components/Sheet/Sheet';
+import { CameraIcon, PencilIcon } from '../../components/icons/ActionIcons';
 import { SegmentedPortion } from '../../components/SegmentedPortion/SegmentedPortion';
 import { Stepper } from '../../components/Stepper/Stepper';
 import { addEntry, deleteEntry, putEntry } from '../../data/dao/diary';
+import {
+  addPhotoRef,
+  deletePhotoByEntry,
+  getPhotoByEntry,
+} from '../../data/dao/photos';
 import { searchFoods, type IndexedFood } from '../../data/foods';
 import type { Basis, DiaryEntry, Meal, Portion } from '../../data/types';
 import { useFoodIndex } from '../../data/useFoodIndex';
-import { kcalOf, scaleNutrients } from '../../features/diary/calc';
-import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
+import { kcalOf, scaleNutrients } from '../../features/diary/calc';import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
 import { useRecentFoods } from '../../features/memory/hooks';
 import { rememberFood } from '../../features/memory/memory';
 import {
@@ -18,6 +23,12 @@ import {
   resolveParsed,
   type ResolvedItem,
 } from '../../features/parse/sentence';
+import {
+  capturePhoto,
+  deletePhotoFile,
+  photoDataUrl,
+  type PhotoDraft,
+} from '../../services/photo';
 import './EntrySheet.css';
 
 interface EntrySheetProps {
@@ -57,6 +68,13 @@ export function EntrySheet({
   const [sentence, setSentence] = useState('');
   const [rows, setRows] = useState<ResolvedItem[]>([]);
 
+  // 照片（P5 第一步：只存图，识别还没接）
+  const [photo, setPhoto] = useState<PhotoDraft | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [capturing, setCapturing] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+  const savedRef = useRef(false);
+
   // 只在「打开的那一次」回填，索引后到也不会把用户正在改的值冲掉
   useEffect(() => {
     if (!open) {
@@ -72,6 +90,10 @@ export function EntrySheet({
     setMode('pick');
     setSentence('');
     setRows([]);
+    setPhoto(null);
+    setPhotoPreview(null);
+    setNotice(null);
+    savedRef.current = false;
 
     if (editing) {
       const item = editing.foodCode ? index?.byCode.get(editing.foodCode) : undefined;
@@ -80,6 +102,16 @@ export function EntrySheet({
       setPortion(editing.portion);
       setMeal(editing.meal);
       setBasis(editing.basis);
+
+      // 编辑已有记录时把照片读回来做缩略图
+      void getPhotoByEntry(editing.id).then(async (ref) => {
+        if (!ref) return;
+        try {
+          setPhotoPreview(await photoDataUrl(ref.relPath));
+        } catch {
+          /* 文件可能已被系统清理，忽略 */
+        }
+      });
     } else {
       setPicked(null);
       setGrams(150);
@@ -118,6 +150,44 @@ export function EntrySheet({
     if (picked) setGrams(portionGrams(resolvePortionCategory(picked), next));
   }
 
+  // ---------------------------------------------------------------- 照片
+
+  async function takePhoto() {
+    if (capturing) return;
+    setCapturing(true);
+    setNotice(null);
+    try {
+      const draft = await capturePhoto();
+      setPhoto(draft);
+      setPhotoPreview(await photoDataUrl(draft.relPath));
+    } catch (error) {
+      setNotice(t('entry.photoFailed', { message: error instanceof Error ? error.message : String(error) }));
+    } finally {
+      setCapturing(false);
+    }
+  }
+
+  async function removePhoto() {
+    if (photo) void deletePhotoFile(photo.relPath);
+    setPhoto(null);
+    setPhotoPreview(null);
+  }
+
+  /** 关弹窗：没保存就把刚才拍的图删掉，不留孤儿文件 */
+  function closeSheet() {
+    if (!savedRef.current && photo) void deletePhotoFile(photo.relPath);
+    savedRef.current = false;
+    onClose();
+  }
+
+  async function attachPhoto(entryId: string, existingId?: string): Promise<string | undefined> {
+    if (!photo) return existingId;
+    if (existingId) return existingId;
+    const id = crypto.randomUUID();
+    await addPhotoRef({ id, entryId, ...photo, createdAt: Date.now() });
+    return id;
+  }
+
   async function save() {
     if (!picked || busy) return;
     setBusy(true);
@@ -128,11 +198,18 @@ export function EntrySheet({
         if (portion) updated.portion = portion;
         else delete updated.portion;
         await putEntry(updated);
+
+        const photoId = await attachPhoto(editing.id, editing.photoId);
+        if (photoId && photoId !== editing.photoId) {
+          await putEntry({ ...updated, photoId });
+        }
+
         // 用户改过的克数就是这次「修正」，回写记忆库
         await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.updated'));
       } else {
-        await addEntry({
+        const photoId = photo ? crypto.randomUUID() : undefined;
+        const entry = await addEntry({
           date,
           meal,
           foodCode: picked.code,
@@ -142,10 +219,15 @@ export function EntrySheet({
           portion,
           nutrients,
           source: 'search',
+          photoId,
         });
+        if (photoId) {
+          await addPhotoRef({ id: photoId, entryId: entry.id, ...photo!, createdAt: Date.now() });
+        }
         await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.saved'));
       }
+      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -164,7 +246,8 @@ export function EntrySheet({
     setBusy(true);
     try {
       const nutrients = scaleNutrients(item.nut, gramsFromMemory, 'edible', item.edible);
-      await addEntry({
+      const photoId = photo ? crypto.randomUUID() : undefined;
+      const entry = await addEntry({
         date,
         meal,
         foodCode: item.code,
@@ -174,7 +257,11 @@ export function EntrySheet({
         portion: memoryPortion,
         nutrients,
         source: 'memory',
+        photoId,
       });
+      if (photoId) {
+        await addPhotoRef({ id: photoId, entryId: entry.id, ...photo!, createdAt: Date.now() });
+      }
       await rememberFood({
         foodCode: item.code,
         name: item.name,
@@ -182,6 +269,7 @@ export function EntrySheet({
         portion: memoryPortion,
       });
       onSaved(t('entry.saved'));
+      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -192,8 +280,12 @@ export function EntrySheet({
     if (!editing || busy) return;
     setBusy(true);
     try {
+      // 先清图片引用和文件，再删记录
+      const refs = await deletePhotoByEntry(editing.id);
+      for (const ref of refs) await deletePhotoFile(ref.relPath);
       await deleteEntry(editing.id);
       onSaved(t('entry.deleted'));
+      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -233,11 +325,13 @@ export function EntrySheet({
 
     setBusy(true);
     try {
+      let first = true;
       for (const row of valid) {
         const food = row.food;
         if (!food) continue;
         const nutrients = scaleNutrients(food.nut, row.grams, 'edible', food.edible);
-        await addEntry({
+        const photoId = first && photo ? crypto.randomUUID() : undefined;
+        const entry = await addEntry({
           date,
           meal,
           foodCode: food.code,
@@ -247,10 +341,17 @@ export function EntrySheet({
           portion: row.portion,
           nutrients,
           source: 'text',
+          photoId,
         });
+        // 一张照片只挂第一条，多条记录共用一张图反而混乱
+        if (photoId && photo) {
+          await addPhotoRef({ id: photoId, entryId: entry.id, ...photo, createdAt: Date.now() });
+        }
+        first = false;
         await rememberFood({ foodCode: food.code, name: food.name, grams: row.grams, portion: row.portion });
       }
       onSaved(t('entry.savedCount', { count: valid.length }));
+      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -260,7 +361,7 @@ export function EntrySheet({
   const title = editing ? t('entry.editTitle') : t('entry.title');
 
   return (
-    <Sheet open={open} onClose={onClose} title={title}>
+    <Sheet open={open} onClose={closeSheet} title={title}>
       {picked ? (
         <div className="entry">
           <div className="entry__head">
@@ -276,8 +377,9 @@ export function EntrySheet({
             </span>
           </div>
 
-          <p className="entry__label">{t('entry.portion')}</p>
-          <SegmentedPortion value={portion} labels={portionLabels} onChange={applyPortion} />
+          {photoPreview ? <img className="entry__photo" src={photoPreview} alt="" /> : null}
+
+          <p className="entry__label">{t('entry.portion')}</p>          <SegmentedPortion value={portion} labels={portionLabels} onChange={applyPortion} />
 
           <div className="entry__stepper">
             <Stepper
@@ -410,6 +512,33 @@ export function EntrySheet({
         </div>
       ) : (
         <div className="pick">
+          <Button
+            type="default"
+            block
+            loading={capturing}
+            icon={<CameraIcon />}
+            onClick={takePhoto}
+          >
+            {t('entry.photo')}
+          </Button>
+
+          {photoPreview ? (
+            <div className="photo">
+              <img className="photo__img" src={photoPreview} alt="" />
+              <div className="photo__side">
+                <span className="photo__meta">
+                  {photo ? `${photo.width}×${photo.height} · ${Math.round(photo.bytes / 1024)} KB` : ''}
+                </span>
+                <button type="button" className="photo__remove" onClick={removePhoto}>
+                  {t('entry.removePhoto')}
+                </button>
+              </div>
+            </div>
+          ) : null}
+
+          {photoPreview ? <p className="photo__hint">{t('entry.photoNotReady')}</p> : null}
+          {notice ? <p className="photo__notice">{notice}</p> : null}
+
           {!query.trim() && recent.length > 0 ? (
             <>
               <p className="pick__section">{t('entry.recent')}</p>
@@ -466,7 +595,7 @@ export function EntrySheet({
           ) : null}
 
           {!query.trim() ? (
-            <Button type="text" block onClick={() => setMode('sentence')}>
+            <Button type="text" block icon={<PencilIcon />} onClick={() => setMode('sentence')}>
               {t('entry.sentence')}
             </Button>
           ) : null}
