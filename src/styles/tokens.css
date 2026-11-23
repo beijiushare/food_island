@@ -73,8 +73,10 @@
   --z-toast: 300;
 }
 
-/* 本项目的字体栈（库已通过 @fontsource 自带 Nunito / Noto Sans SC / Zen Maru Gothic） */
+/* 本项目的字体栈：西文/数字走 Nunito（圆润、体积小），中文走 Noto Sans SC（库自带，完整简体覆盖）。
+   Zen Maru Gothic 是日文字体，已被 vite.config.ts 的 stripFonts 剃掉，这里不再声明。
+   中文永远轮不到 Nunito —— 它没有 CJK 字形。 */
 :root {
-  --font-sans: Nunito, 'Noto Sans SC', 'Zen Maru Gothic', 'HarmonyOS Sans SC', MiSans,
-    -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-sans: Nunito, 'Noto Sans SC', 'HarmonyOS Sans SC', MiSans, -apple-system,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
