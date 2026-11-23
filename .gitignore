@@ -1,0 +1,84 @@
+# ============================================
+# 依赖
+# ============================================
+node_modules/
+.pnpm-store/
+.npm/
+
+# ============================================
+# 构建产物
+# ============================================
+dist/
+dist-ssr/
+build/
+output/
+*.local
+*.tsbuildinfo
+
+# ============================================
+# Capacitor / Android
+# ============================================
+# 保留 android/ 源码，忽略构建产物与本机配置
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/captures/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json
+android/capacitor-cordova-android-plugins/
+android/app/release/
+*.jks
+*.keystore
+!android/app/debug.keystore
+
+# ============================================
+# 参考仓库（只读，不入库）
+# ============================================
+参考/
+
+# ============================================
+# AI / 工具临时产物
+# ============================================
+.claude/
+.claude_temp/
+.claude_dist/
+*.tmp
+
+# ============================================
+# 环境变量与密钥
+# ============================================
+.env
+.env.*
+!.env.example
+*.pem
+
+# ============================================
+# 运行时导出（用户数据备份，不入库）
+# ============================================
+exports/
+*.csv
+!data-src/*.csv
+
+# ============================================
+# 日志与测试
+# ============================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+coverage/
+.nyc_output/
+
+# ============================================
+# 编辑器 / 系统
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp

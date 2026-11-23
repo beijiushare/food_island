@@ -1,0 +1,55 @@
+{
+  "app": {
+    "name": "食岛",
+    "loading": "正在上岛…"
+  },
+  "nav": {
+    "today": "今天",
+    "stats": "统计",
+    "me": "我的"
+  },
+  "today": {
+    "greetingMorning": "早上好，今天也要好好吃饭",
+    "greetingNoon": "中午啦，记一笔吧",
+    "greetingAfternoon": "下午好，别忘了下午茶",
+    "greetingEvening": "晚上好，今天吃了什么",
+    "greetingNight": "夜深了，早点休息",
+    "empty": "今天还没有记录哦",
+    "emptyAction": "记一笔",
+    "kcal": "kcal",
+    "target": "/ {{value}} kcal",
+    "breakfast": "早餐",
+    "lunch": "午餐",
+    "dinner": "晚餐",
+    "snack": "加餐",
+    "addMeal": "添加{{meal}}",
+    "protein": "蛋白",
+    "carb": "碳水",
+    "fat": "脂肪"
+  },
+  "stats": {
+    "title": "统计",
+    "week": "本周",
+    "month": "本月",
+    "placeholder": "统计还在路上"
+  },
+  "me": {
+    "title": "我的",
+    "placeholder": "设置还在路上"
+  },
+  "search": {
+    "title": "搜索成分表",
+    "placeholder": "搜「米饭」「mifan」「西红柿」",
+    "empty": "没找到，换个说法试试？",
+    "hint": "共 {{count}} 条",
+    "stale": "生",
+    "cooked": "熟",
+    "loading": "正在加载成分表…"
+  },
+  "common": {
+    "cancel": "取消",
+    "confirm": "记下来",
+    "back": "返回",
+    "retry": "重试"
+  }
+}

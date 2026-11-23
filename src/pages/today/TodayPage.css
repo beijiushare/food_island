@@ -1,0 +1,32 @@
+.today__header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--sp-sm);
+}
+
+.today__greeting {
+  margin-bottom: var(--sp-lg);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-text-body);
+}
+
+.today__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-lg);
+  padding: var(--sp-xl) var(--sp-lg);
+  text-align: center;
+}
+
+.today__empty-art {
+  display: block;
+}
+
+.today__empty-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+}

@@ -1,0 +1,110 @@
+/* ============================================================
+   食岛 · 全局样式
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* 移动端不跟随系统缩放，避免布局抖动 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--c-text-body);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 移动端长按不弹系统菜单，代码里需要长按的地方自己处理 */
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 页面滚动区（设计文档 §7.1） */
+.page {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--sp-lg);
+  padding-bottom: calc(var(--h-bottom-nav) + 48px + env(safe-area-inset-bottom));
+}
+
+.page__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: var(--sp-md);
+}
+
+/* 页面进入动画（设计文档 §6.2） */
+@keyframes ac-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ac-fade-up {
+  animation: ac-fade-up var(--mo-base) var(--mo-ease);
+}
+
+/* 无障碍：尊重系统的「减少动态效果」 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
