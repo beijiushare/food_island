@@ -18,9 +18,48 @@
 }
 
 .me__value {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
   font-size: 14px;
   font-weight: 700;
   color: var(--c-text-body);
+}
+
+.me__edit {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text);
+  background: var(--c-primary-bg);
+  border: 1px solid var(--c-primary);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+
+.targets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.targets__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+}
+
+.targets__label {
+  flex: none;
+  min-width: 72px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.targets__row .stepper {
+  flex: 1;
 }
 
 .me__section {

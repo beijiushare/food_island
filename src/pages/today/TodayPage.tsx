@@ -161,14 +161,17 @@ export function TodayPage() {
               {list.map((entry) => (
                 <ListItem
                   key={entry.id}
-                  name={entry.name}
+                  name={entry.pending ? t('entry.pendingName') : entry.name}
                   sub={
-                    entry.portion
-                      ? t(PORTION_LABEL[entry.portion])
-                      : t(SOURCE_LABEL[entry.source])
+                    entry.pending
+                      ? t('entry.pendingShort')
+                      : entry.portion
+                        ? t(PORTION_LABEL[entry.portion])
+                        : t(SOURCE_LABEL[entry.source])
                   }
                   grams={entry.grams}
                   kcal={kcalOf(entry.nutrients)}
+                  hideNumbers={entry.pending}
                   onClick={() => openEdit(entry)}
                 />
               ))}

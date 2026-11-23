@@ -15,7 +15,7 @@ import {
 import { searchFoods, type IndexedFood } from '../../data/foods';
 import type { Basis, DiaryEntry, Meal, Portion } from '../../data/types';
 import { useFoodIndex } from '../../data/useFoodIndex';
-import { kcalOf, scaleNutrients } from '../../features/diary/calc';import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
+import { emptyNutrients, kcalOf, scaleNutrients } from '../../features/diary/calc';import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
 import { useRecentFoods } from '../../features/memory/hooks';
 import { rememberFood } from '../../features/memory/memory';
 import {
@@ -27,7 +27,6 @@ import {
   capturePhoto,
   deletePhotoFile,
   photoDataUrl,
-  type PhotoDraft,
 } from '../../services/photo';
 import './EntrySheet.css';
 
@@ -68,12 +67,17 @@ export function EntrySheet({
   const [sentence, setSentence] = useState('');
   const [rows, setRows] = useState<ResolvedItem[]>([]);
 
-  // 照片（P5 第一步：只存图，识别还没接）
-  const [photo, setPhoto] = useState<PhotoDraft | null>(null);
+  // 照片：拍照即建档，pending 表示「只有照片、食物待补」
+  const [pendingEntry, setPendingEntry] = useState<DiaryEntry | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoMeta, setPhotoMeta] = useState<{ width: number; height: number; bytes: number } | null>(
+    null,
+  );
   const [capturing, setCapturing] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
-  const savedRef = useRef(false);
+
+  /** 当前正在编辑/补充的记录 */
+  const target = editing ?? pendingEntry;
 
   // 只在「打开的那一次」回填，索引后到也不会把用户正在改的值冲掉
   useEffect(() => {
@@ -90,10 +94,10 @@ export function EntrySheet({
     setMode('pick');
     setSentence('');
     setRows([]);
-    setPhoto(null);
+    setPendingEntry(null);
     setPhotoPreview(null);
+    setPhotoMeta(null);
     setNotice(null);
-    savedRef.current = false;
 
     if (editing) {
       const item = editing.foodCode ? index?.byCode.get(editing.foodCode) : undefined;
@@ -108,6 +112,7 @@ export function EntrySheet({
         if (!ref) return;
         try {
           setPhotoPreview(await photoDataUrl(ref.relPath));
+          setPhotoMeta({ width: ref.width, height: ref.height, bytes: ref.bytes });
         } catch {
           /* 文件可能已被系统清理，忽略 */
         }
@@ -152,40 +157,88 @@ export function EntrySheet({
 
   // ---------------------------------------------------------------- 照片
 
+  /**
+   * 拍照即建档：先把照片落盘 + 插一条 pending 记录，再让用户慢慢补食物。
+   * 这样网络/AI/手滑都不会让原图丢——记录本身已经存在了。
+   */
   async function takePhoto() {
     if (capturing) return;
     setCapturing(true);
     setNotice(null);
     try {
       const draft = await capturePhoto();
-      setPhoto(draft);
+      const photoId = crypto.randomUUID();
+
+      let entry: DiaryEntry;
+      if (target) {
+        // 已经有这条记录：替换/补上照片即可
+        const refs = await deletePhotoByEntry(target.id);
+        for (const ref of refs) await deletePhotoFile(ref.relPath);
+        entry = { ...target, photoId };
+        await putEntry(entry);
+      } else {
+        entry = await addEntry({
+          date,
+          meal,
+          foodCode: null,
+          name: '',
+          grams: 0,
+          basis: 'edible',
+          nutrients: emptyNutrients(),
+          source: 'photo',
+          photoId,
+          pending: true,
+        });
+      }
+
+      await addPhotoRef({ id: photoId, entryId: entry.id, ...draft, createdAt: Date.now() });
+      setPendingEntry(entry);
       setPhotoPreview(await photoDataUrl(draft.relPath));
+      setPhotoMeta({ width: draft.width, height: draft.height, bytes: draft.bytes });
+      onSaved(t('entry.photoSaved'));
     } catch (error) {
-      setNotice(t('entry.photoFailed', { message: error instanceof Error ? error.message : String(error) }));
+      setNotice(
+        t('entry.photoFailed', {
+          message: error instanceof Error ? error.message : String(error),
+        }),
+      );
     } finally {
       setCapturing(false);
     }
   }
 
   async function removePhoto() {
-    if (photo) void deletePhotoFile(photo.relPath);
-    setPhoto(null);
-    setPhotoPreview(null);
-  }
+    if (!target) {
+      setPhotoPreview(null);
+      setPhotoMeta(null);
+      return;
+    }
 
-  /** 关弹窗：没保存就把刚才拍的图删掉，不留孤儿文件 */
-  function closeSheet() {
-    if (!savedRef.current && photo) void deletePhotoFile(photo.relPath);
-    savedRef.current = false;
-    onClose();
-  }
+    setBusy(true);
+    try {
+      const refs = await deletePhotoByEntry(target.id);
+      for (const ref of refs) await deletePhotoFile(ref.relPath);
 
-  async function attachPhoto(entryId: string, existingId?: string): Promise<string | undefined> {
-    if (!photo) return existingId;
-    if (existingId) return existingId;
-    const id = crypto.randomUUID();
-    await addPhotoRef({ id, entryId, ...photo, createdAt: Date.now() });
-    return id;
+      if (target.pending) {
+        // 照片是这条记录的全部内容，删图就等于删记录
+        await deleteEntry(target.id);
+        setPendingEntry(null);
+        setPhotoPreview(null);
+        setPhotoMeta(null);
+        onSaved(t('entry.deleted'));
+        onClose();
+        return;
+      }
+
+      const updated: DiaryEntry = { ...target };
+      delete updated.photoId;
+      await putEntry(updated);
+      setPhotoPreview(null);
+      setPhotoMeta(null);
+      onSaved(t('entry.photoRemoved'));
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function save() {
@@ -193,23 +246,29 @@ export function EntrySheet({
     setBusy(true);
     try {
       const nutrients = scaleNutrients(picked.nut, grams, basis, picked.edible);
-      if (editing) {
-        const updated: DiaryEntry = { ...editing, meal, grams, basis, nutrients };
+
+      if (target) {
+        const updated: DiaryEntry = {
+          ...target,
+          foodCode: picked.code,
+          name: picked.name,
+          meal,
+          grams,
+          basis,
+          nutrients,
+          // 从「只有照片」补成正式记录时，来源保留 photo，便于统计区分
+          source: target.pending ? 'photo' : target.source,
+        };
         if (portion) updated.portion = portion;
         else delete updated.portion;
+        delete updated.pending;
+
         await putEntry(updated);
-
-        const photoId = await attachPhoto(editing.id, editing.photoId);
-        if (photoId && photoId !== editing.photoId) {
-          await putEntry({ ...updated, photoId });
-        }
-
         // 用户改过的克数就是这次「修正」，回写记忆库
         await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.updated'));
       } else {
-        const photoId = photo ? crypto.randomUUID() : undefined;
-        const entry = await addEntry({
+        await addEntry({
           date,
           meal,
           foodCode: picked.code,
@@ -219,15 +278,11 @@ export function EntrySheet({
           portion,
           nutrients,
           source: 'search',
-          photoId,
         });
-        if (photoId) {
-          await addPhotoRef({ id: photoId, entryId: entry.id, ...photo!, createdAt: Date.now() });
-        }
         await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.saved'));
       }
-      savedRef.current = true;
+
       onClose();
     } finally {
       setBusy(false);
@@ -246,8 +301,7 @@ export function EntrySheet({
     setBusy(true);
     try {
       const nutrients = scaleNutrients(item.nut, gramsFromMemory, 'edible', item.edible);
-      const photoId = photo ? crypto.randomUUID() : undefined;
-      const entry = await addEntry({
+      await addEntry({
         date,
         meal,
         foodCode: item.code,
@@ -257,11 +311,7 @@ export function EntrySheet({
         portion: memoryPortion,
         nutrients,
         source: 'memory',
-        photoId,
       });
-      if (photoId) {
-        await addPhotoRef({ id: photoId, entryId: entry.id, ...photo!, createdAt: Date.now() });
-      }
       await rememberFood({
         foodCode: item.code,
         name: item.name,
@@ -269,7 +319,6 @@ export function EntrySheet({
         portion: memoryPortion,
       });
       onSaved(t('entry.saved'));
-      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -277,15 +326,15 @@ export function EntrySheet({
   }
 
   async function remove() {
-    if (!editing || busy) return;
+    if (!target || busy) return;
     setBusy(true);
     try {
       // 先清图片引用和文件，再删记录
-      const refs = await deletePhotoByEntry(editing.id);
+      const refs = await deletePhotoByEntry(target.id);
       for (const ref of refs) await deletePhotoFile(ref.relPath);
-      await deleteEntry(editing.id);
+      await deleteEntry(target.id);
+      setPendingEntry(null);
       onSaved(t('entry.deleted'));
-      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
@@ -325,13 +374,11 @@ export function EntrySheet({
 
     setBusy(true);
     try {
-      let first = true;
       for (const row of valid) {
         const food = row.food;
         if (!food) continue;
         const nutrients = scaleNutrients(food.nut, row.grams, 'edible', food.edible);
-        const photoId = first && photo ? crypto.randomUUID() : undefined;
-        const entry = await addEntry({
+        await addEntry({
           date,
           meal,
           foodCode: food.code,
@@ -341,32 +388,25 @@ export function EntrySheet({
           portion: row.portion,
           nutrients,
           source: 'text',
-          photoId,
         });
-        // 一张照片只挂第一条，多条记录共用一张图反而混乱
-        if (photoId && photo) {
-          await addPhotoRef({ id: photoId, entryId: entry.id, ...photo, createdAt: Date.now() });
-        }
-        first = false;
         await rememberFood({ foodCode: food.code, name: food.name, grams: row.grams, portion: row.portion });
       }
       onSaved(t('entry.savedCount', { count: valid.length }));
-      savedRef.current = true;
       onClose();
     } finally {
       setBusy(false);
     }
   }
 
-  const title = editing ? t('entry.editTitle') : t('entry.title');
+  const title = target ? t('entry.editTitle') : t('entry.title');
 
   return (
-    <Sheet open={open} onClose={closeSheet} title={title}>
+    <Sheet open={open} onClose={onClose} title={title}>
       {picked ? (
         <div className="entry">
           <div className="entry__head">
             <div>
-              <p className="entry__name">{editing ? editing.name : picked.name}</p>
+              <p className="entry__name">{target?.name || picked.name}</p>
               <p className="entry__cat">
                 {picked.cat1} · {picked.cat2} · 每 100 g 可食部
               </p>
@@ -379,7 +419,8 @@ export function EntrySheet({
 
           {photoPreview ? <img className="entry__photo" src={photoPreview} alt="" /> : null}
 
-          <p className="entry__label">{t('entry.portion')}</p>          <SegmentedPortion value={portion} labels={portionLabels} onChange={applyPortion} />
+          <p className="entry__label">{t('entry.portion')}</p>
+          <SegmentedPortion value={portion} labels={portionLabels} onChange={applyPortion} />
 
           <div className="entry__stepper">
             <Stepper
@@ -423,7 +464,7 @@ export function EntrySheet({
           ) : null}
 
           <div className="entry__actions">
-            {editing ? (
+            {target ? (
               <Button type="text" danger onClick={remove} loading={busy}>
                 {t('entry.delete')}
               </Button>
@@ -433,7 +474,7 @@ export function EntrySheet({
               </Button>
             )}
             <Button type="primary" onClick={save} loading={busy}>
-              {editing ? t('entry.update') : t('entry.save')}
+              {target ? t('entry.update') : t('entry.save')}
             </Button>
           </div>
         </div>
@@ -527,19 +568,25 @@ export function EntrySheet({
               <img className="photo__img" src={photoPreview} alt="" />
               <div className="photo__side">
                 <span className="photo__meta">
-                  {photo ? `${photo.width}×${photo.height} · ${Math.round(photo.bytes / 1024)} KB` : ''}
+                  {photoMeta
+                    ? `${photoMeta.width}×${photoMeta.height} · ${Math.round(photoMeta.bytes / 1024)} KB`
+                    : ''}
                 </span>
-                <button type="button" className="photo__remove" onClick={removePhoto}>
+                <button type="button" className="photo__remove" onClick={removePhoto} disabled={busy}>
                   {t('entry.removePhoto')}
                 </button>
               </div>
             </div>
           ) : null}
 
-          {photoPreview ? <p className="photo__hint">{t('entry.photoNotReady')}</p> : null}
+          {photoPreview ? (
+            <p className="photo__hint">
+              {target?.pending ? t('entry.pendingHint') : t('entry.photoNotReady')}
+            </p>
+          ) : null}
           {notice ? <p className="photo__notice">{notice}</p> : null}
 
-          {!query.trim() && recent.length > 0 ? (
+          {!query.trim() && !target && recent.length > 0 ? (
             <>
               <p className="pick__section">{t('entry.recent')}</p>
               <div className="recent">
@@ -594,7 +641,7 @@ export function EntrySheet({
             <p className="pick__empty">{t('search.empty')}</p>
           ) : null}
 
-          {!query.trim() ? (
+          {!query.trim() && !target ? (
             <Button type="text" block icon={<PencilIcon />} onClick={() => setMode('sentence')}>
               {t('entry.sentence')}
             </Button>

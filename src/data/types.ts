@@ -96,6 +96,11 @@ export interface DiaryEntry {
   photoId?: string;
   source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
   createdAt: number;
+  /**
+   * 只有照片、还没确定食物的占位记录。
+   * 照片先存档，分析成功与否都不影响原图（避免网络抖动就丢图）。
+   */
+  pending?: boolean;
 }
 
 export interface MemoryItem {

@@ -1,18 +1,41 @@
-import { Button, Card, Divider, Footer } from 'animal-island-ui';
+import { Button, Card, Divider, Footer, Modal } from 'animal-island-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Stepper } from '../../components/Stepper/Stepper';
 import { Toast } from '../../components/Toast/Toast';
 import { listAll } from '../../data/dao/diary';
+import { setTargets } from '../../data/dao/settings';
+import type { Targets } from '../../data/types';
 import { useTargets } from '../../features/diary/hooks';
 import { exportDiaryCsv } from '../../services/export';
 import './MePage.css';
 
+const TARGET_FIELDS: { key: keyof Targets; label: string; step: number; unit: string }[] = [
+  { key: 'kcal', label: 'targetKcal', step: 50, unit: 'kcal' },
+  { key: 'protein', label: 'targetProtein', step: 5, unit: 'g' },
+  { key: 'carb', label: 'targetCarb', step: 10, unit: 'g' },
+  { key: 'fat', label: 'targetFat', step: 5, unit: 'g' },
+];
+
 export function MePage() {
   const { t } = useTranslation();
   const targets = useTargets();
+  const [draft, setDraft] = useState<Targets>(targets);
+  const [editing, setEditing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+
+  function openEdit() {
+    setDraft(targets);
+    setEditing(true);
+  }
+
+  async function saveTargets() {
+    await setTargets(draft);
+    setEditing(false);
+    setToast(t('me.targetSaved'));
+  }
 
   async function handleExport() {
     if (busy) return;
@@ -39,7 +62,12 @@ export function MePage() {
       <Card className="me__card">
         <div className="me__row">
           <span className="me__label">{t('me.targetKcal')}</span>
-          <span className="me__value">{targets.kcal} kcal</span>
+          <span className="me__value">
+            {targets.kcal} kcal
+            <button type="button" className="me__edit" onClick={openEdit}>
+              {t('me.edit')}
+            </button>
+          </span>
         </div>
         <div className="me__row">
           <span className="me__label">{t('me.macros')}</span>
@@ -60,6 +88,30 @@ export function MePage() {
       <Divider />
       <p className="me__about">{t('me.about')}</p>
       <Footer type="tree" />
+
+      <Modal
+        open={editing}
+        title={t('me.editTargets')}
+        typewriter={false}
+        onClose={() => setEditing(false)}
+        onOk={saveTargets}
+      >
+        <div className="targets">
+          {TARGET_FIELDS.map((field) => (
+            <div className="targets__row" key={field.key}>
+              <span className="targets__label">{t(`me.${field.label}`)}</span>
+              <Stepper
+                value={draft[field.key]}
+                min={field.key === 'kcal' ? 500 : 0}
+                max={field.key === 'kcal' ? 6000 : 500}
+                step={field.step}
+                unit={field.unit}
+                onChange={(value) => setDraft({ ...draft, [field.key]: value })}
+              />
+            </div>
+          ))}
+        </div>
+      </Modal>
 
       <Toast message={toast} onDone={() => setToast(null)} />
     </div>
