@@ -1,0 +1,12 @@
+# 统一换行符，避免 Windows 下拉取后整文件 diff
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary
+*.keystore binary
+*.jks binary
+
+# Gradle 包装脚本必须在 Linux/macOS 上保持 LF 且可执行
+gradlew text eol=lf
