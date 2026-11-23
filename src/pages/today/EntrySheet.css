@@ -135,6 +135,93 @@
   text-align: center;
 }
 
+/* ---------- 打一句话 ---------- */
+
+.sentence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.parsed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  margin: var(--sp-xs) 0;
+}
+
+.parsed__row {
+  padding: var(--sp-md);
+  background: var(--c-bg);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-base);
+}
+
+.parsed__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-sm);
+}
+
+.parsed__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.parsed__grams {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-body);
+}
+
+.parsed__del {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--c-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.parsed__del:active {
+  background: var(--c-bg-secondary);
+}
+
+.parsed__body {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.parsed__body .segmented {
+  flex: 1;
+}
+
+.parsed__kcal {
+  flex: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-text-body);
+  white-space: nowrap;
+}
+
+.parsed__miss {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-error);
+}
+
 /* ---------- 编辑态 ---------- */
 
 .entry {

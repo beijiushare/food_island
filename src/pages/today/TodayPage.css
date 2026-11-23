@@ -13,9 +13,12 @@
 }
 
 .today__greeting {
+  /* 打字机逐字渲染，文本为空的那一帧不能塌高度，否则整页会抖一下 */
+  min-height: 1.5em;
   margin-bottom: var(--sp-lg);
   font-size: 15px;
   font-weight: 600;
+  line-height: 1.5;
   color: var(--c-text-body);
 }
 
@@ -65,7 +68,7 @@
 
 .today__meal {
   margin-bottom: var(--sp-md);
-  padding-bottom: var(--sp-xs);
+  padding: var(--sp-sm);
 }
 
 .today__meal-head {
@@ -73,7 +76,14 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-md);
-  padding: 2px var(--sp-md) var(--sp-sm);
+  padding: 2px var(--sp-sm) var(--sp-sm);
+}
+
+/* 条目区回到米白底：彩色只留标题栏，长列表更好读 */
+.today__meal-list {
+  overflow: hidden;
+  background: var(--c-bg-content);
+  border-radius: var(--r-base);
 }
 
 .today__meal-title {

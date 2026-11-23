@@ -50,7 +50,22 @@
     "large": "L",
     "portionSmall": "small",
     "portionMedium": "medium",
-    "portionLarge": "large"
+    "portionLarge": "large",
+    "sentence": "✎ Type a sentence",
+    "sentencePlaceholder": "2 liang rice, one egg",
+    "sentenceHint": "Try: 2 liang / 300g / a bowl / one piece",
+    "parse": "Parse",
+    "unresolvedShort": "Not in the food table, will be skipped",
+    "saveAll": "Save all",
+    "savedCount": "Saved {{count}} entries",
+    "removeRow": "Remove",
+    "source": {
+      "photo": "photo",
+      "memory": "recent",
+      "text": "text",
+      "search": "search",
+      "manual": "manual"
+    }
   },
   "stats": {
     "title": "Stats",

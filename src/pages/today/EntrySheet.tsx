@@ -13,6 +13,11 @@ import { kcalOf, scaleNutrients } from '../../features/diary/calc';
 import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
 import { useRecentFoods } from '../../features/memory/hooks';
 import { rememberFood } from '../../features/memory/memory';
+import {
+  parseSentence,
+  resolveParsed,
+  type ResolvedItem,
+} from '../../features/parse/sentence';
 import './EntrySheet.css';
 
 interface EntrySheetProps {
@@ -47,6 +52,11 @@ export function EntrySheet({
   const [busy, setBusy] = useState(false);
   const initializedRef = useRef(false);
 
+  // 「打一句话」模式
+  const [mode, setMode] = useState<'pick' | 'sentence'>('pick');
+  const [sentence, setSentence] = useState('');
+  const [rows, setRows] = useState<ResolvedItem[]>([]);
+
   // 只在「打开的那一次」回填，索引后到也不会把用户正在改的值冲掉
   useEffect(() => {
     if (!open) {
@@ -59,6 +69,9 @@ export function EntrySheet({
     initializedRef.current = true;
     setBusy(false);
     setQuery('');
+    setMode('pick');
+    setSentence('');
+    setRows([]);
 
     if (editing) {
       const item = editing.foodCode ? index?.byCode.get(editing.foodCode) : undefined;
@@ -187,6 +200,63 @@ export function EntrySheet({
     }
   }
 
+  // ---------------------------------------------------------------- 打一句话
+
+  function runParse() {
+    if (!index || !sentence.trim()) return;
+    setRows(parseSentence(sentence).map((parsed) => resolveParsed(index, parsed)));
+  }
+
+  function updateRowPortion(index: number, next: Portion) {
+    setRows((prev) =>
+      prev.map((row, i) => {
+        if (i !== index || !row.food) return row;
+        const grams = portionGrams(resolvePortionCategory(row.food), next);
+        return {
+          ...row,
+          portion: next,
+          grams,
+          nutrients: scaleNutrients(row.food.nut, grams, 'edible', row.food.edible),
+        };
+      }),
+    );
+  }
+
+  function removeRow(index: number) {
+    setRows((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  async function saveAll() {
+    if (busy) return;
+    const valid = rows.filter((row) => row.food);
+    if (valid.length === 0) return;
+
+    setBusy(true);
+    try {
+      for (const row of valid) {
+        const food = row.food;
+        if (!food) continue;
+        const nutrients = scaleNutrients(food.nut, row.grams, 'edible', food.edible);
+        await addEntry({
+          date,
+          meal,
+          foodCode: food.code,
+          name: food.name,
+          grams: row.grams,
+          basis: 'edible',
+          portion: row.portion,
+          nutrients,
+          source: 'text',
+        });
+        await rememberFood({ foodCode: food.code, name: food.name, grams: row.grams, portion: row.portion });
+      }
+      onSaved(t('entry.savedCount', { count: valid.length }));
+      onClose();
+    } finally {
+      setBusy(false);
+    }
+  }
+
   const title = editing ? t('entry.editTitle') : t('entry.title');
 
   return (
@@ -265,6 +335,79 @@ export function EntrySheet({
             </Button>
           </div>
         </div>
+      ) : mode === 'sentence' ? (
+        <div className="sentence">
+          <Input
+            size="large"
+            allowClear
+            value={sentence}
+            placeholder={t('entry.sentencePlaceholder')}
+            onChange={(e) => setSentence(e.target.value)}
+            onClear={() => {
+              setSentence('');
+              setRows([]);
+            }}
+          />
+          <p className="pick__hint">{t('entry.sentenceHint')}</p>
+
+          <Button type="default" block onClick={runParse} disabled={!sentence.trim()}>
+            {t('entry.parse')}
+          </Button>
+
+          {rows.length > 0 ? (
+            <ul className="parsed">
+              {rows.map((row, i) => (
+                <li className="parsed__row" key={`${row.raw}-${i}`}>
+                  <div className="parsed__head">
+                    <span className="parsed__name">
+                      {row.food ? row.food.name : row.name}
+                    </span>
+                    <span className="parsed__grams">
+                      {row.food ? `${Math.round(row.grams)} g` : '—'}
+                    </span>
+                    <button
+                      type="button"
+                      className="parsed__del"
+                      onClick={() => removeRow(i)}
+                      aria-label={t('entry.removeRow')}
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  {row.food ? (
+                    <div className="parsed__body">
+                      <SegmentedPortion
+                        value={row.portion}
+                        labels={portionLabels}
+                        onChange={(next) => updateRowPortion(i, next)}
+                      />
+                      <span className="parsed__kcal">
+                        {row.nutrients ? kcalOf(row.nutrients) : 0} kcal
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="parsed__miss">{t('entry.unresolvedShort')}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <div className="entry__actions">
+            <Button type="text" onClick={() => setMode('pick')}>
+              {t('common.cancel')}
+            </Button>
+            <Button
+              type="primary"
+              onClick={saveAll}
+              loading={busy}
+              disabled={rows.every((row) => !row.food)}
+            >
+              {t('entry.saveAll')}
+            </Button>
+          </div>
+        </div>
       ) : (
         <div className="pick">
           {!query.trim() && recent.length > 0 ? (
@@ -320,6 +463,12 @@ export function EntrySheet({
           </ul>
           {query.trim() && hits.length === 0 ? (
             <p className="pick__empty">{t('search.empty')}</p>
+          ) : null}
+
+          {!query.trim() ? (
+            <Button type="text" block onClick={() => setMode('sentence')}>
+              {t('entry.sentence')}
+            </Button>
           ) : null}
         </div>
       )}

@@ -50,7 +50,22 @@
     "large": "大",
     "portionSmall": "小份",
     "portionMedium": "中份",
-    "portionLarge": "大份"
+    "portionLarge": "大份",
+    "sentence": "✎ 打一句话",
+    "sentencePlaceholder": "中午吃了二两米饭、一个鸡蛋",
+    "sentenceHint": "支持：二两 / 300g / 一碗 / 两个 / 半碗",
+    "parse": "拆一下",
+    "unresolvedShort": "成分表里查不到，会跳过",
+    "saveAll": "全部记下来",
+    "savedCount": "记下 {{count}} 条",
+    "removeRow": "删掉这条",
+    "source": {
+      "photo": "拍照",
+      "memory": "常吃",
+      "text": "文字",
+      "search": "搜索",
+      "manual": "手动"
+    }
   },
   "stats": {
     "title": "统计",

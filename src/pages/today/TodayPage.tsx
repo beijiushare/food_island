@@ -24,6 +24,20 @@ const MEAL_COLOR = {
   snack: 'purple',
 } as const;
 
+const PORTION_LABEL = {
+  small: 'entry.portionSmall',
+  medium: 'entry.portionMedium',
+  large: 'entry.portionLarge',
+} as const;
+
+const SOURCE_LABEL: Record<DiaryEntry['source'], string> = {
+  photo: 'entry.source.photo',
+  memory: 'entry.source.memory',
+  text: 'entry.source.text',
+  search: 'entry.source.search',
+  manual: 'entry.source.manual',
+};
+
 function greetingKey(hour: number): string {
   if (hour < 5) return 'today.greetingNight';
   if (hour < 11) return 'today.greetingMorning';
@@ -95,7 +109,7 @@ export function TodayPage() {
       </header>
 
       <p className="today__greeting">
-        <Typewriter trigger={date}>{t(greeting)}</Typewriter>
+        <Typewriter>{t(greeting)}</Typewriter>
       </p>
 
       <Card className="today__summary">
@@ -143,24 +157,22 @@ export function TodayPage() {
               <span className="today__meal-title">{t(`today.${meal}`)}</span>
               <span className="today__meal-kcal">{mealKcal} kcal</span>
             </div>
-            {list.map((entry) => (
-              <ListItem
-                key={entry.id}
-                name={entry.name}
-                sub={
-                  entry.portion === 'small'
-                    ? t('entry.portionSmall')
-                    : entry.portion === 'medium'
-                      ? t('entry.portionMedium')
-                      : entry.portion === 'large'
-                        ? t('entry.portionLarge')
-                        : t('entry.manual')
-                }
-                grams={entry.grams}
-                kcal={kcalOf(entry.nutrients)}
-                onClick={() => openEdit(entry)}
-              />
-            ))}
+            <div className="today__meal-list">
+              {list.map((entry) => (
+                <ListItem
+                  key={entry.id}
+                  name={entry.name}
+                  sub={
+                    entry.portion
+                      ? t(PORTION_LABEL[entry.portion])
+                      : t(SOURCE_LABEL[entry.source])
+                  }
+                  grams={entry.grams}
+                  kcal={kcalOf(entry.nutrients)}
+                  onClick={() => openEdit(entry)}
+                />
+              ))}
+            </div>
           </Card>
         );
       })}
