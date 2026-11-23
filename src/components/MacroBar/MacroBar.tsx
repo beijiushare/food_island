@@ -6,11 +6,20 @@ interface MacroBarProps {
   target: number;
   tone: 'protein' | 'carb' | 'fat';
   unit?: string;
+  /** 营养构成里只显示百分比，不显示 x/目标 */
+  showTarget?: boolean;
 }
 
-export function MacroBar({ label, value, target, tone, unit = 'g' }: MacroBarProps) {
-  const ratio = target > 0 ? Math.min(1, value / target) : 0;
-  const over = target > 0 && value > target;
+export function MacroBar({
+  label,
+  value,
+  target,
+  tone,
+  unit = 'g',
+  showTarget = true,
+}: MacroBarProps) {
+  const ratio = showTarget ? (target > 0 ? Math.min(1, value / target) : 0) : Math.min(1, value / 100);
+  const over = showTarget && target > 0 && value > target;
 
   return (
     <div className={`macro-bar${over ? ' macro-bar--over' : ''}`}>
@@ -22,8 +31,17 @@ export function MacroBar({ label, value, target, tone, unit = 'g' }: MacroBarPro
         />
       </span>
       <span className="macro-bar__value">
-        {Math.round(value)}/{target}
-        <span className="macro-bar__unit">{unit}</span>
+        {showTarget ? (
+          <>
+            {Math.round(value)}/{target}
+            <span className="macro-bar__unit">{unit}</span>
+          </>
+        ) : (
+          <>
+            {Math.round(value)}
+            <span className="macro-bar__unit">{unit}</span>
+          </>
+        )}
       </span>
     </div>
   );

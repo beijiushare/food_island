@@ -1,0 +1,94 @@
+.chart {
+  margin-top: var(--sp-sm);
+}
+
+.chart__area {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-sm);
+  height: 148px;
+  padding-top: var(--sp-md);
+  border-bottom: 2px solid var(--c-border-light);
+}
+
+.chart__target {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 0;
+  border-top: 2px dashed var(--c-border);
+  pointer-events: none;
+}
+
+.chart__target-label {
+  position: absolute;
+  top: -9px;
+  right: 0;
+  padding-left: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-text-muted);
+  background: var(--c-bg-content);
+}
+
+.chart__col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.chart__track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 112px;
+}
+
+.chart__bar {
+  display: block;
+  width: 18px;
+  min-height: 3px;
+  border-radius: var(--r-sm);
+  transform-origin: bottom;
+  animation: chart-grow 500ms var(--mo-ease) both;
+}
+
+.chart__bar--ok {
+  background: var(--c-primary);
+}
+
+.chart__bar--over {
+  background: var(--c-error);
+}
+
+.chart__bar--empty {
+  background: var(--c-bg-secondary);
+}
+
+@keyframes chart-grow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.chart__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+}
+
+.chart__caption {
+  margin-top: var(--sp-sm);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-text-muted);
+}

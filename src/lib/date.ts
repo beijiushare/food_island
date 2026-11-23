@@ -38,3 +38,38 @@ export function dayOfMonth(iso: string): string {
 export function monthDayLabel(iso: string): string {
   return at(iso).format(locale() === 'zh-cn' ? 'M月D日' : 'MMM D');
 }
+
+/** 周一为一周起点 */
+export function startOfWeekISO(iso: string = todayISO()): string {
+  const d = dayjs(iso);
+  const offset = (d.day() + 6) % 7;
+  return d.subtract(offset, 'day').format('YYYY-MM-DD');
+}
+
+export function endOfWeekISO(iso: string = todayISO()): string {
+  return addDays(startOfWeekISO(iso), 6);
+}
+
+export function startOfMonthISO(iso: string = todayISO()): string {
+  return dayjs(iso).startOf('month').format('YYYY-MM-DD');
+}
+
+export function endOfMonthISO(iso: string = todayISO()): string {
+  return dayjs(iso).endOf('month').format('YYYY-MM-DD');
+}
+
+/** 闭区间内的每一天 */
+export function dayList(from: string, to: string): string[] {
+  const out: string[] = [];
+  let cursor = dayjs(from);
+  const end = dayjs(to);
+  while (cursor.isBefore(end) || cursor.isSame(end, 'day')) {
+    out.push(cursor.format('YYYY-MM-DD'));
+    cursor = cursor.add(1, 'day');
+  }
+  return out;
+}
+
+export function dayOfMonthNumber(iso: string): number {
+  return dayjs(iso).date();
+}

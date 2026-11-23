@@ -75,7 +75,14 @@
     "title": "统计",
     "week": "本周",
     "month": "本月",
-    "placeholder": "统计还在路上"
+    "average": "平均每日",
+    "recordedDays": "记录天数",
+    "highest": "最高",
+    "kcalTrend": "热量趋势",
+    "macroShare": "营养构成",
+    "weekCaption": "虚线是目标线，红柱表示超了",
+    "monthCaption": "每根柱子是那一周的平均每日热量",
+    "empty": "这段时间还没有记录哦"
   },
   "me": {
     "title": "我的",

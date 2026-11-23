@@ -75,7 +75,14 @@
     "title": "Stats",
     "week": "Week",
     "month": "Month",
-    "placeholder": "Stats coming soon"
+    "average": "Daily average",
+    "recordedDays": "Days logged",
+    "highest": "Highest",
+    "kcalTrend": "Calorie trend",
+    "macroShare": "Macro split",
+    "weekCaption": "Dashed line is the target; red bars went over",
+    "monthCaption": "Each bar is that week's daily average",
+    "empty": "No entries in this period"
   },
   "me": {
     "title": "Me",
