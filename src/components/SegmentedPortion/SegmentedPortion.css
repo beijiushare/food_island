@@ -1,0 +1,33 @@
+.segmented {
+  display: flex;
+  gap: 0;
+  height: 44px;
+  padding: 3px;
+  background: var(--c-bg-content);
+  border: 2px solid var(--c-border-light);
+  border-radius: var(--r-pill);
+}
+
+.segmented__item {
+  flex: 1;
+  min-width: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease), color var(--mo-fast) var(--mo-ease),
+    transform 0.1s var(--mo-ease);
+}
+
+.segmented__item:active {
+  transform: scale(0.97);
+}
+
+.segmented__item--active {
+  color: var(--c-text);
+  background: var(--c-primary-bg);
+  font-weight: 700;
+}

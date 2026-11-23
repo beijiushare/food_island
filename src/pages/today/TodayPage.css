@@ -1,7 +1,15 @@
 .today__header {
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
   margin-bottom: var(--sp-sm);
+}
+
+.today__date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
 }
 
 .today__greeting {
@@ -11,22 +19,69 @@
   color: var(--c-text-body);
 }
 
-.today__empty {
+/* ---------- 汇总卡 ---------- */
+
+.today__summary {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: var(--sp-lg);
+  margin-bottom: var(--sp-md);
+  padding: var(--sp-lg);
+}
+
+.today__macros {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   gap: var(--sp-md);
-  margin-bottom: var(--sp-lg);
-  padding: var(--sp-xl) var(--sp-lg);
-  text-align: center;
+  min-width: 0;
 }
 
-.today__empty-art {
-  display: block;
+/* ---------- 餐次卡 ---------- */
+
+.today__add {
+  margin-bottom: var(--sp-md);
+  padding: 0;
 }
 
-.today__empty-text {
+.today__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--sp-md);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--c-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.today__add-btn:active {
+  color: var(--c-text);
+}
+
+.today__meal {
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-xs);
+}
+
+.today__meal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  padding: 2px var(--sp-md) var(--sp-sm);
+}
+
+.today__meal-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.today__meal-kcal {
+  font-size: 13px;
+  font-weight: 700;
 }

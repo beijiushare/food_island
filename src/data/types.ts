@@ -71,6 +71,105 @@ export interface FoodItem {
   iniFull: string;
 }
 
+export type Meal = 'breakfast' | 'lunch' | 'dinner' | 'snack';
+
+export type Portion = 'small' | 'medium' | 'large';
+
+/** 克数口径：可食部 / 带骨带壳整重 */
+export type Basis = 'edible' | 'as_purchased';
+
+export interface DiaryEntry {
+  id: string;
+  /** 'YYYY-MM-DD' */
+  date: string;
+  meal: Meal;
+  /** 命中成分表才有；手工录入的自定义食物为 null */
+  foodCode: string | null;
+  /** 显示名快照，不随成分表更新而变 */
+  name: string;
+  grams: number;
+  basis: Basis;
+  portion?: Portion;
+  /** 已按克数折算的「实际摄入量」快照 */
+  nutrients: Nutrients;
+  scene?: string;
+  photoId?: string;
+  source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
+  createdAt: number;
+}
+
+export interface MemoryItem {
+  id: string;
+  /** 归一化食物名或 foodCode */
+  foodKey: string;
+  scene: string;
+  grams: number;
+  portion?: Portion;
+  usedCount: number;
+  corrections: number;
+  lastUsedAt: number;
+}
+
+export interface PhotoRef {
+  id: string;
+  entryId: string;
+  /** 相对路径 'photos/2026/11/xxx.jpg'，不存绝对路径 */
+  relPath: string;
+  width: number;
+  height: number;
+  bytes: number;
+  createdAt: number;
+}
+
+export interface Setting {
+  key: string;
+  value: unknown;
+}
+
+export interface Targets {
+  kcal: number;
+  protein: number;
+  carb: number;
+  fat: number;
+}
+
+export const DEFAULT_TARGETS: Targets = {
+  kcal: 1800,
+  protein: 90,
+  carb: 200,
+  fat: 60,
+};
+
+export const NUTRIENT_KEYS: NutrientKey[] = [
+  'kcal',
+  'kj',
+  'protein',
+  'fat',
+  'carb',
+  'fiber',
+  'ash',
+  'water',
+  'chol',
+  'na',
+  'k',
+  'ca',
+  'p',
+  'mg',
+  'fe',
+  'zn',
+  'se',
+  'cu',
+  'mn',
+  'va',
+  'car',
+  'ret',
+  'vb1',
+  'vb2',
+  'niacin',
+  'vc',
+  've',
+];
+
 export interface FoodDataset {
   version: number;
   source: string;

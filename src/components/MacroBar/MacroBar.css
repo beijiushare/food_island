@@ -1,0 +1,58 @@
+.macro-bar {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.macro-bar__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+}
+
+.macro-bar__track {
+  display: block;
+  height: 14px;
+  overflow: hidden;
+  background: var(--c-bg-secondary);
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 2px 4px rgb(114 93 66 / 15%);
+}
+
+.macro-bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-pill);
+  transition: width 500ms var(--mo-ease);
+}
+
+.macro-bar__fill--protein {
+  background: var(--c-primary);
+}
+
+.macro-bar__fill--carb {
+  background: var(--c-warning);
+}
+
+.macro-bar__fill--fat {
+  background: var(--c-error);
+}
+
+.macro-bar--over .macro-bar__fill {
+  background: var(--c-error);
+}
+
+.macro-bar__value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-text-body);
+  white-space: nowrap;
+}
+
+.macro-bar__unit {
+  margin-left: 1px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+}

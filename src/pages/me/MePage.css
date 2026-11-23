@@ -1,0 +1,47 @@
+.me__card {
+  margin-bottom: var(--sp-md);
+  padding: var(--sp-lg);
+}
+
+.me__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  min-height: 32px;
+}
+
+.me__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.me__value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-text-body);
+}
+
+.me__section {
+  margin: var(--sp-lg) 0 var(--sp-sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+}
+
+.me__hint {
+  margin-bottom: var(--sp-md);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+  line-height: 1.6;
+}
+
+.me__about {
+  margin-top: var(--sp-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-text-muted);
+  text-align: center;
+}

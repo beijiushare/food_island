@@ -9,6 +9,7 @@
     "me": "我的"
   },
   "today": {
+    "today": "今天",
     "greetingMorning": "早上好，今天也要好好吃饭",
     "greetingNoon": "中午啦，记一笔吧",
     "greetingAfternoon": "下午好，别忘了下午茶",
@@ -27,6 +28,26 @@
     "carb": "碳水",
     "fat": "脂肪"
   },
+  "entry": {
+    "title": "记一笔",
+    "editTitle": "改一下",
+    "searchPlaceholder": "搜食物，比如 米饭 / mifan",
+    "pickHint": "点一样食物开始",
+    "portion": "份量",
+    "meal": "餐次",
+    "asPurchased": "按带骨带壳整重算",
+    "save": "记下来",
+    "update": "保存",
+    "delete": "删掉这条",
+    "reselect": "换一样",
+    "manual": "手动",
+    "saved": "记下来啦",
+    "updated": "改好啦",
+    "deleted": "删掉啦",
+    "small": "小",
+    "medium": "中",
+    "large": "大"
+  },
   "stats": {
     "title": "统计",
     "week": "本周",
@@ -35,7 +56,15 @@
   },
   "me": {
     "title": "我的",
-    "placeholder": "设置还在路上"
+    "targetKcal": "每日热量目标",
+    "macros": "蛋白 / 碳水 / 脂肪",
+    "data": "数据",
+    "exportHint": "导出全部饮食记录为 CSV。手机换机、系统升级前记得导一次。",
+    "exportCsv": "导出 CSV（全部记录）",
+    "exporting": "正在导出…",
+    "exported": "已导出 {{count}} 条",
+    "noData": "还没有记录可以导出",
+    "about": "食岛 v1.0 · 数据来自中国食物成分表"
   },
   "search": {
     "title": "搜索成分表",

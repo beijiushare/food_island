@@ -9,6 +9,7 @@
     "me": "Me"
   },
   "today": {
+    "today": "today",
     "greetingMorning": "Good morning, eat well today",
     "greetingNoon": "Lunchtime — log your meal",
     "greetingAfternoon": "Good afternoon, snack time?",
@@ -27,6 +28,26 @@
     "carb": "Carbs",
     "fat": "Fat"
   },
+  "entry": {
+    "title": "Log food",
+    "editTitle": "Edit entry",
+    "searchPlaceholder": "Search food, e.g. rice / mifan",
+    "pickHint": "Tap a food to start",
+    "portion": "Portion",
+    "meal": "Meal",
+    "asPurchased": "Count bone/shell weight",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete this entry",
+    "reselect": "Choose another",
+    "manual": "manual",
+    "saved": "Logged!",
+    "updated": "Updated",
+    "deleted": "Deleted",
+    "small": "S",
+    "medium": "M",
+    "large": "L"
+  },
   "stats": {
     "title": "Stats",
     "week": "Week",
@@ -35,7 +56,15 @@
   },
   "me": {
     "title": "Me",
-    "placeholder": "Settings coming soon"
+    "targetKcal": "Daily calorie target",
+    "macros": "Protein / Carbs / Fat",
+    "data": "Data",
+    "exportHint": "Export all entries as CSV. Do it before switching phones or upgrading the OS.",
+    "exportCsv": "Export CSV (all entries)",
+    "exporting": "Exporting…",
+    "exported": "Exported {{count}} entries",
+    "noData": "Nothing to export yet",
+    "about": "Food Island v1.0 · Data from China Food Composition Table"
   },
   "search": {
     "title": "Food database",
