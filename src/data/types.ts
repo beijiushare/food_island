@@ -100,8 +100,10 @@ export interface DiaryEntry {
 
 export interface MemoryItem {
   id: string;
-  /** 归一化食物名或 foodCode */
+  /** foodCode，或 name:<归一化食物名> */
   foodKey: string;
+  /** 显示名快照 */
+  name: string;
   scene: string;
   grams: number;
   portion?: Portion;

@@ -11,6 +11,8 @@ import type { Basis, DiaryEntry, Meal, Portion } from '../../data/types';
 import { useFoodIndex } from '../../data/useFoodIndex';
 import { kcalOf, scaleNutrients } from '../../features/diary/calc';
 import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
+import { useRecentFoods } from '../../features/memory/hooks';
+import { rememberFood } from '../../features/memory/memory';
 import './EntrySheet.css';
 
 interface EntrySheetProps {
@@ -34,6 +36,7 @@ export function EntrySheet({
 }: EntrySheetProps) {
   const { t } = useTranslation();
   const { index } = useFoodIndex(open);
+  const recent = useRecentFoods(8);
 
   const [query, setQuery] = useState('');
   const [picked, setPicked] = useState<IndexedFood | null>(null);
@@ -112,6 +115,8 @@ export function EntrySheet({
         if (portion) updated.portion = portion;
         else delete updated.portion;
         await putEntry(updated);
+        // 用户改过的克数就是这次「修正」，回写记忆库
+        await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.updated'));
       } else {
         await addEntry({
@@ -125,8 +130,45 @@ export function EntrySheet({
           nutrients,
           source: 'search',
         });
+        await rememberFood({ foodCode: picked.code, name: picked.name, grams, portion });
         onSaved(t('entry.saved'));
       }
+      onClose();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  /** 最近吃过：点一下直接记上，零操作（技术文档 §7.2 路径 ①） */
+  async function quickAdd(foodKey: string, memoryGrams: number, memoryPortion?: Portion) {
+    if (busy) return;
+    const gramsFromMemory = Number(memoryGrams);
+    if (!Number.isFinite(gramsFromMemory) || gramsFromMemory <= 0) return;
+
+    const item = index?.byCode.get(foodKey);
+    if (!item) return;
+
+    setBusy(true);
+    try {
+      const nutrients = scaleNutrients(item.nut, gramsFromMemory, 'edible', item.edible);
+      await addEntry({
+        date,
+        meal,
+        foodCode: item.code,
+        name: item.name,
+        grams: gramsFromMemory,
+        basis: 'edible',
+        portion: memoryPortion,
+        nutrients,
+        source: 'memory',
+      });
+      await rememberFood({
+        foodCode: item.code,
+        name: item.name,
+        grams: gramsFromMemory,
+        portion: memoryPortion,
+      });
+      onSaved(t('entry.saved'));
       onClose();
     } finally {
       setBusy(false);
@@ -225,10 +267,30 @@ export function EntrySheet({
         </div>
       ) : (
         <div className="pick">
+          {!query.trim() && recent.length > 0 ? (
+            <>
+              <p className="pick__section">{t('entry.recent')}</p>
+              <div className="recent">
+                {recent.map((memory) => (
+                  <button
+                    key={memory.id}
+                    type="button"
+                    className="recent__chip"
+                    disabled={busy}
+                    onClick={() => quickAdd(memory.foodKey, memory.grams, memory.portion)}
+                  >
+                    <span className="recent__name">{memory.name}</span>
+                    <span className="recent__grams">{Math.round(memory.grams)} g</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : null}
+
           <Input
             size="large"
             allowClear
-            autoFocus
+            autoFocus={recent.length === 0}
             value={query}
             placeholder={t('entry.searchPlaceholder')}
             onChange={(e) => setQuery(e.target.value)}

@@ -33,6 +33,7 @@
     "editTitle": "Edit entry",
     "searchPlaceholder": "Search food, e.g. rice / mifan",
     "pickHint": "Tap a food to start",
+    "recent": "Recently eaten",
     "portion": "Portion",
     "meal": "Meal",
     "asPurchased": "Count bone/shell weight",
@@ -46,7 +47,10 @@
     "deleted": "Deleted",
     "small": "S",
     "medium": "M",
-    "large": "L"
+    "large": "L",
+    "portionSmall": "small",
+    "portionMedium": "medium",
+    "portionLarge": "large"
   },
   "stats": {
     "title": "Stats",

@@ -24,6 +24,10 @@ export async function listAll(): Promise<DiaryEntry[]> {
 }
 
 export async function addEntry(input: NewEntryInput): Promise<DiaryEntry> {
+  // 脏数据在写入时就拦住，不要等到列表里显示 NaN
+  if (!Number.isFinite(input.grams) || input.grams <= 0) {
+    throw new Error(`addEntry: 非法克数 ${String(input.grams)}`);
+  }
   const entry: DiaryEntry = {
     ...input,
     id: crypto.randomUUID(),

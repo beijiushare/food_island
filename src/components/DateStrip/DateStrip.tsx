@@ -10,7 +10,7 @@ interface DateStripProps {
   days?: number;
 }
 
-export function DateStrip({ selected, marked, onSelect, days = 14 }: DateStripProps) {
+export function DateStrip({ selected, marked, onSelect, days = 7 }: DateStripProps) {
   const dates = recentDays(days);
   const today = todayISO();
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ export function DateStrip({ selected, marked, onSelect, days = 14 }: DateStripPr
   }, []);
 
   return (
-    <div className="date-strip" ref={scrollerRef}>
+    <div className={`date-strip${days <= 7 ? ' date-strip--fit' : ''}`} ref={scrollerRef}>
       {dates.map((date) => {
         const active = date === selected;
         const isToday = date === today;

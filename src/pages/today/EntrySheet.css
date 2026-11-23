@@ -1,5 +1,67 @@
 /* ---------- 录入 Sheet ---------- */
 
+.pick__section {
+  margin-bottom: var(--sp-sm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+}
+
+.recent {
+  display: flex;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+  padding-bottom: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recent::-webkit-scrollbar {
+  display: none;
+}
+
+.recent__chip {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 84px;
+  padding: 8px 12px;
+  text-align: left;
+  background: var(--c-bg-content);
+  border: 2px solid var(--c-border-light);
+  border-radius: var(--r-base);
+  box-shadow: 0 3px 0 0 var(--shadow-input);
+  cursor: pointer;
+  transition: transform 0.1s var(--mo-ease), box-shadow 0.1s var(--mo-ease);
+}
+
+.recent__chip:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 var(--shadow-input);
+}
+
+.recent__chip:disabled {
+  opacity: 0.6;
+}
+
+.recent__name {
+  max-width: 140px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent__grams {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+}
+
 .pick__hint {
   margin: var(--sp-sm) 0 var(--sp-md);
   font-size: 12px;

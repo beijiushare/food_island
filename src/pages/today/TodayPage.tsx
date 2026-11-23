@@ -47,7 +47,7 @@ export function TodayPage() {
   const [date, setDate] = useState(today);
   const entries = useDayEntries(date);
   const targets = useTargets();
-  const marked = useMarkedDates(addDays(today, -13), today);
+  const marked = useMarkedDates(addDays(today, -6), today);
 
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sheetMeal, setSheetMeal] = useState<Meal>(defaultMeal());
@@ -123,7 +123,6 @@ export function TodayPage() {
       </Card>
 
       <DateStrip selected={date} marked={marked} onSelect={setDate} />
-
       {MEAL_ORDER.map((meal) => {
         const list = byMeal[meal];
         if (list.length === 0) {
@@ -148,7 +147,15 @@ export function TodayPage() {
               <ListItem
                 key={entry.id}
                 name={entry.name}
-                sub={entry.portion ? t(`entry.${entry.portion}`) : t('entry.manual')}
+                sub={
+                  entry.portion === 'small'
+                    ? t('entry.portionSmall')
+                    : entry.portion === 'medium'
+                      ? t('entry.portionMedium')
+                      : entry.portion === 'large'
+                        ? t('entry.portionLarge')
+                        : t('entry.manual')
+                }
                 grams={entry.grams}
                 kcal={kcalOf(entry.nutrients)}
                 onClick={() => openEdit(entry)}
