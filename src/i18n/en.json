@@ -107,6 +107,13 @@
     "noData": "Nothing to export yet",
     "about": "Food Island v1.0 · Data from China Food Composition Table"
   },
+  "date": {
+    "pick": "Pick a date",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month"
+  },
   "search": {
     "title": "Food database",
     "placeholder": "Try \"rice\", \"mifan\" or \"tomato\"",

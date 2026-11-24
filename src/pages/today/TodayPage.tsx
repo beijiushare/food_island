@@ -7,6 +7,7 @@ import { DateStrip } from '../../components/DateStrip/DateStrip';
 import { Fab } from '../../components/Fab/Fab';
 import { ListItem } from '../../components/ListItem/ListItem';
 import { MacroBar } from '../../components/MacroBar/MacroBar';
+import { MonthCalendar } from '../../components/MonthCalendar/MonthCalendar';
 import { Toast } from '../../components/Toast/Toast';
 import type { DiaryEntry, Meal } from '../../data/types';
 import { kcalOf, sumNutrients } from '../../features/diary/calc';
@@ -61,12 +62,13 @@ export function TodayPage() {
   const [date, setDate] = useState(today);
   const entries = useDayEntries(date);
   const targets = useTargets();
-  const marked = useMarkedDates(addDays(today, -6), today);
+  const marked = useMarkedDates(addDays(today, -365), today);
 
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sheetMeal, setSheetMeal] = useState<Meal>(defaultMeal());
   const [editing, setEditing] = useState<DiaryEntry | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const totals = useMemo(
     () => sumNutrients(entries.map((entry) => entry.nutrients)),
@@ -102,10 +104,14 @@ export function TodayPage() {
     <div className="page ac-fade-up">
       <header className="today__header">
         <Time />
-        <span className="today__date">
+        <button
+          type="button"
+          className="today__date-btn"
+          onClick={() => setCalendarOpen(true)}
+        >
           {monthDayLabel(date)}
           {date === today ? ` · ${t('today.today')}` : ''}
-        </span>
+        </button>
       </header>
 
       <p className="today__greeting">
@@ -194,6 +200,13 @@ export function TodayPage() {
         editing={editing}
         onClose={() => setSheetOpen(false)}
         onSaved={setToast}
+      />
+
+      <MonthCalendar
+        open={calendarOpen}
+        selected={date}
+        onClose={() => setCalendarOpen(false)}
+        onSelect={setDate}
       />
     </div>
   );

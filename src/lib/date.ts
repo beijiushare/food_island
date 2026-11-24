@@ -39,6 +39,24 @@ export function monthDayLabel(iso: string): string {
   return at(iso).format(locale() === 'zh-cn' ? 'M月D日' : 'MMM D');
 }
 
+/** 2026年11月 / November 2026 */
+export function monthLabel(iso: string): string {
+  return at(iso).format(locale() === 'zh-cn' ? 'YYYY年M月' : 'MMMM YYYY');
+}
+
+/** 11月23日 – 11月29日 */
+export function weekRangeLabel(weekStart: string): string {
+  const end = addDays(weekStart, 6);
+  const sep = locale() === 'zh-cn' ? ' – ' : ' – ';
+  return `${monthDayLabel(weekStart)}${sep}${monthDayLabel(end)}`;
+}
+
+/** 日历表头用：从某个周一取 7 个周几短名 */
+export function weekdayHeaders(): string[] {
+  const monday = '2024-01-01'; // 这一天是周一
+  return Array.from({ length: 7 }, (_, i) => weekdayShort(addDays(monday, i)));
+}
+
 /** 周一为一周起点 */
 export function startOfWeekISO(iso: string = todayISO()): string {
   const d = dayjs(iso);

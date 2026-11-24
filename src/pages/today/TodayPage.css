@@ -6,10 +6,21 @@
   margin-bottom: var(--sp-sm);
 }
 
-.today__date {
+.today__date-btn {
+  padding: 4px 8px;
   font-size: 12px;
   font-weight: 600;
   color: var(--c-text-secondary);
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease);
+}
+
+.today__date-btn:active {
+  background: var(--c-bg-secondary);
 }
 
 .today__greeting {

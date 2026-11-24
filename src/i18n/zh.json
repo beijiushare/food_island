@@ -107,6 +107,13 @@
     "noData": "还没有记录可以导出",
     "about": "食岛 v1.0 · 数据来自中国食物成分表"
   },
+  "date": {
+    "pick": "选择日期",
+    "prevWeek": "上一周",
+    "nextWeek": "下一周",
+    "prevMonth": "上个月",
+    "nextMonth": "下个月"
+  },
   "search": {
     "title": "搜索成分表",
     "placeholder": "搜「米饭」「mifan」「西红柿」",
