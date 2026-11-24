@@ -1,6 +1,5 @@
 import { Button, Switch } from 'animal-island-ui';
 
-import { SegmentedPortion } from '../../../components/SegmentedPortion/SegmentedPortion';
 import { Stepper } from '../../../components/Stepper/Stepper';
 import { kcalOf } from '../../../features/diary/calc';
 import type { Meal } from '../../../data/types';
@@ -28,13 +27,6 @@ export function DetailView({ form }: { form: EntryForm }) {
       </div>
 
       {photoPreview ? <img className="entry__photo" src={photoPreview} alt="" /> : null}
-
-      <p className="entry__label">{t('entry.portion')}</p>
-      <SegmentedPortion
-        value={form.portion}
-        labels={form.portionLabels}
-        onChange={form.applyPortion}
-      />
 
       <div className="entry__stepper">
         <Stepper value={form.grams} onChange={form.changeGrams} />

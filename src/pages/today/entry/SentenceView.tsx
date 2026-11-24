@@ -1,6 +1,5 @@
 import { Button, Input } from 'animal-island-ui';
 
-import { SegmentedPortion } from '../../../components/SegmentedPortion/SegmentedPortion';
 import { Stepper } from '../../../components/Stepper/Stepper';
 import { kcalOf } from '../../../features/diary/calc';
 import type { EntryForm } from './useEntryForm';
@@ -62,23 +61,15 @@ export function SentenceView({ form }: { form: EntryForm }) {
               {row.food ? (
                 <div className="parsed__body">
                   {row.unit === 'tbsp' ? (
-                    <>
-                      <span className="parsed__spoon">{row.quantity} 汤匙</span>
-                      <Stepper
-                        value={row.grams}
-                        min={1}
-                        max={200}
-                        step={row.grams <= 20 ? 1 : 5}
-                        onChange={(next) => form.setRowGrams(i, next)}
-                      />
-                    </>
-                  ) : (
-                    <SegmentedPortion
-                      value={row.portion}
-                      labels={form.portionLabels}
-                      onChange={(next) => form.updateRowPortion(i, next)}
-                    />
-                  )}
+                    <span className="parsed__spoon">{row.quantity} 汤匙</span>
+                  ) : null}
+                  <Stepper
+                    value={row.grams}
+                    min={1}
+                    max={2000}
+                    step={row.grams <= 20 ? 1 : row.grams <= 100 ? 5 : 10}
+                    onChange={(next) => form.setRowGrams(i, next)}
+                  />
                   <span className="parsed__kcal">
                     {row.nutrients ? kcalOf(row.nutrients) : 0} kcal
                   </span>

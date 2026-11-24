@@ -8,7 +8,6 @@ import type {
   Meal,
   MemoryItem,
   Nutrients,
-  Portion,
 } from '../../data/types';
 import { emptyNutrients, scaleNutrients, sumNutrients } from '../diary/calc';
 import {
@@ -31,8 +30,7 @@ export interface DraftRow {
   id: string;
   name: string;
   grams: number;
-  portion?: Portion;
-  /** 简单食物才有档位类别；复合菜为空 */
+  /** 只用来给一个起始克数，不再作为「小/中/大」展示 */
   category?: PortionCategory;
   basis: Basis;
   foodCode: string | null;
@@ -72,7 +70,6 @@ interface DraftState {
   removeRow: (id: string) => void;
   setRowName: (id: string, name: string) => void;
   setRowGrams: (id: string, grams: number) => void;
-  setRowPortion: (id: string, portion: Portion) => void;
   setComponentGrams: (rowId: string, index: number, grams: number) => void;
   setRowNutrients: (id: string, patch: Partial<Nutrients>) => void;
   resetRowNutrients: (id: string) => void;
@@ -148,15 +145,6 @@ export const useDraft = create<DraftState>((set, get) => ({
       rows: state.rows.map((row) => (row.id === id ? withNutrition(row, Math.max(1, grams)) : row)),
     })),
 
-  setRowPortion: (id, portion) =>
-    set((state) => ({
-      rows: state.rows.map((row) => {
-        if (row.id !== id || !row.category) return row;
-        const next = withNutrition(row, portionGrams(row.category, portion));
-        return { ...next, portion };
-      }),
-    })),
-
   setComponentGrams: (rowId, index, grams) =>
     set((state) => ({
       rows: state.rows.map((row) => {
@@ -217,14 +205,13 @@ export const useDraft = create<DraftState>((set, get) => ({
 let seq = 0;
 const nextId = () => `row-${++seq}`;
 
-function rowFromFood(item: IndexedFood, portion: Portion): DraftRow {
+function rowFromFood(item: IndexedFood): DraftRow {
   const category = resolvePortionCategory(item);
-  const grams = portionGrams(category, portion);
+  const grams = portionGrams(category, 'medium');
   return {
     id: nextId(),
     name: item.name,
     grams,
-    portion,
     category,
     basis: 'edible',
     foodCode: item.code,
@@ -239,7 +226,7 @@ export function rowsFromSearch(
   item: IndexedFood,
   source: 'search' | 'memory' = 'search',
 ): DraftRow[] {
-  const row = rowFromFood(item, 'medium');
+  const row = rowFromFood(item);
   return [{ ...row, source }];
 }
 
@@ -259,7 +246,6 @@ export function rowsFromMemory(
       id: nextId(),
       name: food.name,
       grams: Math.round(grams),
-      portion: memory.portion,
       category,
       basis: 'edible',
       foodCode: food.code,
@@ -298,7 +284,6 @@ export function rowsFromRecognized(index: FoodIndex, items: RecognizedItem[]): D
           id: nextId(),
           name: item.nameCn,
           grams: components.reduce((total, component) => total + component.grams, 0),
-          portion: item.portion,
           basis: 'edible',
           foodCode: null,
           nutrients: sumNutrients(components.map((component) => component.nutrients)),
@@ -316,7 +301,6 @@ export function rowsFromRecognized(index: FoodIndex, items: RecognizedItem[]): D
       id: nextId(),
       name: food?.name ?? item.nameCn,
       grams: food ? resolved.grams : 0,
-      portion: food ? item.portion : undefined,
       category: food ? resolvePortionCategory(food) : undefined,
       basis: 'edible',
       foodCode: food?.code ?? null,
@@ -340,7 +324,6 @@ export function rowsFromSentence(index: FoodIndex, sentence: string): DraftRow[]
       id: nextId(),
       name: food?.name ?? item.name,
       grams: food ? item.grams : 0,
-      portion: item.portion,
       category: food ? resolvePortionCategory(food) : undefined,
       basis: 'edible',
       foodCode: food?.code ?? null,

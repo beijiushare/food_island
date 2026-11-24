@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Stepper } from '../../components/Stepper/Stepper';
-import { SegmentedPortion } from '../../components/SegmentedPortion/SegmentedPortion';
 import { addEntry } from '../../data/dao/diary';
 import { addPhotoRef } from '../../data/dao/photos';
-import type { EntryComponent, Meal, Portion } from '../../data/types';
+import type { EntryComponent, Meal } from '../../data/types';
 import { kcalOf } from '../../features/diary/calc';
 import { useDraft, type DraftRow } from '../../features/entry/draft';
 import { rememberFood } from '../../features/memory/memory';
@@ -27,7 +26,6 @@ export function AddReviewPage() {
   const photos = useDraft((state) => state.photos);
   const setRowName = useDraft((state) => state.setRowName);
   const setRowGrams = useDraft((state) => state.setRowGrams);
-  const setRowPortion = useDraft((state) => state.setRowPortion);
   const setComponentGrams = useDraft((state) => state.setComponentGrams);
   const removeRow = useDraft((state) => state.removeRow);
   const setRowNutrients = useDraft((state) => state.setRowNutrients);
@@ -39,12 +37,6 @@ export function AddReviewPage() {
   const [editing, setEditing] = useState<Record<string, boolean>>({});
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
-
-  const portionLabels: Record<Portion, string> = {
-    small: t('entry.small'),
-    medium: t('entry.medium'),
-    large: t('entry.large'),
-  };
 
   const totalKcal = rows.reduce((sum, row) => sum + kcalOf(row.nutrients), 0);
 
@@ -83,7 +75,6 @@ export function AddReviewPage() {
           name: row.name,
           grams: Math.round(row.grams),
           basis: row.basis,
-          portion: row.portion,
           nutrients: row.nutrients,
           components,
           nutrientsManual: row.nutrientsManual,
@@ -107,7 +98,6 @@ export function AddReviewPage() {
           foodCode: row.foodCode,
           name: row.name,
           grams: row.grams,
-          portion: row.portion,
         });
       }
 
@@ -184,14 +174,6 @@ export function AddReviewPage() {
         ) : null}
 
         {renderComponents(row)}
-
-        {!row.components?.length && row.category ? (
-          <SegmentedPortion
-            value={row.portion}
-            labels={portionLabels}
-            onChange={(next) => setRowPortion(row.id, next)}
-          />
-        ) : null}
 
         <div className="rv__grams">
           <Stepper

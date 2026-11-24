@@ -8,7 +8,6 @@
     "me": "我的"
   },
   "today": {
-    "today": "今天",
     "greetingMorning": "早上好，今天也要好好吃饭",
     "greetingNoon": "中午啦，记一笔吧",
     "greetingAfternoon": "下午好，别忘了下午茶",
@@ -34,7 +33,6 @@
     "searchPlaceholder": "搜食物，比如 米饭 / mifan",
     "pickHint": "点一样食物开始",
     "recent": "最近吃过",
-    "portion": "份量",
     "meal": "餐次",
     "asPurchased": "按带骨带壳整重算",
     "save": "记下来",
@@ -44,9 +42,6 @@
     "saved": "记下来啦",
     "updated": "改好啦",
     "deleted": "删掉啦",
-    "small": "小",
-    "medium": "中",
-    "large": "大",
     "portionSmall": "小份",
     "portionMedium": "中份",
     "portionLarge": "大份",

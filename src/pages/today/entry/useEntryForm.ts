@@ -160,28 +160,15 @@ export function useEntryForm({
     return scaleNutrients(picked.nut, grams, basis, picked.edible);
   }, [picked, grams, basis]);
 
-  const portionLabels = {
-    small: t('entry.small'),
-    medium: t('entry.medium'),
-    large: t('entry.large'),
-  };
-
   function pick(item: IndexedFood) {
     const category = resolvePortionCategory(item);
     setPicked(item);
-    setPortion('medium');
     setGrams(portionGrams(category, 'medium'));
     setQuery('');
   }
 
-  function applyPortion(next: Portion) {
-    setPortion(next);
-    if (picked) setGrams(portionGrams(resolvePortionCategory(picked), next));
-  }
-
   function changeGrams(next: number) {
     setGrams(next);
-    setPortion(undefined);
   }
 
   // ---------------------------------------------------------------- 照片
@@ -398,21 +385,6 @@ export function useEntryForm({
     setRows(parseSentence(sentence).map((parsed) => resolveParsed(index, parsed)));
   }
 
-  function updateRowPortion(rowIndex: number, next: Portion) {
-    setRows((prev) =>
-      prev.map((row, i) => {
-        if (i !== rowIndex || !row.food) return row;
-        const nextGrams = portionGrams(resolvePortionCategory(row.food), next);
-        return {
-          ...row,
-          portion: next,
-          grams: nextGrams,
-          nutrients: scaleNutrients(row.food.nut, nextGrams, 'edible', row.food.edible),
-        };
-      }),
-    );
-  }
-
   /** 明确给了克数（如复合菜里的「2 汤匙油」）用步进器改，不套档位 */
   function setRowGrams(rowIndex: number, nextGrams: number) {
     setRows((prev) =>
@@ -530,10 +502,8 @@ export function useEntryForm({
     // 派生
     hits,
     previewNutrients,
-    portionLabels,
     // 动作
     pick,
-    applyPortion,
     changeGrams,
     takePhoto,
     removePhoto,
@@ -542,7 +512,6 @@ export function useEntryForm({
     quickAdd,
     remove,
     runParse,
-    updateRowPortion,
     setRowGrams,
     removeRow,
     backToPick,

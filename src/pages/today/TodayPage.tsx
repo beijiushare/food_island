@@ -119,7 +119,6 @@ export function TodayPage() {
           onClick={() => setCalendarOpen(true)}
         >
           {monthDayLabel(date)}
-          {date === today ? ` · ${t('today.today')}` : ''}
         </button>
       </header>
 
