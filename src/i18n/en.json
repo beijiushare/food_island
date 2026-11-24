@@ -87,6 +87,7 @@
     "macroShare": "Macro split",
     "weekCaption": "Dashed line is the target; red bars went over",
     "monthCaption": "Each bar is that week's daily average",
+    "backToCurrent": "Back to this {{period}}",
     "empty": "No entries in this period"
   },
   "me": {

@@ -87,6 +87,7 @@
     "macroShare": "营养构成",
     "weekCaption": "虚线是目标线，红柱表示超了",
     "monthCaption": "每根柱子是那一周的平均每日热量",
+    "backToCurrent": "回到{{period}}",
     "empty": "这段时间还没有记录哦"
   },
   "me": {

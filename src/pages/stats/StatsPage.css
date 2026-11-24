@@ -1,3 +1,58 @@
+.stats__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+}
+
+.stats__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--c-text-body);
+  background: var(--c-bg-content);
+  border: 1.5px solid var(--c-border-light);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s var(--mo-ease);
+}
+
+.stats__arrow:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.stats__arrow:disabled {
+  color: var(--c-text-disabled);
+  cursor: default;
+}
+
+.stats__range {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  text-align: center;
+}
+
+.stats__back {
+  display: block;
+  margin: 0 auto var(--sp-md);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text);
+  background: var(--c-primary-bg);
+  border: 1px solid var(--c-primary);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+
 .stats__card {
   margin-bottom: var(--sp-md);
   padding: var(--sp-lg);

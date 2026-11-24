@@ -8,11 +8,14 @@ import { useTargets } from '../../features/diary/hooks';
 import { useRangeEntries } from '../../features/stats/hooks';
 import { bucketByWeek, buildSummary, type RangeSummary } from '../../features/stats/summary';
 import {
+  addDays,
   endOfMonthISO,
   endOfWeekISO,
+  monthLabel,
   startOfMonthISO,
   startOfWeekISO,
   todayISO,
+  weekRangeLabel,
   weekdayShort,
 } from '../../lib/date';
 import './StatsPage.css';
@@ -63,60 +66,107 @@ function buildBars(summary: RangeSummary, period: Period): ChartBar[] {
   }));
 }
 
-function PeriodContent({ summary, period }: { summary: RangeSummary; period: Period }) {
+interface PeriodPanelProps {
+  summary: RangeSummary;
+  period: Period;
+  from: string;
+  canNext: boolean;
+  isCurrent: boolean;
+  onShift: (delta: number) => void;
+  onBackToCurrent: () => void;
+}
+
+function PeriodPanel({
+  summary,
+  period,
+  from,
+  canNext,
+  isCurrent,
+  onShift,
+  onBackToCurrent,
+}: PeriodPanelProps) {
   const { t } = useTranslation();
   const targets = useTargets();
 
-  if (summary.recordedDays === 0) {
-    return (
-      <Card type="dashed" className="stats__hint">
-        <p>{t('stats.empty')}</p>
-      </Card>
-    );
-  }
-
   return (
     <>
-      <SummaryCard summary={summary} />
+      <div className="stats__nav">
+        <button
+          type="button"
+          className="stats__arrow"
+          onClick={() => onShift(-1)}
+          aria-label={period === 'week' ? t('date.prevWeek') : t('date.prevMonth')}
+        >
+          ‹
+        </button>
+        <span className="stats__range">
+          {period === 'week' ? weekRangeLabel(from) : monthLabel(from)}
+        </span>
+        <button
+          type="button"
+          className="stats__arrow"
+          onClick={() => onShift(1)}
+          disabled={!canNext}
+          aria-label={period === 'week' ? t('date.nextWeek') : t('date.nextMonth')}
+        >
+          ›
+        </button>
+      </div>
 
-      <Card className="stats__card">
-        <div className="stats__card-title">{t('stats.kcalTrend')}</div>
-        <WeekBarChart
-          bars={buildBars(summary, period)}
-          target={targets.kcal}
-          caption={period === 'month' ? t('stats.monthCaption') : t('stats.weekCaption')}
-        />
-      </Card>
+      {!isCurrent ? (
+        <button type="button" className="stats__back" onClick={onBackToCurrent}>
+          {t('stats.backToCurrent', { period: t(`stats.${period}`) })}
+        </button>
+      ) : null}
 
-      <Card className="stats__card">
-        <div className="stats__card-title">{t('stats.macroShare')}</div>
-        <div className="stats__macros">
-          <MacroBar
-            label={t('today.protein')}
-            value={summary.macroShare.protein}
-            target={100}
-            tone="protein"
-            unit="%"
-            showTarget={false}
-          />
-          <MacroBar
-            label={t('today.carb')}
-            value={summary.macroShare.carb}
-            target={100}
-            tone="carb"
-            unit="%"
-            showTarget={false}
-          />
-          <MacroBar
-            label={t('today.fat')}
-            value={summary.macroShare.fat}
-            target={100}
-            tone="fat"
-            unit="%"
-            showTarget={false}
-          />
-        </div>
-      </Card>
+      {summary.recordedDays === 0 ? (
+        <Card type="dashed" className="stats__hint">
+          <p>{t('stats.empty')}</p>
+        </Card>
+      ) : (
+        <>
+          <SummaryCard summary={summary} />
+
+          <Card className="stats__card">
+            <div className="stats__card-title">{t('stats.kcalTrend')}</div>
+            <WeekBarChart
+              bars={buildBars(summary, period)}
+              target={targets.kcal}
+              caption={period === 'month' ? t('stats.monthCaption') : t('stats.weekCaption')}
+            />
+          </Card>
+
+          <Card className="stats__card">
+            <div className="stats__card-title">{t('stats.macroShare')}</div>
+            <div className="stats__macros">
+              <MacroBar
+                label={t('today.protein')}
+                value={summary.macroShare.protein}
+                target={100}
+                tone="protein"
+                unit="%"
+                showTarget={false}
+              />
+              <MacroBar
+                label={t('today.carb')}
+                value={summary.macroShare.carb}
+                target={100}
+                tone="carb"
+                unit="%"
+                showTarget={false}
+              />
+              <MacroBar
+                label={t('today.fat')}
+                value={summary.macroShare.fat}
+                target={100}
+                tone="fat"
+                unit="%"
+                showTarget={false}
+              />
+            </div>
+          </Card>
+        </>
+      )}
     </>
   );
 }
@@ -125,22 +175,39 @@ export function StatsPage() {
   const { t } = useTranslation();
   const today = todayISO();
   const [period, setPeriod] = useState<Period>('week');
+  const [anchor, setAnchor] = useState(today);
 
-  const weekFrom = startOfWeekISO(today);
-  const weekTo = endOfWeekISO(today);
-  const monthFrom = startOfMonthISO(today);
-  const monthTo = endOfMonthISO(today);
+  const from = period === 'week' ? startOfWeekISO(anchor) : startOfMonthISO(anchor);
+  const to = period === 'week' ? endOfWeekISO(anchor) : endOfMonthISO(anchor);
+  const currentFrom = period === 'week' ? startOfWeekISO(today) : startOfMonthISO(today);
 
-  const weekEntries = useRangeEntries(weekFrom, weekTo);
-  const monthEntries = useRangeEntries(monthFrom, monthTo);
+  const entries = useRangeEntries(from, to);
+  const summary = useMemo(() => buildSummary(entries, from, to), [entries, from, to]);
 
-  const weekSummary = useMemo(
-    () => buildSummary(weekEntries, weekFrom, weekTo),
-    [weekEntries, weekFrom, weekTo],
-  );
-  const monthSummary = useMemo(
-    () => buildSummary(monthEntries, monthFrom, monthTo),
-    [monthEntries, monthFrom, monthTo],
+  const canNext = from < currentFrom;
+  const isCurrent = from === currentFrom;
+
+  function shift(delta: number) {
+    if (delta > 0 && !canNext) return;
+    setAnchor(
+      period === 'week'
+        ? addDays(anchor, delta * 7)
+        : delta > 0
+          ? addDays(to, 1)
+          : addDays(from, -1),
+    );
+  }
+
+  const panel = (
+    <PeriodPanel
+      summary={summary}
+      period={period}
+      from={from}
+      canNext={canNext}
+      isCurrent={isCurrent}
+      onShift={shift}
+      onBackToCurrent={() => setAnchor(today)}
+    />
   );
 
   return (
@@ -149,16 +216,8 @@ export function StatsPage() {
 
       <Tabs
         items={[
-          {
-            key: 'week',
-            label: t('stats.week'),
-            children: <PeriodContent summary={weekSummary} period="week" />,
-          },
-          {
-            key: 'month',
-            label: t('stats.month'),
-            children: <PeriodContent summary={monthSummary} period="month" />,
-          },
+          { key: 'week', label: t('stats.week'), children: panel },
+          { key: 'month', label: t('stats.month'), children: panel },
         ]}
         activeKey={period}
         onChange={(key) => setPeriod(key === 'month' ? 'month' : 'week')}
