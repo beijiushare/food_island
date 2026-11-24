@@ -30,6 +30,14 @@ export default defineConfig({
     // 5173 常被其它项目占用，食岛固定用 5199
     port: 5199,
     strictPort: true,
+    proxy: {
+      // 浏览器直连 DeepSeek 会被 CORS 拦，开发期走代理
+      '/api/deepseek': {
+        target: 'https://api.deepseek.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/deepseek/, ''),
+      },
+    },
     watch: {
       // Android 工程与本地产物不参与热更新
       ignored: ['**/android/**', '**/dist/**', '**/.claude_temp/**'],
