@@ -1,68 +1,53 @@
 #!/usr/bin/env node
 /**
- * assets/app-icon.svg → android/app/src/main/res/mipmap-* + public/favicon.png
+ * assets/app-icon.svg → android mipmap-* + public/favicon.png
  *
- * 用无头 Edge 截图渲染（不引额外依赖）：
- *   legacy  ic_launcher.png / ic_launcher_round.png  mdpi 48 → xxxhdpi 192
- *   adaptive ic_launcher_foreground.png              108dp 画布，图形缩到 92%
+ * 用 sharp 做真正的 SVG 光栅化（之前的「无头浏览器截图」在小尺寸下会截偏）。
  *
  * 用法：node scripts/generate-icons.mjs
  */
 
-import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'assets', 'app-icon.svg');
-const TMP = path.join(ROOT, '.claude_temp', 'icon-render');
 const RES = path.join(ROOT, 'android', 'app', 'src', 'main', 'res');
 
-const EDGE_CANDIDATES = [
-  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-  'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-];
+const svg = fs.readFileSync(SRC);
 
-const browser = EDGE_CANDIDATES.find((p) => fs.existsSync(p));
-if (!browser) {
-  console.error('找不到 Edge / Chrome，无法渲染图标');
-  process.exit(1);
-}
-
-fs.mkdirSync(TMP, { recursive: true });
-
-/** 渲染一张透明底 PNG */
-function render({ size, inset = 1, out }) {
+/** 渲染一张正方形透明 PNG；inset < 1 时居中留白（给自适应图标安全区用） */
+async function render(size, out, inset = 1) {
   const art = Math.round(size * inset);
-  const html = `<!doctype html><html><body style="margin:0;background:transparent">
-<div style="width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center">
-<img src="${pathToFileUrl(SRC)}" style="width:${art}px;height:${art}px" />
-</div></body></html>`;
 
-  const page = path.join(TMP, `page-${size}-${Math.round(inset * 100)}.html`);
-  fs.writeFileSync(page, html, 'utf8');
+  // 以较高 density 光栅化，再缩到目标尺寸，边缘更干净
+  const artBuffer = await sharp(svg, { density: 384 })
+    .resize(art, art, {
+      fit: 'contain',
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
+    .png()
+    .toBuffer();
 
-  execFileSync(
-    browser,
-    [
-      '--headless=new',
-      '--disable-gpu',
-      '--no-sandbox',
-      '--hide-scrollbars',
-      `--user-data-dir=${path.join(TMP, 'profile')}`,
-      `--window-size=${size},${size}`,
-      '--default-background-color=00000000',
-      `--screenshot=${out}`,
-      pathToFileUrl(page),
-    ],
-    { stdio: 'ignore' },
-  );
-}
+  if (art === size) {
+    fs.writeFileSync(out, artBuffer);
+    return;
+  }
 
-function pathToFileUrl(p) {
-  return 'file:///' + p.replace(/\\/g, '/').replace(/ /g, '%20');
+  const pad = Math.round((size - art) / 2);
+  await sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    },
+  })
+    .composite([{ input: artBuffer, left: pad, top: pad }])
+    .png()
+    .toFile(out);
 }
 
 const DENSITIES = [
@@ -86,7 +71,7 @@ let count = 0;
 for (const [density, size] of DENSITIES) {
   const dir = path.join(RES, `mipmap-${density}`);
   const out = path.join(dir, 'ic_launcher.png');
-  render({ size, inset: 1, out });
+  await render(size, out);
   fs.copyFileSync(out, path.join(dir, 'ic_launcher_round.png'));
   count += 2;
   console.log(`  ${density}  ${size}×${size}`);
@@ -94,16 +79,17 @@ for (const [density, size] of DENSITIES) {
 
 for (const [density, size] of FOREGROUND) {
   const dir = path.join(RES, `mipmap-${density}`);
-  const out = path.join(dir, 'ic_launcher_foreground.png');
-  render({ size, inset: 0.92, out });
+  await render(size, path.join(dir, 'ic_launcher_foreground.png'), 0.92);
   count += 1;
   console.log(`  ${density}  foreground ${size}×${size}`);
 }
 
-// 浏览器 favicon
 const publicDir = path.join(ROOT, 'public');
 fs.mkdirSync(publicDir, { recursive: true });
-render({ size: 64, inset: 1, out: path.join(publicDir, 'favicon.png') });
+await render(64, path.join(publicDir, 'favicon.png'));
 count += 1;
 
+// 校验生成的尺寸
+const check = await sharp(path.join(publicDir, 'favicon.png')).metadata();
+console.log(`  favicon  ${check.width}×${check.height}`);
 console.log(`✓ 生成 ${count} 张图标`);

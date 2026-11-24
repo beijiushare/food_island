@@ -97,6 +97,29 @@
   border-radius: var(--r-base);
 }
 
+/* 餐次内再加一样 */
+.today__meal-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--sp-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  background: transparent;
+  border: none;
+  border-top: 1px dashed var(--c-border-light);
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease), color var(--mo-fast) var(--mo-ease);
+}
+
+.today__meal-add:active {
+  color: var(--c-text);
+  background: var(--c-bg-secondary);
+}
+
 .today__meal-title {
   font-size: 15px;
   font-weight: 700;

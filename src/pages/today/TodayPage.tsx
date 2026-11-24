@@ -181,6 +181,9 @@ export function TodayPage() {
                   onClick={() => openEdit(entry)}
                 />
               ))}
+              <button type="button" className="today__meal-add" onClick={() => openAdd(meal)}>
+                ＋ {t('today.addOne')}
+              </button>
             </div>
           </Card>
         );

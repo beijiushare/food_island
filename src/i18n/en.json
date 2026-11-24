@@ -24,6 +24,7 @@
     "dinner": "Dinner",
     "snack": "Snack",
     "addMeal": "Add {{meal}}",
+    "addOne": "Add another",
     "protein": "Protein",
     "carb": "Carbs",
     "fat": "Fat"
