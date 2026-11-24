@@ -15,7 +15,9 @@ import {
 import { searchFoods, type IndexedFood } from '../../data/foods';
 import type { Basis, DiaryEntry, Meal, Portion } from '../../data/types';
 import { useFoodIndex } from '../../data/useFoodIndex';
-import { emptyNutrients, kcalOf, scaleNutrients } from '../../features/diary/calc';import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
+import { emptyNutrients, kcalOf, scaleNutrients } from '../../features/diary/calc';
+import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
+import { useSheetStore } from '../../features/ui/sheetStore';
 import { useRecentFoods } from '../../features/memory/hooks';
 import { rememberFood } from '../../features/memory/memory';
 import {
@@ -78,6 +80,17 @@ export function EntrySheet({
 
   /** 当前正在编辑/补充的记录 */
   const target = editing ?? pendingEntry;
+
+  // 把「弹窗是否打开」告诉 Android 返回键的处理器
+  const setSheetState = useSheetStore((state) => state.setSheet);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (!open) return;
+    setSheetState(true, () => onCloseRef.current());
+    return () => setSheetState(false);
+  }, [open, setSheetState]);
 
   // 只在「打开的那一次」回填，索引后到也不会把用户正在改的值冲掉
   useEffect(() => {
