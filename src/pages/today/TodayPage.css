@@ -33,8 +33,6 @@
   color: var(--c-text-body);
 }
 
-/* ---------- 汇总卡 ---------- */
-
 .today__summary {
   display: flex;
   align-items: center;

@@ -1,7 +1,6 @@
 {
   "app": {
-    "name": "食岛",
-    "loading": "正在上岛…"
+    "name": "食岛"
   },
   "nav": {
     "today": "今天",
@@ -42,7 +41,6 @@
     "update": "保存",
     "delete": "删掉这条",
     "reselect": "换一样",
-    "manual": "手动",
     "saved": "记下来啦",
     "updated": "改好啦",
     "deleted": "删掉啦",
@@ -100,14 +98,11 @@
     "title": "我的",
     "targetKcal": "每日热量目标",
     "macros": "蛋白 / 碳水 / 脂肪",
-    "edit": "调整",
     "editTargets": "调整每日目标",
     "targetProtein": "蛋白质",
     "targetCarb": "碳水",
     "targetFat": "脂肪",
     "targetSaved": "目标改好啦",
-    "adjustKcal": "调整热量目标",
-    "adjustMacros": "调整蛋白 / 碳水 / 脂肪",
     "ai": {
       "title": "AI 识别",
       "baseUrl": "Base URL",
@@ -145,14 +140,10 @@
     "placeholder": "搜「米饭」「mifan」「西红柿」",
     "empty": "没找到，换个说法试试？",
     "hint": "共 {{count}} 条",
-    "stale": "生",
-    "cooked": "熟",
     "loading": "正在加载成分表…"
   },
   "common": {
     "cancel": "取消",
-    "confirm": "记下来",
-    "back": "返回",
-    "retry": "重试"
+    "back": "返回"
   }
 }

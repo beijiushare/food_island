@@ -1,7 +1,6 @@
 {
   "app": {
-    "name": "Food Island",
-    "loading": "Landing on the island…"
+    "name": "Food Island"
   },
   "nav": {
     "today": "Today",
@@ -42,7 +41,6 @@
     "update": "Update",
     "delete": "Delete this entry",
     "reselect": "Choose another",
-    "manual": "manual",
     "saved": "Logged!",
     "updated": "Updated",
     "deleted": "Deleted",
@@ -100,14 +98,11 @@
     "title": "Me",
     "targetKcal": "Daily calorie target",
     "macros": "Protein / Carbs / Fat",
-    "edit": "Edit",
     "editTargets": "Adjust daily targets",
     "targetProtein": "Protein",
     "targetCarb": "Carbs",
     "targetFat": "Fat",
     "targetSaved": "Targets updated",
-    "adjustKcal": "Adjust calorie target",
-    "adjustMacros": "Adjust protein / carbs / fat",
     "ai": {
       "title": "AI recognition",
       "baseUrl": "Base URL",
@@ -145,14 +140,10 @@
     "placeholder": "Try \"rice\", \"mifan\" or \"tomato\"",
     "empty": "Nothing found, try another word?",
     "hint": "{{count}} items",
-    "stale": "raw",
-    "cooked": "cooked",
     "loading": "Loading food database…"
   },
   "common": {
     "cancel": "Cancel",
-    "confirm": "Save",
-    "back": "Back",
-    "retry": "Retry"
+    "back": "Back"
   }
 }
