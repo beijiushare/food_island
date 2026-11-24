@@ -89,7 +89,54 @@ fs.mkdirSync(publicDir, { recursive: true });
 await render(64, path.join(publicDir, 'favicon.png'));
 count += 1;
 
+// ---------------------------------------------------------------- 启动图
+// 默认的 Capacitor 蓝色 logo 启动图跟动森暖米色不搭，用同一个 SVG 重画：
+// 暖米底 + 居中图标（短边的 28%），留白足够，不裁到圆角。
+
+const SPLASH_BG = { r: 0xf8, g: 0xf8, b: 0xf0, alpha: 1 };
+const SPLASH_ICON_RATIO = 0.28;
+
+async function renderSplash(width, height, out) {
+  const art = Math.round(Math.min(width, height) * SPLASH_ICON_RATIO);
+  const iconBuffer = await sharp(svg, { density: 384 })
+    .resize(art, art, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png()
+    .toBuffer();
+
+  await sharp({ create: { width, height, channels: 4, background: SPLASH_BG } })
+    .composite([
+      {
+        input: iconBuffer,
+        left: Math.round((width - art) / 2),
+        top: Math.round((height - art) / 2),
+      },
+    ])
+    .png({ compressionLevel: 9 })
+    .toFile(out);
+}
+
+const SPLASH_PORT = [
+  ['mdpi', 320, 480],
+  ['hdpi', 480, 800],
+  ['xhdpi', 720, 1280],
+  ['xxhdpi', 960, 1600],
+  ['xxxhdpi', 1280, 1920],
+];
+
+let splashCount = 0;
+
+for (const [density, w, h] of SPLASH_PORT) {
+  await renderSplash(w, h, path.join(RES, `drawable-port-${density}`, 'splash.png'));
+  await renderSplash(h, w, path.join(RES, `drawable-land-${density}`, 'splash.png'));
+  splashCount += 2;
+}
+
+// 无方向限定符的兜底图（部分设备会走到这里）
+await renderSplash(480, 800, path.join(RES, 'drawable', 'splash.png'));
+splashCount += 1;
+
 // 校验生成的尺寸
 const check = await sharp(path.join(publicDir, 'favicon.png')).metadata();
 console.log(`  favicon  ${check.width}×${check.height}`);
 console.log(`✓ 生成 ${count} 张图标`);
+console.log(`✓ 生成 ${splashCount} 张启动图`);
