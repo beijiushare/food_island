@@ -7,6 +7,7 @@ import { CameraIcon, PencilIcon } from '../../components/icons/ActionIcons';
 import { SegmentedPortion } from '../../components/SegmentedPortion/SegmentedPortion';
 import { Stepper } from '../../components/Stepper/Stepper';
 import { addEntry, deleteEntry, putEntry } from '../../data/dao/diary';
+import { getAIProfile } from '../../data/dao/settings';
 import {
   addPhotoRef,
   deletePhotoByEntry,
@@ -15,6 +16,7 @@ import {
 import { searchFoods, type IndexedFood } from '../../data/foods';
 import type { Basis, DiaryEntry, Meal, Portion } from '../../data/types';
 import { useFoodIndex } from '../../data/useFoodIndex';
+import { mockRecognition, recognizePhoto, resolveRecognized } from '../../features/ai/recognize';
 import { emptyNutrients, kcalOf, scaleNutrients } from '../../features/diary/calc';
 import { portionGrams, resolvePortionCategory } from '../../features/diary/portion';
 import { useSheetStore } from '../../features/ui/sheetStore';
@@ -65,9 +67,11 @@ export function EntrySheet({
   const initializedRef = useRef(false);
 
   // 「打一句话」模式
-  const [mode, setMode] = useState<'pick' | 'sentence'>('pick');
+  const [mode, setMode] = useState<'pick' | 'sentence' | 'review'>('pick');
   const [sentence, setSentence] = useState('');
   const [rows, setRows] = useState<ResolvedItem[]>([]);
+  const [recognizing, setRecognizing] = useState(false);
+  const [aiNotice, setAiNotice] = useState<string | null>(null);
 
   // 照片：拍照即建档，pending 表示「只有照片、食物待补」
   const [pendingEntry, setPendingEntry] = useState<DiaryEntry | null>(null);
@@ -77,6 +81,7 @@ export function EntrySheet({
   );
   const [capturing, setCapturing] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [hasKey, setHasKey] = useState<boolean | null>(null);
 
   /** 当前正在编辑/补充的记录 */
   const target = editing ?? pendingEntry;
@@ -91,6 +96,23 @@ export function EntrySheet({
     setSheetState(true, () => onCloseRef.current());
     return () => setSheetState(false);
   }, [open, setSheetState]);
+
+  // 有 Key 才能真识别，没有就先给示例结果，按钮文案也随之变化
+  useEffect(() => {
+    if (!open) return;
+    let alive = true;
+    getAIProfile().then(
+      (profile) => {
+        if (alive) setHasKey(profile.apiKey.length > 0);
+      },
+      () => {
+        if (alive) setHasKey(false);
+      },
+    );
+    return () => {
+      alive = false;
+    };
+  }, [open]);
 
   // 只在「打开的那一次」回填，索引后到也不会把用户正在改的值冲掉
   useEffect(() => {
@@ -254,6 +276,31 @@ export function EntrySheet({
     }
   }
 
+  /** 拍照识别：有 Key 走真模型，没有就用示例结果把链路跑通 */
+  async function runRecognition() {
+    if (!index || !photoPreview || recognizing) return;
+    setRecognizing(true);
+    setAiNotice(null);
+    try {
+      const profile = await getAIProfile();
+      const items = profile.apiKey
+        ? await recognizePhoto(profile, photoPreview)
+        : (setAiNotice(t('entry.noKey')), mockRecognition());
+
+      const resolved = items.map((item) => resolveRecognized(index, item));
+      if (resolved.length === 0) {
+        setAiNotice(t('entry.recognizeEmpty'));
+        return;
+      }
+      setRows(resolved);
+      setMode('review');
+    } catch (error) {
+      setAiNotice(error instanceof Error ? error.message : String(error));
+    } finally {
+      setRecognizing(false);
+    }
+  }
+
   async function save() {
     if (!picked || busy) return;
     setBusy(true);
@@ -387,23 +434,51 @@ export function EntrySheet({
 
     setBusy(true);
     try {
+      // 如果是从照片来的（pending 记录），第一样食物写进这条记录，保住那张照片
+      const pendingTarget = target?.pending ? target : null;
+      let first = true;
+
       for (const row of valid) {
         const food = row.food;
         if (!food) continue;
         const nutrients = scaleNutrients(food.nut, row.grams, 'edible', food.edible);
-        await addEntry({
-          date,
-          meal,
+
+        if (first && pendingTarget) {
+          const updated: DiaryEntry = {
+            ...pendingTarget,
+            foodCode: food.code,
+            name: food.name,
+            grams: row.grams,
+            basis: 'edible',
+            portion: row.portion,
+            nutrients,
+            source: 'photo',
+          };
+          delete updated.pending;
+          await putEntry(updated);
+        } else {
+          await addEntry({
+            date,
+            meal,
+            foodCode: food.code,
+            name: food.name,
+            grams: row.grams,
+            basis: 'edible',
+            portion: row.portion,
+            nutrients,
+            source: pendingTarget ? 'photo' : 'text',
+          });
+        }
+
+        first = false;
+        await rememberFood({
           foodCode: food.code,
           name: food.name,
           grams: row.grams,
-          basis: 'edible',
           portion: row.portion,
-          nutrients,
-          source: 'text',
         });
-        await rememberFood({ foodCode: food.code, name: food.name, grams: row.grams, portion: row.portion });
       }
+
       onSaved(t('entry.savedCount', { count: valid.length }));
       onClose();
     } finally {
@@ -491,24 +566,33 @@ export function EntrySheet({
             </Button>
           </div>
         </div>
-      ) : mode === 'sentence' ? (
+      ) : mode === 'sentence' || mode === 'review' ? (
         <div className="sentence">
-          <Input
-            size="large"
-            allowClear
-            value={sentence}
-            placeholder={t('entry.sentencePlaceholder')}
-            onChange={(e) => setSentence(e.target.value)}
-            onClear={() => {
-              setSentence('');
-              setRows([]);
-            }}
-          />
-          <p className="pick__hint">{t('entry.sentenceHint')}</p>
+          {mode === 'sentence' ? (
+            <>
+              <Input
+                size="large"
+                allowClear
+                value={sentence}
+                placeholder={t('entry.sentencePlaceholder')}
+                onChange={(e) => setSentence(e.target.value)}
+                onClear={() => {
+                  setSentence('');
+                  setRows([]);
+                }}
+              />
+              <p className="pick__hint">{t('entry.sentenceHint')}</p>
 
-          <Button type="default" block onClick={runParse} disabled={!sentence.trim()}>
-            {t('entry.parse')}
-          </Button>
+              <Button type="default" block onClick={runParse} disabled={!sentence.trim()}>
+                {t('entry.parse')}
+              </Button>
+            </>
+          ) : (
+            <>
+              {aiNotice ? <p className="photo__notice">{aiNotice}</p> : null}
+              <p className="pick__hint">{t('entry.reviewHint')}</p>
+            </>
+          )}
 
           {rows.length > 0 ? (
             <ul className="parsed">
@@ -551,7 +635,13 @@ export function EntrySheet({
           ) : null}
 
           <div className="entry__actions">
-            <Button type="text" onClick={() => setMode('pick')}>
+            <Button
+              type="text"
+              onClick={() => {
+                setMode('pick');
+                setRows([]);
+              }}
+            >
               {t('common.cancel')}
             </Button>
             <Button
@@ -593,10 +683,22 @@ export function EntrySheet({
           ) : null}
 
           {photoPreview ? (
+            <Button
+              type="primary"
+              block
+              loading={recognizing}
+              onClick={runRecognition}
+            >
+              {hasKey === false ? t('entry.recognizeMock') : t('entry.recognize')}
+            </Button>
+          ) : null}
+
+          {photoPreview ? (
             <p className="photo__hint">
               {target?.pending ? t('entry.pendingHint') : t('entry.photoNotReady')}
             </p>
           ) : null}
+          {aiNotice ? <p className="photo__notice">{aiNotice}</p> : null}
           {notice ? <p className="photo__notice">{notice}</p> : null}
 
           {!query.trim() && !target && recent.length > 0 ? (
