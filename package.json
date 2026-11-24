@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
+    "verify": "node scripts/verify.mjs",
     "data:build": "node scripts/build-foods.mjs",
     "cap:sync": "cap sync android",
     "cap:run": "cap run android",
