@@ -2,16 +2,15 @@ import { Capacitor } from '@capacitor/core';
 
 /**
  * AI 客户端（技术文档 §6.2）。
- * 一个客户端 + 配置切换，不写第二套代码。
+ * 一个客户端 + 一份配置，不做多供应商槽位。
  */
 
 export interface AIProfile {
-  id: string;
-  name: string;
   baseUrl: string;
-  apiKey: string;
   model: string;
-  supportsVision: boolean;
+  apiKey: string;
+  /** 可选附加请求头，单行「名字: 值」（如 OpenCode 的 x-opencode-session） */
+  extraHeader?: string;
 }
 
 export interface ChatMessage {
@@ -44,13 +43,22 @@ export const DEFAULT_BASE_URL = Capacitor.isNativePlatform()
 export const DEFAULT_MODEL = 'deepseek-flash';
 
 export const DEFAULT_PROFILE: AIProfile = {
-  id: 'deepseek',
-  name: 'DeepSeek',
   baseUrl: DEFAULT_BASE_URL,
-  apiKey: '',
   model: DEFAULT_MODEL,
-  supportsVision: true,
+  apiKey: '',
 };
+
+/** 「名字: 值」→ { 名字: 值 }；格式不对就当没填 */
+export function parseExtraHeader(value: string | undefined): Record<string, string> {
+  const text = (value ?? '').trim();
+  if (!text) return {};
+  const index = text.indexOf(':');
+  if (index <= 0) return {};
+  const name = text.slice(0, index).trim();
+  const headerValue = text.slice(index + 1).trim();
+  if (!name || !headerValue) return {};
+  return { [name]: headerValue };
+}
 
 function endpoint(baseUrl: string): string {
   return `${baseUrl.replace(/\/+$/, '')}/chat/completions`;
@@ -82,6 +90,7 @@ export async function chat(
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${profile.apiKey}`,
+        ...parseExtraHeader(profile.extraHeader),
       },
       body: JSON.stringify({
         model: profile.model,

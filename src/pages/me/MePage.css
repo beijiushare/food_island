@@ -77,6 +77,28 @@
   line-height: 1.6;
 }
 
+.me__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--sp-md);
+}
+
+.me__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.me__status {
+  margin-top: var(--sp-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-body);
+  line-height: 1.5;
+}
+
 .me__about {
   margin-top: var(--sp-sm);
   font-size: 12px;
