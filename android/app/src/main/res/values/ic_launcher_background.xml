@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 与图标外圈同色，自适应图标裁剪时不会露出突兀的底 -->
-    <color name="ic_launcher_background">#CAEAFF</color>
+    <!--
+      自适应图标的底层：透明。
+      图标本身是一个完整的圆盘，不需要再垫一层色块；
+      垫色会让桌面图标变成「一块底色 + 中间一个圆」，看着像多了一圈背景。
+    -->
+    <color name="ic_launcher_background">#00000000</color>
 </resources>

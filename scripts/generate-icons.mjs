@@ -79,7 +79,8 @@ for (const [density, size] of DENSITIES) {
 
 for (const [density, size] of FOREGROUND) {
   const dir = path.join(RES, `mipmap-${density}`);
-  await render(size, path.join(dir, 'ic_launcher_foreground.png'), 0.92);
+  // 图标本身就是完整圆盘，铺满画布，不再留 8% 边（否则桌面上像多了一圈底）
+  await render(size, path.join(dir, 'ic_launcher_foreground.png'), 1);
   count += 1;
   console.log(`  ${density}  foreground ${size}×${size}`);
 }
