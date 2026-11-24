@@ -105,6 +105,8 @@
     "targetCarb": "Carbs",
     "targetFat": "Fat",
     "targetSaved": "Targets updated",
+    "adjustKcal": "Adjust calorie target",
+    "adjustMacros": "Adjust protein / carbs / fat",
     "ai": {
       "title": "AI recognition",
       "baseUrl": "Base URL",

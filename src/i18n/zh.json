@@ -105,6 +105,8 @@
     "targetCarb": "碳水",
     "targetFat": "脂肪",
     "targetSaved": "目标改好啦",
+    "adjustKcal": "调整热量目标",
+    "adjustMacros": "调整蛋白 / 碳水 / 脂肪",
     "ai": {
       "title": "AI 识别",
       "baseUrl": "Base URL",

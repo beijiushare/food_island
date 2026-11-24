@@ -1,7 +1,8 @@
-import { Button, Card, Divider, Footer, Input, Modal } from 'animal-island-ui';
+import { Button, Card, Divider, Footer, Input } from 'animal-island-ui';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Sheet } from '../../components/Sheet/Sheet';
 import { Stepper } from '../../components/Stepper/Stepper';
 import { Toast } from '../../components/Toast/Toast';
 import { listAll } from '../../data/dao/diary';
@@ -16,15 +17,17 @@ import {
 } from '../../data/dao/settings';
 import type { Targets } from '../../data/types';
 import { useTargets } from '../../features/diary/hooks';
-import { exportDiaryCsv } from '../../services/export';
 import { testProfile } from '../../services/ai-client';
+import { exportDiaryCsv } from '../../services/export';
 import './MePage.css';
 
-const TARGET_FIELDS: { key: keyof Targets; label: string; step: number; unit: string }[] = [
-  { key: 'kcal', label: 'targetKcal', step: 50, unit: 'kcal' },
-  { key: 'protein', label: 'targetProtein', step: 5, unit: 'g' },
-  { key: 'carb', label: 'targetCarb', step: 10, unit: 'g' },
-  { key: 'fat', label: 'targetFat', step: 5, unit: 'g' },
+type TargetField = keyof Targets;
+
+const KCAL_FIELD = { key: 'kcal' as TargetField, label: 'targetKcal', step: 50, min: 500, max: 6000, unit: 'kcal' };
+const MACRO_FIELDS = [
+  { key: 'protein' as TargetField, label: 'targetProtein', step: 5, min: 0, max: 500, unit: 'g' },
+  { key: 'carb' as TargetField, label: 'targetCarb', step: 10, min: 0, max: 500, unit: 'g' },
+  { key: 'fat' as TargetField, label: 'targetFat', step: 5, min: 0, max: 500, unit: 'g' },
 ];
 
 interface AIDraft {
@@ -37,7 +40,7 @@ export function MePage() {
   const { t } = useTranslation();
   const targets = useTargets();
   const [draft, setDraft] = useState<Targets>(targets);
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState<'kcal' | 'macros' | null>(null);
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -64,14 +67,14 @@ export function MePage() {
     };
   }, []);
 
-  function openEdit() {
+  function openTargets(which: 'kcal' | 'macros') {
     setDraft(targets);
-    setEditing(true);
+    setEditing(which);
   }
 
-  async function saveTargets() {
+  async function saveTargetsDraft() {
     await setTargets(draft);
-    setEditing(false);
+    setEditing(null);
     setToast(t('me.targetSaved'));
   }
 
@@ -111,7 +114,12 @@ export function MePage() {
     try {
       const typedKey = keyInput.trim();
       const profile = typedKey
-        ? { baseUrl: ai.baseUrl.trim(), model: ai.model.trim(), extraHeader: ai.extraHeader.trim(), apiKey: typedKey }
+        ? {
+            baseUrl: ai.baseUrl.trim(),
+            model: ai.model.trim(),
+            extraHeader: ai.extraHeader.trim(),
+            apiKey: typedKey,
+          }
         : await getAIProfile();
       await testProfile(profile);
       setAiStatus(t('me.ai.testOk'));
@@ -140,26 +148,36 @@ export function MePage() {
     }
   }
 
+  const targetRows: { key: TargetField; label: string; unit: string; which: 'kcal' | 'macros' }[] = [
+    { key: 'kcal', label: 'targetKcal', unit: 'kcal', which: 'kcal' },
+    { key: 'protein', label: 'targetProtein', unit: 'g', which: 'macros' },
+    { key: 'carb', label: 'targetCarb', unit: 'g', which: 'macros' },
+    { key: 'fat', label: 'targetFat', unit: 'g', which: 'macros' },
+  ];
+
+  const editingFields = editing === 'kcal' ? [KCAL_FIELD] : MACRO_FIELDS;
+
   return (
     <div className="page ac-fade-up">
       <h1 className="page__title">{t('me.title')}</h1>
 
-      <Card className="me__card">
-        <div className="me__row">
-          <span className="me__label">{t('me.targetKcal')}</span>
-          <span className="me__value">
-            {targets.kcal} kcal
-            <button type="button" className="me__edit" onClick={openEdit}>
-              {t('me.edit')}
-            </button>
-          </span>
-        </div>
-        <div className="me__row">
-          <span className="me__label">{t('me.macros')}</span>
-          <span className="me__value">
-            {targets.protein} / {targets.carb} / {targets.fat} g
-          </span>
-        </div>
+      <Card className="me__card me__card--rows">
+        {targetRows.map((row) => (
+          <button
+            key={row.key}
+            type="button"
+            className="me__row me__row--tap"
+            onClick={() => openTargets(row.which)}
+          >
+            <span className="me__label">{t(`me.${row.label}`)}</span>
+            <span className="me__value">
+              {targets[row.key]} {row.unit}
+              <span className="me__chevron" aria-hidden="true">
+                ›
+              </span>
+            </span>
+          </button>
+        ))}
       </Card>
 
       <h2 className="me__section">{t('me.ai.title')}</h2>
@@ -188,7 +206,8 @@ export function MePage() {
 
         <div className="me__field">
           <span className="me__label">
-            {t('me.ai.apiKey')} {hasKey ? t('me.ai.keyStored') : ''}
+            {t('me.ai.apiKey')}
+            {hasKey ? <span className="me__badge">{t('me.ai.keyStored')}</span> : null}
           </span>
           <Input
             size="large"
@@ -212,18 +231,20 @@ export function MePage() {
         </div>
 
         <div className="me__actions">
-          <Button type="primary" onClick={saveAI} loading={aiBusy}>
+          <Button type="primary" className="me__action" onClick={saveAI} loading={aiBusy}>
             {t('me.ai.save')}
           </Button>
-          <Button type="default" onClick={testConnection} loading={aiBusy}>
+          <Button type="default" className="me__action" onClick={testConnection} loading={aiBusy}>
             {t('me.ai.test')}
           </Button>
-          {hasKey ? (
+        </div>
+        {hasKey ? (
+          <div className="me__actions me__actions--minor">
             <Button type="text" danger onClick={clearKey}>
               {t('me.ai.clearKey')}
             </Button>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
 
         {aiStatus ? <p className="me__status">{aiStatus}</p> : null}
       </Card>
@@ -240,21 +261,19 @@ export function MePage() {
       <p className="me__about">{t('me.about')}</p>
       <Footer type="tree" />
 
-      <Modal
-        open={editing}
-        title={t('me.editTargets')}
-        typewriter={false}
-        onClose={() => setEditing(false)}
-        onOk={saveTargets}
+      <Sheet
+        open={editing !== null}
+        onClose={() => setEditing(null)}
+        title={editing === 'kcal' ? t('me.adjustKcal') : t('me.adjustMacros')}
       >
         <div className="targets">
-          {TARGET_FIELDS.map((field) => (
+          {editingFields.map((field) => (
             <div className="targets__row" key={field.key}>
               <span className="targets__label">{t(`me.${field.label}`)}</span>
               <Stepper
                 value={draft[field.key]}
-                min={field.key === 'kcal' ? 500 : 0}
-                max={field.key === 'kcal' ? 6000 : 500}
+                min={field.min}
+                max={field.max}
                 step={field.step}
                 unit={field.unit}
                 onChange={(value) => setDraft({ ...draft, [field.key]: value })}
@@ -262,7 +281,16 @@ export function MePage() {
             </div>
           ))}
         </div>
-      </Modal>
+
+        <div className="me__actions me__actions--sheet">
+          <Button type="text" onClick={() => setEditing(null)}>
+            {t('common.cancel')}
+          </Button>
+          <Button type="primary" onClick={saveTargetsDraft}>
+            {t('me.ai.save')}
+          </Button>
+        </div>
+      </Sheet>
 
       <Toast message={toast} onDone={() => setToast(null)} />
     </div>

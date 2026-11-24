@@ -553,7 +553,7 @@ export function EntrySheet({
 
           <div className="entry__actions">
             {target ? (
-              <Button type="text" danger onClick={remove} loading={busy}>
+              <Button type="default" danger onClick={remove} loading={busy}>
                 {t('entry.delete')}
               </Button>
             ) : (

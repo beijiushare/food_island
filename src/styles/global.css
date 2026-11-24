@@ -98,6 +98,43 @@ ol {
   animation: ac-fade-up var(--mo-base) var(--mo-ease);
 }
 
+/* ============================================================
+   库组件样式修正
+   animal-island-ui 的 primary 按钮是羊皮纸底（与 default 几乎同色），
+   按本项目令牌改成薄荷绿主按钮，与 FAB / 设计系统一致。
+   ============================================================ */
+
+button[class*='animal-btn-primary']:not([class*='animal-btn-danger']) {
+  color: var(--c-text-on-primary) !important;
+  background: var(--c-primary) !important;
+  border-color: #11a89b !important;
+  box-shadow: 0 5px 0 0 #0f9c92 !important;
+}
+
+button[class*='animal-btn-primary']:not([class*='animal-btn-danger']):hover:not(:disabled) {
+  background: var(--c-primary-hover) !important;
+  border-color: #11a89b !important;
+}
+
+button[class*='animal-btn-primary']:not([class*='animal-btn-danger']):active:not(:disabled) {
+  background: var(--c-primary-active) !important;
+  box-shadow: 0 1px 0 0 #0f9c92 !important;
+}
+
+/* 默认按钮与主按钮同厚度：库的 default 只有很薄的阴影，和 primary 摆一起像两种形状 */
+button[class*='animal-btn-default'] {
+  box-shadow: 0 5px 0 0 var(--shadow-btn) !important;
+}
+
+button[class*='animal-btn-default']:hover:not(:disabled) {
+  box-shadow: 0 6px 0 0 var(--shadow-btn) !important;
+}
+
+button[class*='animal-btn-default']:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 var(--shadow-btn) !important;
+}
+
 /* 无障碍：尊重系统的「减少动态效果」 */
 @media (prefers-reduced-motion: reduce) {
   *,

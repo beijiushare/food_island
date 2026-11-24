@@ -3,6 +3,42 @@
   padding: var(--sp-lg);
 }
 
+/* 目标卡：整行可点 */
+.me__card--rows {
+  padding: var(--sp-sm) 0;
+}
+
+.me__row--tap {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--sp-sm) var(--sp-lg);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease);
+}
+
+.me__row--tap:active {
+  background: var(--c-bg-secondary);
+}
+
+.me__chevron {
+  margin-left: 4px;
+  font-size: 16px;
+  color: var(--c-text-secondary);
+}
+
+.me__badge {
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-success);
+  background: var(--c-primary-bg);
+  border-radius: var(--r-pill);
+}
+
 .me__row {
   display: flex;
   align-items: center;
@@ -89,6 +125,21 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--sp-sm);
+}
+
+.me__action {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.me__actions--minor {
+  justify-content: flex-end;
+  margin-top: var(--sp-sm);
+}
+
+.me__actions--sheet {
+  justify-content: space-between;
+  margin-top: var(--sp-lg);
 }
 
 .me__status {
