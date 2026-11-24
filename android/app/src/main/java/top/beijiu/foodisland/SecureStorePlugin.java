@@ -1,4 +1,4 @@
-package com.cheng.foodisland;
+package top.beijiu.foodisland;
 
 import android.content.Context;
 import android.content.SharedPreferences;

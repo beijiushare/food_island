@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.cheng.foodisland',
+  appId: 'top.beijiu.foodisland',
   appName: '食岛',
   webDir: 'dist',
   android: {

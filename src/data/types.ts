@@ -92,6 +92,10 @@ export interface DiaryEntry {
   portion?: Portion;
   /** 已按克数折算的「实际摄入量」快照 */
   nutrients: Nutrients;
+  /** 用户手改过营养：改克数不再自动重算 */
+  nutrientsManual?: boolean;
+  /** 复合菜的原料明细：外层只显示一道菜，展开能看到番茄 200g / 鸡蛋 100g */
+  components?: EntryComponent[];
   scene?: string;
   photoId?: string;
   source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
@@ -101,6 +105,14 @@ export interface DiaryEntry {
    * 照片先存档，分析成功与否都不影响原图（避免网络抖动就丢图）。
    */
   pending?: boolean;
+}
+
+/** 复合菜里的一条原料 */
+export interface EntryComponent {
+  name: string;
+  grams: number;
+  foodCode: string | null;
+  nutrients: Nutrients;
 }
 
 export interface MemoryItem {

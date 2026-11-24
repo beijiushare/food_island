@@ -129,24 +129,73 @@ export function parseRecognition(raw: string): RecognizedItem[] {
     .slice(0, 6);
 }
 
-/** 调一次视觉模型，拿识别结果 */
+/** 调一次视觉模型，拿识别结果（单张照片） */
 export async function recognizePhoto(
   profile: AIProfile,
   photoDataUrl: string,
 ): Promise<RecognizedItem[]> {
+  return recognizePhotos(profile, [photoDataUrl]);
+}
+
+/**
+ * 多张照片 + 一句备注一起交给模型。
+ * 照片是同一餐的不同角度/不同盘，提示词里要求合并判断、不要重复计数。
+ */
+export async function recognizePhotos(
+  profile: AIProfile,
+  photoDataUrls: string[],
+  note?: string,
+): Promise<RecognizedItem[]> {
+  const photos = photoDataUrls.filter(Boolean).slice(0, 6);
+  if (photos.length === 0) return [];
+
+  const pieces: string[] = [RECOGNIZE_PROMPT];
+  if (photos.length > 1) {
+    pieces.push(`这次一共给了 ${photos.length} 张照片，拍的是同一顿饭，请合并判断，同一样食物只列一次。`);
+  }
+  if (note?.trim()) {
+    pieces.push(`用户补充：${note.trim()}（用来修正识别和份量，不要照抄进结果）`);
+  }
+
   const raw = await chat(profile, [
     {
       role: 'user',
       content: [
-        { type: 'text', text: RECOGNIZE_PROMPT },
-        { type: 'image_url', image_url: { url: photoDataUrl } },
+        { type: 'text', text: pieces.join('\n\n') },
+        ...photos.map((url) => ({ type: 'image_url' as const, image_url: { url } })),
       ],
     },
   ]);
   return parseRecognition(raw);
 }
 
-/** 没有 Key 时用的示例结果，用于把链路跑通 */
+/** 没有照片、只打字时用这段提示词（和视觉版同一个 JSON 结构） */
+export const TEXT_PROMPT = `你在帮我记录饮食。下面是我对这一餐的描述，只做两件事，不要做别的。
+
+1. 列出我吃了哪些食物（最多 6 种）。用中文常见名字。
+2. 对每个食物判断份量是小份、中份还是大份。
+
+规则：
+- 只输出 JSON，不要任何解释文字。
+- 不要计算热量，不要给克数，不要给营养值。
+- 如果是多种食材混在一起的菜（如番茄炒蛋、青椒肉丝），
+  标 is_composite=true，并在 components 里列出主要原料和大致用量。
+- 拿不准的，confidence 给低值（0.3~0.5），不要编。
+- category 只能从这些里选：
+  米饭 / 面条（熟）/ 粥 / 炒青菜 / 炒菜（带肉）/ 肉类（单份）/
+  汤 / 水果 / 面包 / 饮品`;
+
+export async function recognizeText(
+  profile: AIProfile,
+  description: string,
+): Promise<RecognizedItem[]> {
+  const raw = await chat(profile, [
+    { role: 'user', content: `${TEXT_PROMPT}\n\n我的描述：${description.trim()}` },
+  ]);
+  return parseRecognition(raw);
+}
+
+/** 没配 Key 时用的示例结果，用于把链路跑通 */
 export function mockRecognition(): RecognizedItem[] {
   return [
     {
@@ -214,7 +263,7 @@ function tbspGrams(name: string): number {
 }
 
 /** 复合菜里的单个原料 → 可编辑的一行 */
-function resolveComponent(
+export function resolveComponentRow(
   index: FoodIndex,
   component: RecognizedComponent,
   fallbackCategory: string | undefined,
@@ -262,7 +311,7 @@ export function expandRecognized(index: FoodIndex, item: RecognizedItem): Resolv
   }
 
   const components = item.components.map((component) =>
-    resolveComponent(index, component, item.category),
+    resolveComponentRow(index, component, item.category),
   );
 
   // 一个都查不到时，保留整道菜（至少用户能看到 AI 认出了什么）

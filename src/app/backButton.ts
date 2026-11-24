@@ -7,6 +7,7 @@ import { useSheetStore } from '../features/ui/sheetStore';
 /**
  * Android 返回键（技术文档 §9）：
  *   有弹窗 → 先关弹窗
+ *   在录入流程 / 任意二级页 → 回上一页
  *   不在首页 → 回首页
  *   在首页 → 退出 App
  * 不接管的话按返回键会直接退到桌面。
@@ -26,8 +27,8 @@ export function useAndroidBackButton() {
         closeSheet();
         return;
       }
-      if (pathname !== '/') {
-        navigate('/', { replace: true });
+      if (pathname !== '/' && pathname !== '') {
+        navigate(-1);
         return;
       }
       void App.exitApp();

@@ -1,6 +1,7 @@
 import { Card, Divider, Footer, Time, Typewriter } from 'animal-island-ui';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CalorieRing } from '../../components/CalorieRing/CalorieRing';
 import { DateStrip } from '../../components/DateStrip/DateStrip';
@@ -58,6 +59,8 @@ function defaultMeal(): Meal {
 
 export function TodayPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const today = todayISO();
   const [date, setDate] = useState(today);
   const entries = useDayEntries(date);
@@ -88,10 +91,16 @@ export function TodayPage() {
 
   const greeting = useMemo(() => greetingKey(new Date().getHours()), []);
 
+  // 录入流程记完会带着一句提示回来
+  useEffect(() => {
+    const state = location.state as { toast?: string } | null;
+    if (!state?.toast) return;
+    setToast(state.toast);
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location, navigate]);
+
   function openAdd(meal: Meal) {
-    setEditing(null);
-    setSheetMeal(meal);
-    setSheetOpen(true);
+    navigate(`/add?date=${date}&meal=${meal}`);
   }
 
   function openEdit(entry: DiaryEntry) {

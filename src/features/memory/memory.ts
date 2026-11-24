@@ -54,6 +54,17 @@ export async function recentFoods(limit = 8): Promise<MemoryItem[]> {
   return db.memory.orderBy('lastUsedAt').reverse().limit(limit).toArray();
 }
 
+/**
+ * 「最近」列表：先按吃过几次降序，次数相同再按上次吃的时间降序。
+ * 次数多的通常是主食/常吃的菜，比单纯按时间排更贴近习惯。
+ */
+export async function rankedFoods(limit = 80): Promise<MemoryItem[]> {
+  const rows = await db.memory.toArray();
+  return rows
+    .sort((a, b) => b.usedCount - a.usedCount || b.lastUsedAt - a.lastUsedAt)
+    .slice(0, limit);
+}
+
 export async function getMemory(foodKey: string): Promise<MemoryItem | undefined> {
   return db.memory.where('foodKey').equals(foodKey).first();
 }
