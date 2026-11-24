@@ -3,24 +3,19 @@
   padding: var(--sp-lg);
 }
 
-/* 目标卡：整行可点 */
-.me__card--rows {
-  padding: var(--sp-sm) 0;
-}
-
-.me__row--tap {
-  width: 100%;
-  min-height: 48px;
-  padding: var(--sp-sm) var(--sp-lg);
-  background: transparent;
-  border: none;
-  text-align: left;
+/* 目标卡：两行，整块可点 */
+.me__targets {
   cursor: pointer;
-  transition: background var(--mo-fast) var(--mo-ease);
+  transition: transform 0.1s var(--mo-ease);
 }
 
-.me__row--tap:active {
-  background: var(--c-bg-secondary);
+.me__targets:active {
+  transform: translateY(1px);
+}
+
+.me__targets:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
 }
 
 .me__chevron {

@@ -23,8 +23,8 @@ import './MePage.css';
 
 type TargetField = keyof Targets;
 
-const KCAL_FIELD = { key: 'kcal' as TargetField, label: 'targetKcal', step: 50, min: 500, max: 6000, unit: 'kcal' };
-const MACRO_FIELDS = [
+const TARGET_FIELDS = [
+  { key: 'kcal' as TargetField, label: 'targetKcal', step: 50, min: 500, max: 6000, unit: 'kcal' },
   { key: 'protein' as TargetField, label: 'targetProtein', step: 5, min: 0, max: 500, unit: 'g' },
   { key: 'carb' as TargetField, label: 'targetCarb', step: 10, min: 0, max: 500, unit: 'g' },
   { key: 'fat' as TargetField, label: 'targetFat', step: 5, min: 0, max: 500, unit: 'g' },
@@ -40,7 +40,7 @@ export function MePage() {
   const { t } = useTranslation();
   const targets = useTargets();
   const [draft, setDraft] = useState<Targets>(targets);
-  const [editing, setEditing] = useState<'kcal' | 'macros' | null>(null);
+  const [editing, setEditing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -67,14 +67,14 @@ export function MePage() {
     };
   }, []);
 
-  function openTargets(which: 'kcal' | 'macros') {
+  function openTargets() {
     setDraft(targets);
-    setEditing(which);
+    setEditing(true);
   }
 
   async function saveTargetsDraft() {
     await setTargets(draft);
-    setEditing(null);
+    setEditing(false);
     setToast(t('me.targetSaved'));
   }
 
@@ -148,36 +148,40 @@ export function MePage() {
     }
   }
 
-  const targetRows: { key: TargetField; label: string; unit: string; which: 'kcal' | 'macros' }[] = [
-    { key: 'kcal', label: 'targetKcal', unit: 'kcal', which: 'kcal' },
-    { key: 'protein', label: 'targetProtein', unit: 'g', which: 'macros' },
-    { key: 'carb', label: 'targetCarb', unit: 'g', which: 'macros' },
-    { key: 'fat', label: 'targetFat', unit: 'g', which: 'macros' },
-  ];
-
-  const editingFields = editing === 'kcal' ? [KCAL_FIELD] : MACRO_FIELDS;
-
   return (
     <div className="page ac-fade-up">
       <h1 className="page__title">{t('me.title')}</h1>
 
-      <Card className="me__card me__card--rows">
-        {targetRows.map((row) => (
-          <button
-            key={row.key}
-            type="button"
-            className="me__row me__row--tap"
-            onClick={() => openTargets(row.which)}
-          >
-            <span className="me__label">{t(`me.${row.label}`)}</span>
-            <span className="me__value">
-              {targets[row.key]} {row.unit}
-              <span className="me__chevron" aria-hidden="true">
-                ›
-              </span>
+      <Card
+        className="me__card me__targets"
+        role="button"
+        tabIndex={0}
+        onClick={openTargets}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openTargets();
+          }
+        }}
+      >
+        <div className="me__row">
+          <span className="me__label">{t('me.targetKcal')}</span>
+          <span className="me__value">
+            {targets.kcal} kcal
+            <span className="me__chevron" aria-hidden="true">
+              ›
             </span>
-          </button>
-        ))}
+          </span>
+        </div>
+        <div className="me__row">
+          <span className="me__label">{t('me.macros')}</span>
+          <span className="me__value">
+            {targets.protein} / {targets.carb} / {targets.fat} g
+            <span className="me__chevron" aria-hidden="true">
+              ›
+            </span>
+          </span>
+        </div>
       </Card>
 
       <h2 className="me__section">{t('me.ai.title')}</h2>
@@ -261,13 +265,9 @@ export function MePage() {
       <p className="me__about">{t('me.about')}</p>
       <Footer type="tree" />
 
-      <Sheet
-        open={editing !== null}
-        onClose={() => setEditing(null)}
-        title={editing === 'kcal' ? t('me.adjustKcal') : t('me.adjustMacros')}
-      >
+      <Sheet open={editing} onClose={() => setEditing(false)} title={t('me.editTargets')}>
         <div className="targets">
-          {editingFields.map((field) => (
+          {TARGET_FIELDS.map((field) => (
             <div className="targets__row" key={field.key}>
               <span className="targets__label">{t(`me.${field.label}`)}</span>
               <Stepper
@@ -283,7 +283,7 @@ export function MePage() {
         </div>
 
         <div className="me__actions me__actions--sheet">
-          <Button type="text" onClick={() => setEditing(null)}>
+          <Button type="text" onClick={() => setEditing(false)}>
             {t('common.cancel')}
           </Button>
           <Button type="primary" onClick={saveTargetsDraft}>
