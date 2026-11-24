@@ -4,6 +4,7 @@ import type { Portion } from '../../data/types';
 import { scaleNutrients } from '../diary/calc';
 import { PORTION_CATEGORIES, portionGrams, resolvePortionCategory } from '../diary/portion';
 import type { ResolvedItem } from '../parse/sentence';
+import { INGREDIENT_ALIAS } from '../parse/sentence';
 import { chat, type AIProfile } from '../../services/ai-client';
 
 /**
@@ -197,4 +198,77 @@ function portionCategory(value: string) {
   return (PORTION_CATEGORIES as readonly string[]).includes(value)
     ? (value as (typeof PORTION_CATEGORIES)[number])
     : '炒菜（带肉）';
+}
+
+/** 一汤匙的常识重量（技术文档 §8.3） */
+const TBSP_GRAMS: { test: RegExp; grams: number }[] = [
+  { test: /油/, grams: 13.8 },
+  { test: /糖/, grams: 12.8 },
+  { test: /酱油/, grams: 17.5 },
+  { test: /蚝油/, grams: 19 },
+  { test: /醋/, grams: 15 },
+];
+
+function tbspGrams(name: string): number {
+  return TBSP_GRAMS.find((row) => row.test.test(name))?.grams ?? 15;
+}
+
+/** 复合菜里的单个原料 → 可编辑的一行 */
+function resolveComponent(
+  index: FoodIndex,
+  component: RecognizedComponent,
+  fallbackCategory: string | undefined,
+): ResolvedItem {
+  const searchName = INGREDIENT_ALIAS[component.nameCn] ?? component.nameCn;
+  const hits = searchFoods(index, searchName, 6);
+  const best = hits[0];
+  const food = best && best.score >= 0.7 ? best.item : null;
+
+  let grams = 0;
+  let portion: Portion | undefined;
+
+  if (component.gramsHint) {
+    grams = Math.round(component.gramsHint);
+  } else if (component.tbsp) {
+    grams = Math.round(tbspGrams(component.nameCn) * component.tbsp);
+  } else if (food) {
+    // 只给了「适量」→ 按档位中份兜底
+    portion = 'medium';
+    const category = portionCategory(fallbackCategory ?? resolvePortionCategory(food));
+    grams = portionGrams(category, portion);
+  }
+
+  return {
+    raw: component.nameCn,
+    name: component.nameCn,
+    quantity: component.tbsp ?? null,
+    unit: component.tbsp ? 'tbsp' : null,
+    grams,
+    food,
+    score: best?.score ?? 0,
+    portion,
+    nutrients: food ? scaleNutrients(food.nut, grams, 'edible', food.edible) : null,
+  };
+}
+
+/**
+ * 识别结果 → 可编辑行。
+ * 复合菜（番茄炒蛋这类）拆成原料逐条查表（技术文档 §2.6），
+ * 拆不动就退回原来的一条，交给用户手动处理。
+ */
+export function expandRecognized(index: FoodIndex, item: RecognizedItem): ResolvedItem[] {
+  if (!item.isComposite || item.components.length === 0) {
+    return [resolveRecognized(index, item)];
+  }
+
+  const components = item.components.map((component) =>
+    resolveComponent(index, component, item.category),
+  );
+
+  // 一个都查不到时，保留整道菜（至少用户能看到 AI 认出了什么）
+  if (components.every((row) => row.food === null)) {
+    return [resolveRecognized(index, item)];
+  }
+
+  return components;
 }

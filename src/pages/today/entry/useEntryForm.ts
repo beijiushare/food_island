@@ -7,7 +7,7 @@ import { getAIProfile } from '../../../data/dao/settings';
 import { searchFoods, type IndexedFood } from '../../../data/foods';
 import type { Basis, DiaryEntry, Meal, Portion } from '../../../data/types';
 import { useFoodIndex } from '../../../data/useFoodIndex';
-import { mockRecognition, recognizePhoto, resolveRecognized } from '../../../features/ai/recognize';
+import { expandRecognized, mockRecognition, recognizePhoto } from '../../../features/ai/recognize';
 import { emptyNutrients, scaleNutrients } from '../../../features/diary/calc';
 import { portionGrams, resolvePortionCategory } from '../../../features/diary/portion';
 import { useRecentFoods } from '../../../features/memory/hooks';
@@ -277,7 +277,7 @@ export function useEntryForm({
         ? await recognizePhoto(profile, photoPreview)
         : (setAiNotice(t('entry.noKey')), mockRecognition());
 
-      const resolved = items.map((item) => resolveRecognized(index, item));
+      const resolved = items.flatMap((item) => expandRecognized(index, item));
       if (resolved.length === 0) {
         setAiNotice(t('entry.recognizeEmpty'));
         return;
@@ -413,6 +413,21 @@ export function useEntryForm({
     );
   }
 
+  /** 明确给了克数（如复合菜里的「2 汤匙油」）用步进器改，不套档位 */
+  function setRowGrams(rowIndex: number, nextGrams: number) {
+    setRows((prev) =>
+      prev.map((row, i) => {
+        if (i !== rowIndex || !row.food) return row;
+        return {
+          ...row,
+          portion: undefined,
+          grams: nextGrams,
+          nutrients: scaleNutrients(row.food.nut, nextGrams, 'edible', row.food.edible),
+        };
+      }),
+    );
+  }
+
   function removeRow(rowIndex: number) {
     setRows((prev) => prev.filter((_, i) => i !== rowIndex));
   }
@@ -528,6 +543,7 @@ export function useEntryForm({
     remove,
     runParse,
     updateRowPortion,
+    setRowGrams,
     removeRow,
     backToPick,
     saveAll,

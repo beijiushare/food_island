@@ -278,6 +278,14 @@
   flex: 1;
 }
 
+/* 用了汤匙的原料：左边写清几勺，右边用步进器微调克数 */
+.parsed__spoon {
+  margin-right: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+}
+
 .parsed__kcal {
   flex: none;
   font-size: 13px;

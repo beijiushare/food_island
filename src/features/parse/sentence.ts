@@ -45,7 +45,7 @@ const LEADING_NOISE =
   /^(我|今天|昨天|早上|上午|中午|下午|晚上|夜里|早饭|午饭|晚饭|夜宵|吃了|喝了|来了|又|再|点了|买了|大概|差不多|的)+/;
 
 /** 单字食材映射到成分表里真正的条目（「油」在表里叫豆油，「粥」没有独立条目） */
-const INGREDIENT_ALIAS: Record<string, string> = {
+export const INGREDIENT_ALIAS: Record<string, string> = {
   油: '豆油',
   食用油: '豆油',
   植物油: '豆油',

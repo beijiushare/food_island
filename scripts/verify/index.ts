@@ -16,6 +16,7 @@ import { kcalOf, scaleNutrients, sumNutrients } from '../../src/features/diary/c
 import { portionGrams, resolvePortionCategory } from '../../src/features/diary/portion';
 import { diaryToCsv } from '../../src/features/diary/csv';
 import {
+  expandRecognized,
   mockRecognition,
   parseRecognition,
   resolveRecognized,
@@ -135,6 +136,37 @@ check(
   parseRecognition(JSON.stringify({ items: Array.from({ length: 9 }, (_, i) => ({ name_cn: `f${i}` })) })).length === 6,
 );
 check('mock recognition maps to food table', resolveRecognized(index, mockRecognition()[0]).food !== null);
+
+// 复合菜拆解（技术文档 §2.6）
+const mockDish = mockRecognition()[1];
+const expanded = expandRecognized(index, mockDish);
+check('composite dish expands to ingredients', expanded.length === 3, String(expanded.length));
+check(
+  'components resolved (tomato / egg / oil)',
+  expanded.every((row) => row.food !== null),
+  expanded.map((r) => `${r.name}:${r.food ? 'ok' : 'miss'}`).join(','),
+);
+check(
+  'grams from hints and tbsp',
+  expanded[0]?.grams === 200 && expanded[1]?.grams === 100 && expanded[2]?.grams === 14,
+  expanded.map((r) => `${r.name}=${r.grams}g`).join(' '),
+);
+check(
+  'oil resolved via alias to 豆油',
+  expanded[2]?.food?.name.includes('豆油'),
+  expanded[2]?.food?.name,
+);
+check(
+  'single dish without components stays one row',
+  expandRecognized(index, { ...mockDish, isComposite: false, components: [] }).length === 1,
+);
+check(
+  'unresolvable composite falls back to one row',
+  expandRecognized(index, {
+    ...mockDish,
+    components: [{ nameCn: '不存在的东西' }, { nameCn: '也不存在' }],
+  }).length === 1,
+);
 check(
   'extra header parsed',
   JSON.stringify(parseExtraHeader('x-opencode-session: abc')) === '{"x-opencode-session":"abc"}',
