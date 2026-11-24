@@ -60,6 +60,12 @@ interface DraftState {
   text: string;
   photos: DraftPhoto[];
   rows: DraftRow[];
+  /** 编辑已有记录时带着原记录（id/createdAt/photoId 要保留） */
+  baseEntry: DiaryEntry | null;
+  /** 编辑时原来那张照片（只展示，不参与 reset 的删除） */
+  editPhoto: DraftPhoto | null;
+  /** 用户点了「删照片」，保存时才真删 */
+  photoRemoved: boolean;
 
   setContext: (date: string, meal: Meal) => void;
   setText: (text: string) => void;
@@ -73,6 +79,9 @@ interface DraftState {
   setComponentGrams: (rowId: string, index: number, grams: number) => void;
   setRowNutrients: (id: string, patch: Partial<Nutrients>) => void;
   resetRowNutrients: (id: string) => void;
+  /** 打开已有记录准备编辑 */
+  startEdit: (entry: DiaryEntry, rows: DraftRow[], photo: DraftPhoto | null) => void;
+  markPhotoRemoved: () => void;
   /** 清空草稿；true 时把没保存的照片文件一并删掉 */
   reset: (deletePhotos?: boolean) => Promise<void>;
 }
@@ -117,6 +126,9 @@ export const useDraft = create<DraftState>((set, get) => ({
   text: '',
   photos: [],
   rows: [],
+  baseEntry: null,
+  editPhoto: null,
+  photoRemoved: false,
 
   setContext: (date, meal) => set({ date, meal }),
   setText: (text) => set({ text }),
@@ -192,9 +204,30 @@ export const useDraft = create<DraftState>((set, get) => ({
       }),
     })),
 
+  startEdit: (entry, rows, photo) =>
+    set({
+      date: entry.date,
+      meal: entry.meal,
+      text: '',
+      photos: [],
+      rows,
+      baseEntry: entry,
+      editPhoto: photo,
+      photoRemoved: false,
+    }),
+
+  markPhotoRemoved: () => set({ photoRemoved: true, editPhoto: null }),
+
   reset: async (deletePhotos = true) => {
     const photos = get().photos;
-    set({ text: '', photos: [], rows: [] });
+    set({
+      text: '',
+      photos: [],
+      rows: [],
+      baseEntry: null,
+      editPhoto: null,
+      photoRemoved: false,
+    });
     if (!deletePhotos) return;
     for (const photo of photos) await deletePhotoFile(photo.relPath);
   },
@@ -313,6 +346,42 @@ export function rowsFromRecognized(index: FoodIndex, items: RecognizedItem[]): D
   }
 
   return rows;
+}
+
+/** 已有记录 → 草稿行（编辑页用），保留原营养快照与原料明细 */
+export function rowsFromEntry(entry: DiaryEntry, index: FoodIndex | null): DraftRow[] {
+  const food = entry.foodCode ? (index?.byCode.get(entry.foodCode) ?? null) : null;
+  const components = entry.components?.map<DraftComponent>((component) => {
+    const componentFood = component.foodCode
+      ? (index?.byCode.get(component.foodCode) ?? null)
+      : null;
+    return {
+      name: component.name,
+      grams: component.grams,
+      foodCode: component.foodCode,
+      nutrients: component.nutrients,
+      per100: componentFood?.nut ?? null,
+      edible: componentFood?.edible ?? null,
+    };
+  });
+
+  return [
+    {
+      id: nextId(),
+      name: entry.name || '未命名',
+      grams: entry.grams,
+      category: food ? resolvePortionCategory(food) : undefined,
+      basis: entry.basis,
+      foodCode: entry.foodCode,
+      nutrients: entry.nutrients,
+      nutrientsManual: entry.nutrientsManual,
+      unresolved: !food && !components?.length,
+      components,
+      source: entry.source,
+      per100: food?.nut ?? null,
+      edible: food?.edible ?? null,
+    },
+  ];
 }
 
 /** 没配 Key 时的文字兜底：本地规则解析 */

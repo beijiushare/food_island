@@ -10,6 +10,10 @@ export async function listByDate(date: string): Promise<DiaryEntry[]> {
   return rows.sort(byCreatedAt);
 }
 
+export async function getEntry(id: string): Promise<DiaryEntry | undefined> {
+  return db.diary.get(id);
+}
+
 export async function listBetween(from: string, to: string): Promise<DiaryEntry[]> {
   const rows = await db.diary.where('date').between(from, to, true, true).toArray();
   return rows.sort(byCreatedAt);

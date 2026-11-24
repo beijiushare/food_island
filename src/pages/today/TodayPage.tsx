@@ -14,7 +14,6 @@ import type { DiaryEntry, Meal } from '../../data/types';
 import { kcalOf, sumNutrients } from '../../features/diary/calc';
 import { useDayEntries, useMarkedDates, useTargets } from '../../features/diary/hooks';
 import { addDays, monthDayLabel, todayISO } from '../../lib/date';
-import { EntrySheet } from './EntrySheet';
 import './TodayPage.css';
 
 const MEAL_ORDER: Meal[] = ['breakfast', 'lunch', 'dinner', 'snack'];
@@ -67,9 +66,6 @@ export function TodayPage() {
   const targets = useTargets();
   const marked = useMarkedDates(addDays(today, -365), today);
 
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [sheetMeal, setSheetMeal] = useState<Meal>(defaultMeal());
-  const [editing, setEditing] = useState<DiaryEntry | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
 
@@ -104,9 +100,7 @@ export function TodayPage() {
   }
 
   function openEdit(entry: DiaryEntry) {
-    setEditing(entry);
-    setSheetMeal(entry.meal);
-    setSheetOpen(true);
+    navigate(`/add/entry/${entry.id}`);
   }
 
   return (
@@ -203,15 +197,6 @@ export function TodayPage() {
       <Fab onClick={() => openAdd(defaultMeal())} label={t('today.emptyAction')} />
 
       <Toast message={toast} onDone={() => setToast(null)} />
-
-      <EntrySheet
-        open={sheetOpen}
-        date={date}
-        defaultMeal={sheetMeal}
-        editing={editing}
-        onClose={() => setSheetOpen(false)}
-        onSaved={setToast}
-      />
 
       <MonthCalendar
         open={calendarOpen}

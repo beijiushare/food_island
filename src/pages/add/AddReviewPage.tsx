@@ -4,17 +4,27 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Stepper } from '../../components/Stepper/Stepper';
-import { addEntry } from '../../data/dao/diary';
-import { addPhotoRef } from '../../data/dao/photos';
-import type { EntryComponent, Meal } from '../../data/types';
+import { addEntry, deleteEntry, putEntry } from '../../data/dao/diary';
+import { addPhotoRef, deletePhotoByEntry } from '../../data/dao/photos';
+import type { DiaryEntry, EntryComponent, Meal } from '../../data/types';
 import { kcalOf } from '../../features/diary/calc';
 import { useDraft, type DraftRow } from '../../features/entry/draft';
 import { rememberFood } from '../../features/memory/memory';
-import { deletePhotoFile } from '../../services/photo';
 import { todayISO } from '../../lib/date';
+import { capturePhoto, deletePhotoFile, photoDataUrl } from '../../services/photo';
 import { AddHeader } from './AddHeader';
 
 const MEALS: Meal[] = ['breakfast', 'lunch', 'dinner', 'snack'];
+
+function toComponents(row: DraftRow): EntryComponent[] | undefined {
+  if (!row.components?.length) return undefined;
+  return row.components.map((component) => ({
+    name: component.name,
+    grams: component.grams,
+    foodCode: component.foodCode,
+    nutrients: component.nutrients,
+  }));
+}
 
 export function AddReviewPage() {
   const { t } = useTranslation();
@@ -24,6 +34,12 @@ export function AddReviewPage() {
   const meal = useDraft((state) => state.meal);
   const rows = useDraft((state) => state.rows);
   const photos = useDraft((state) => state.photos);
+  const baseEntry = useDraft((state) => state.baseEntry);
+  const editPhoto = useDraft((state) => state.editPhoto);
+  const photoRemoved = useDraft((state) => state.photoRemoved);
+  const addPhoto = useDraft((state) => state.addPhoto);
+  const removePhoto = useDraft((state) => state.removePhoto);
+  const markPhotoRemoved = useDraft((state) => state.markPhotoRemoved);
   const setRowName = useDraft((state) => state.setRowName);
   const setRowGrams = useDraft((state) => state.setRowGrams);
   const setComponentGrams = useDraft((state) => state.setComponentGrams);
@@ -39,6 +55,76 @@ export function AddReviewPage() {
   const [notice, setNotice] = useState<string | null>(null);
 
   const totalKcal = rows.reduce((sum, row) => sum + kcalOf(row.nutrients), 0);
+  const shownPhoto = photos[0]?.dataUrl ?? (photoRemoved ? null : (editPhoto?.dataUrl ?? null));
+
+  async function addPhotoFromCamera() {
+    if (busy) return;
+    setBusy(true);
+    setNotice(null);
+    try {
+      const draft = await capturePhoto('prompt');
+      const dataUrl = await photoDataUrl(draft.relPath);
+      addPhoto({ id: crypto.randomUUID(), ...draft, dataUrl });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      if (!/取消|没有选图|cancel/i.test(message)) {
+        setNotice(t('entry.photoFailed', { message }));
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function dropPhoto() {
+    if (photos[0]) {
+      void removePhoto(photos[0].id);
+      return;
+    }
+    // 已有记录的照片：等到保存时才真删
+    markPhotoRemoved();
+  }
+
+  async function saveEdit(base: DiaryEntry, row: DraftRow) {
+    const firstPhoto = photos[0];
+    let photoId = base.photoId;
+
+    if (firstPhoto) {
+      const refs = await deletePhotoByEntry(base.id);
+      for (const ref of refs) await deletePhotoFile(ref.relPath);
+      await addPhotoRef({
+        id: firstPhoto.id,
+        entryId: base.id,
+        relPath: firstPhoto.relPath,
+        width: firstPhoto.width,
+        height: firstPhoto.height,
+        bytes: firstPhoto.bytes,
+        createdAt: Date.now(),
+      });
+      photoId = firstPhoto.id;
+    } else if (photoRemoved && photoId) {
+      const refs = await deletePhotoByEntry(base.id);
+      for (const ref of refs) await deletePhotoFile(ref.relPath);
+      photoId = undefined;
+    }
+
+    await putEntry({
+      ...base,
+      date,
+      meal,
+      foodCode: row.foodCode,
+      name: row.name,
+      grams: Math.round(row.grams),
+      basis: row.basis,
+      nutrients: row.nutrients,
+      components: toComponents(row),
+      nutrientsManual: row.nutrientsManual,
+      photoId,
+    });
+
+    await rememberFood({ foodCode: row.foodCode, name: row.name, grams: row.grams });
+    await reset(false);
+    navigate('/', { replace: true, state: { toast: t('entry.updated') } });
+  }
 
   async function save() {
     if (busy) return;
@@ -58,16 +144,14 @@ export function AddReviewPage() {
     setBusy(true);
     setNotice(null);
     try {
+      if (baseEntry) {
+        await saveEdit(baseEntry, rows[0]);
+        return;
+      }
+
       const firstPhoto = photos[0];
 
       for (const [index, row] of rows.entries()) {
-        const components: EntryComponent[] | undefined = row.components?.map((component) => ({
-          name: component.name,
-          grams: component.grams,
-          foodCode: component.foodCode,
-          nutrients: component.nutrients,
-        }));
-
         const entry = await addEntry({
           date,
           meal,
@@ -76,7 +160,7 @@ export function AddReviewPage() {
           grams: Math.round(row.grams),
           basis: row.basis,
           nutrients: row.nutrients,
-          components,
+          components: toComponents(row),
           nutrientsManual: row.nutrientsManual,
           source: row.source,
           photoId: index === 0 && firstPhoto ? firstPhoto.id : undefined,
@@ -94,11 +178,7 @@ export function AddReviewPage() {
           });
         }
 
-        await rememberFood({
-          foodCode: row.foodCode,
-          name: row.name,
-          grams: row.grams,
-        });
+        await rememberFood({ foodCode: row.foodCode, name: row.name, grams: row.grams });
       }
 
       // 多出来的照片只用于识别，记完就真删，不留尸体
@@ -107,7 +187,26 @@ export function AddReviewPage() {
       }
 
       await reset(false);
-      navigate('/', { replace: true, state: { toast: t('entry.savedCount', { count: rows.length }) } });
+      navigate('/', {
+        replace: true,
+        state: { toast: t('entry.savedCount', { count: rows.length }) },
+      });
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : String(error));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function remove() {
+    if (!baseEntry || busy) return;
+    setBusy(true);
+    try {
+      const refs = await deletePhotoByEntry(baseEntry.id);
+      for (const ref of refs) await deletePhotoFile(ref.relPath);
+      await deleteEntry(baseEntry.id);
+      await reset(false);
+      navigate('/', { replace: true, state: { toast: t('entry.deleted') } });
     } catch (error) {
       setNotice(error instanceof Error ? error.message : String(error));
     } finally {
@@ -150,14 +249,16 @@ export function AddReviewPage() {
             aria-label={t('add.rowName')}
           />
           <span className="rv__kcal">{kcalOf(row.nutrients)} kcal</span>
-          <button
-            type="button"
-            className="rv__del"
-            aria-label={t('add.removeRow')}
-            onClick={() => removeRow(row.id)}
-          >
-            ×
-          </button>
+          {baseEntry ? null : (
+            <button
+              type="button"
+              className="rv__del"
+              aria-label={t('add.removeRow')}
+              onClick={() => removeRow(row.id)}
+            >
+              ×
+            </button>
+          )}
         </div>
 
         {row.components?.length ? (
@@ -244,6 +345,26 @@ export function AddReviewPage() {
 
       <ul className="rv__list">{rows.map(renderRow)}</ul>
 
+      <div className="rv__photo">
+        {shownPhoto ? (
+          <div className="rv__photo-box">
+            <img className="rv__photo-img" src={shownPhoto} alt="" />
+            <button
+              type="button"
+              className="rv__photo-del"
+              aria-label={t('entry.removePhoto')}
+              onClick={dropPhoto}
+            >
+              ×
+            </button>
+          </div>
+        ) : (
+          <button type="button" className="rv__photo-add" onClick={addPhotoFromCamera}>
+            {t('add.addPhoto')}
+          </button>
+        )}
+      </div>
+
       <div className="rv__meta">
         <label className="rv__date">
           <span>{t('add.date')}</span>
@@ -268,7 +389,7 @@ export function AddReviewPage() {
           ))}
         </div>
 
-        {photos.length > 0 ? (
+        {!baseEntry && photos.length > 1 ? (
           <p className="rv__photo-note">{t('add.photoNote', { count: photos.length })}</p>
         ) : null}
       </div>
@@ -276,9 +397,20 @@ export function AddReviewPage() {
       {notice ? <p className="add__notice">{notice}</p> : null}
 
       <div className="add__footer">
-        <Button type="primary" block loading={busy} disabled={rows.length === 0} onClick={save}>
-          {t('add.saveAll', { count: rows.length })}
-        </Button>
+        {baseEntry ? (
+          <div className="rv__actions">
+            <Button type="default" danger onClick={remove} disabled={busy}>
+              {t('entry.delete')}
+            </Button>
+            <Button type="primary" loading={busy} onClick={save}>
+              {t('entry.update')}
+            </Button>
+          </div>
+        ) : (
+          <Button type="primary" block loading={busy} disabled={rows.length === 0} onClick={save}>
+            {t('add.saveAll', { count: rows.length })}
+          </Button>
+        )}
       </div>
     </div>
   );

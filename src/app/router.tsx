@@ -6,6 +6,7 @@ import { AddMenuPage } from '../pages/add/AddMenuPage';
 import { AddRecentPage } from '../pages/add/AddRecentPage';
 import { AddReviewPage } from '../pages/add/AddReviewPage';
 import { AddSearchPage } from '../pages/add/AddSearchPage';
+import { EntryEditPage } from '../pages/add/EntryEditPage';
 import { MePage } from '../pages/me/MePage';
 import { StatsPage } from '../pages/stats/StatsPage';
 import { TodayPage } from '../pages/today/TodayPage';
@@ -27,6 +28,7 @@ export function AppRouter() {
         <Route path="search" element={<AddSearchPage />} />
         <Route path="recent" element={<AddRecentPage />} />
         <Route path="review" element={<AddReviewPage />} />
+        <Route path="entry/:id" element={<EntryEditPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -29,45 +29,21 @@
     "fat": "Fat"
   },
   "entry": {
-    "title": "Log food",
     "editTitle": "Edit entry",
-    "searchPlaceholder": "Search food, e.g. rice / mifan",
-    "pickHint": "Tap a food to start",
-    "recent": "Recently eaten",
-    "meal": "Meal",
-    "asPurchased": "Count bone/shell weight",
-    "save": "Save",
     "update": "Update",
     "delete": "Delete this entry",
-    "reselect": "Choose another",
-    "saved": "Logged!",
     "updated": "Updated",
     "deleted": "Deleted",
     "portionSmall": "small",
     "portionMedium": "medium",
     "portionLarge": "large",
-    "sentence": "Type a sentence",
-    "photo": "Photo",
-    "photoSaved": "Photo saved — fill in the food whenever you like",
     "photoFailed": "Camera failed: {{message}}",
     "removePhoto": "Remove photo",
-    "photoRemoved": "Photo removed",
-    "photoNotReady": "Photo saved, pick a food to attach it",
-    "recognize": "Recognize photo",
-    "recognizeMock": "Try with a sample result",
     "noKey": "No API key yet — showing a sample result",
     "recognizeEmpty": "Nothing recognized, pick a food manually",
-    "reviewHint": "Check the result — edit or remove anything wrong",
-    "pendingHint": "This entry is photo-only. Pick a food, or close it and fill in later",
     "pendingName": "Photo only",
     "pendingShort": "tap to fill in",
-    "sentencePlaceholder": "2 liang rice, one egg",
-    "sentenceHint": "Try: 2 liang / 300g / a bowl / one piece",
-    "parse": "Parse",
-    "unresolvedShort": "Not in the food table, will be skipped",
-    "saveAll": "Save all",
     "savedCount": "Saved {{count}} entries",
-    "removeRow": "Remove",
     "source": {
       "photo": "photo",
       "memory": "recent",
@@ -172,14 +148,10 @@
     "reviewHint": "{{count}} items · {{kcal}} kcal"
   },
   "search": {
-    "title": "Food database",
-    "placeholder": "Try \"rice\", \"mifan\" or \"tomato\"",
     "empty": "Nothing found, try another word?",
-    "hint": "{{count}} items",
-    "loading": "Loading food database…"
+    "hint": "{{count}} items"
   },
   "common": {
-    "cancel": "Cancel",
-    "back": "Back"
+    "cancel": "Cancel"
   }
 }
