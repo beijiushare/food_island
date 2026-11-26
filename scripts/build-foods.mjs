@@ -96,32 +96,15 @@ const round2 = (n) => (n === null ? null : Math.round(n * 100) / 100);
 /** CSV 列名 → JSON 短键（顺序即输出顺序，便于 diff） */
 const NUTRIENTS = [
   ['energyKCal', 'kcal'],
-  ['energyKJ', 'kj'],
   ['protein', 'protein'],
   ['fat', 'fat'],
   ['CHO', 'carb'],
   ['dietaryFiber', 'fiber'],
-  ['ash', 'ash'],
-  ['water', 'water'],
   ['cholesterol', 'chol'],
   ['Na', 'na'],
-  ['K', 'k'],
   ['Ca', 'ca'],
-  ['P', 'p'],
-  ['Mg', 'mg'],
   ['Fe', 'fe'],
-  ['Zn', 'zn'],
-  ['Se', 'se'],
-  ['Cu', 'cu'],
-  ['Mn', 'mn'],
-  ['vitaminA', 'va'],
-  ['carotene', 'car'],
-  ['retinol', 'ret'],
-  ['thiamin', 'vb1'],
-  ['riboflavin', 'vb2'],
-  ['niacin', 'niacin'],
   ['vitaminC', 'vc'],
-  ['vitaminETotal', 've'],
 ];
 
 const STATE_KEYWORDS = [
@@ -229,8 +212,9 @@ function build() {
     }
 
     // 成分合计自检（不含 fiber：中式成分表的 CHO 已含膳食纤维，重复计入会假阳性）
-    const sumCore = ['water', 'protein', 'fat', 'carb', 'ash'].reduce(
-      (acc, k) => acc + (nut[k] ?? 0),
+    // 水分/灰分没进 Nutrients，这里直接读原始列
+    const sumCore = ['water', 'protein', 'fat', 'CHO', 'ash'].reduce(
+      (acc, name) => acc + (toNumber(r[col[name]]).value ?? 0),
       0,
     );
     const suspect = sumCore > 105;

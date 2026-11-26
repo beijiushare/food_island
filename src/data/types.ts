@@ -8,32 +8,21 @@
 export interface Nutrients {
   /** kcal / 100g 可食部 */
   kcal: number | null;
-  kj: number | null;
   protein: number | null;
   fat: number | null;
   carb: number | null;
+  /** 膳食纤维 */
   fiber: number | null;
-  ash: number | null;
-  water: number | null;
-  chol: number | null;
+  /** 钠 mg */
   na: number | null;
-  k: number | null;
+  /** 钙 mg */
   ca: number | null;
-  p: number | null;
-  mg: number | null;
+  /** 铁 mg */
   fe: number | null;
-  zn: number | null;
-  se: number | null;
-  cu: number | null;
-  mn: number | null;
-  va: number | null;
-  car: number | null;
-  ret: number | null;
-  vb1: number | null;
-  vb2: number | null;
-  niacin: number | null;
+  /** 维生素 C mg */
   vc: number | null;
-  ve: number | null;
+  /** 胆固醇 mg */
+  chol: number | null;
 }
 
 export type NutrientKey = keyof Nutrients;
@@ -181,32 +170,15 @@ export const DEFAULT_TARGETS: Targets = {
 
 export const NUTRIENT_KEYS: NutrientKey[] = [
   'kcal',
-  'kj',
   'protein',
   'fat',
   'carb',
   'fiber',
-  'ash',
-  'water',
-  'chol',
   'na',
-  'k',
   'ca',
-  'p',
-  'mg',
   'fe',
-  'zn',
-  'se',
-  'cu',
-  'mn',
-  'va',
-  'car',
-  'ret',
-  'vb1',
-  'vb2',
-  'niacin',
   'vc',
-  've',
+  'chol',
 ];
 
 export interface FoodDataset {

@@ -16,6 +16,10 @@ output/
 *.tsbuildinfo
 .verify/
 
+# 由 npm run data:build 生成，源头在 data-src/
+src/assets/foods.json
+src/assets/dishes.json
+
 # ============================================
 # Capacitor / Android
 # ============================================

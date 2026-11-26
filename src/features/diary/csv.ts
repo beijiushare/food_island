@@ -19,6 +19,10 @@ const CSV_HEADER = [
   '碳水g',
   '膳食纤维g',
   '钠mg',
+  '钙mg',
+  '铁mg',
+  '维生素Cmg',
+  '胆固醇mg',
   '食物编码',
   '来源',
 ];
@@ -42,6 +46,10 @@ export function diaryToCsv(entries: DiaryEntry[]): string {
     entry.nutrients.carb ?? 0,
     entry.nutrients.fiber ?? 0,
     entry.nutrients.na ?? 0,
+    entry.nutrients.ca ?? 0,
+    entry.nutrients.fe ?? 0,
+    entry.nutrients.vc ?? 0,
+    entry.nutrients.chol ?? 0,
     entry.foodCode ?? '',
     entry.source,
   ]);
