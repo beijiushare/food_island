@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-      自适应图标的底层：透明。
-      图标本身是一个完整的圆盘，不需要再垫一层色块；
-      垫色会让桌面图标变成「一块底色 + 中间一个圆」，看着像多了一圈背景。
-    -->
-    <color name="ic_launcher_background">#00000000</color>
+    <!-- 自适应图标底层：白底 -->
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

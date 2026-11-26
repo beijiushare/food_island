@@ -18,34 +18,51 @@ const RES = path.join(ROOT, 'android', 'app', 'src', 'main', 'res');
 
 const svg = fs.readFileSync(SRC);
 
-/** 渲染一张正方形透明 PNG；inset < 1 时居中留白（给自适应图标安全区用） */
-async function render(size, out, inset = 1) {
+/**
+ * 渲染一张正方形 PNG。
+ * background:
+ *   'none'   透明
+ *   'white'  白底方块（旧版图标、favicon）
+ *   'circle' 白底圆形（round 图标，四角保持透明）
+ * inset < 1 时居中留白
+ */
+async function render(size, out, inset = 1, background = 'none') {
   const art = Math.round(size * inset);
+  const transparent = { r: 0, g: 0, b: 0, alpha: 0 };
 
   // 以较高 density 光栅化，再缩到目标尺寸，边缘更干净
   const artBuffer = await sharp(svg, { density: 384 })
-    .resize(art, art, {
-      fit: 'contain',
-      background: { r: 0, g: 0, b: 0, alpha: 0 },
-    })
+    .resize(art, art, { fit: 'contain', background: transparent })
     .png()
     .toBuffer();
 
-  if (art === size) {
+  const pad = Math.round((size - art) / 2);
+  const layers = [];
+
+  if (background === 'circle') {
+    const circle = Buffer.from(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">` +
+        `<circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="#ffffff"/></svg>`,
+    );
+    layers.push({ input: await sharp(circle).png().toBuffer(), left: 0, top: 0 });
+  }
+
+  if (background === 'none' && art === size) {
     fs.writeFileSync(out, artBuffer);
     return;
   }
 
-  const pad = Math.round((size - art) / 2);
+  layers.push({ input: artBuffer, left: pad, top: pad });
+
   await sharp({
     create: {
       width: size,
       height: size,
       channels: 4,
-      background: { r: 0, g: 0, b: 0, alpha: 0 },
+      background: background === 'white' ? { r: 255, g: 255, b: 255, alpha: 1 } : transparent,
     },
   })
-    .composite([{ input: artBuffer, left: pad, top: pad }])
+    .composite(layers)
     .png()
     .toFile(out);
 }
@@ -71,23 +88,23 @@ let count = 0;
 for (const [density, size] of DENSITIES) {
   const dir = path.join(RES, `mipmap-${density}`);
   const out = path.join(dir, 'ic_launcher.png');
-  await render(size, out);
-  fs.copyFileSync(out, path.join(dir, 'ic_launcher_round.png'));
+  await render(size, out, 0.84, 'white');
+  await render(size, path.join(dir, 'ic_launcher_round.png'), 0.84, 'circle');
   count += 2;
   console.log(`  ${density}  ${size}×${size}`);
 }
 
 for (const [density, size] of FOREGROUND) {
   const dir = path.join(RES, `mipmap-${density}`);
-  // 图标本身就是完整圆盘，铺满画布，不再留 8% 边（否则桌面上像多了一圈底）
-  await render(size, path.join(dir, 'ic_launcher_foreground.png'), 1);
+  // 自适应底是白色，前景留出边距，桌面上就是白底 + 居中盘子
+  await render(size, path.join(dir, 'ic_launcher_foreground.png'), 0.84);
   count += 1;
   console.log(`  ${density}  foreground ${size}×${size}`);
 }
 
 const publicDir = path.join(ROOT, 'public');
 fs.mkdirSync(publicDir, { recursive: true });
-await render(64, path.join(publicDir, 'favicon.png'));
+await render(64, path.join(publicDir, 'favicon.png'), 0.84, 'white');
 count += 1;
 
 // ---------------------------------------------------------------- 启动图
