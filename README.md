@@ -56,14 +56,8 @@ P1 数据层完成（1677 条 → `src/assets/foods.json`，检索验收通过�
 - [NutritionCalculatorOfHOC](https://github.com/Sibuxiangx/NutritionCalculatorOfHOC) — 调料数值与菜品配方比例（MIT）
 - [CookLikeHOC](https://github.com/Gar-b-age/CookLikeHOC) — 菜品配方来源
 
-**组件库**
+**代码与参考**
 
 - [animal-island-ui](https://github.com/guokaigdg/animal-island-ui) — 动森风格组件库（MIT）
-
-**技术栈**
-
-- [Vite](https://vite.dev) · [React](https://react.dev/) · [Capacitor](https://capacitorjs.com) · [Dexie](https://dexie.org) · [Zustand](https://github.com/pmndrs/zustand) · [i18next](https://www.i18next.com) · [pinyin-pro](https://pinyin-pro.cn) · [dayjs](https://day.js.org)
-
-**参考**
-
+- 技术栈：[Vite](https://vite.dev) · [React](https://react.dev/) · [Capacitor](https://capacitorjs.com) · [Dexie](https://dexie.org) · [Zustand](https://github.com/pmndrs/zustand) · [i18next](https://www.i18next.com) · [pinyin-pro](https://pinyin-pro.cn) · [dayjs](https://day.js.org)
 - [Fud AI](https://github.com/apoorvdarshan/fud-ai) — API Key 加密存储与录入流程参考（MIT）
