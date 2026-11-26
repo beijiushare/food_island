@@ -38,6 +38,7 @@ const SOURCE_LABEL: Record<DiaryEntry['source'], string> = {
   text: 'entry.source.text',
   search: 'entry.source.search',
   manual: 'entry.source.manual',
+  recipe: 'entry.source.recipe',
 };
 
 function greetingKey(hour: number): string {

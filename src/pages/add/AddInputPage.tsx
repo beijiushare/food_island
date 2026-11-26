@@ -27,6 +27,7 @@ export function AddInputPage() {
   const reset = useDraft((state) => state.reset);
 
   const [busy, setBusy] = useState(false);
+  const [thinking, setThinking] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
   /** 拍照 → 立刻建档（识别在记录内部完成，失败也留得住） */
@@ -77,6 +78,7 @@ export function AddInputPage() {
   async function submitText() {
     if (!index || busy || !text.trim()) return;
     setBusy(true);
+    setThinking(true);
     setNotice(null);
     try {
       const profile = await getAIProfile();
@@ -97,6 +99,7 @@ export function AddInputPage() {
       );
     } finally {
       setBusy(false);
+      setThinking(false);
     }
   }
 
@@ -120,8 +123,16 @@ export function AddInputPage() {
         rows={3}
         value={text}
         placeholder={t('add.textPlaceholder')}
+        disabled={thinking}
         onChange={(event) => setText(event.target.value)}
       />
+
+      {thinking ? (
+        <div className="add__thinking">
+          <span className="add__spinner add__spinner--sm" aria-hidden="true" />
+          <span>{t('add.thinking')}</span>
+        </div>
+      ) : null}
 
       {notice ? <p className="add__notice">{notice}</p> : null}
 
@@ -130,7 +141,7 @@ export function AddInputPage() {
           type="primary"
           block
           loading={busy}
-          disabled={!text.trim()}
+          disabled={!text.trim() || thinking}
           onClick={submitText}
         >
           {t('add.askAi')}

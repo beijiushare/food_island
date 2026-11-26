@@ -10,7 +10,7 @@ import type {
   MemoryItem,
   Nutrients,
 } from '../../data/types';
-import { scaleNutrients, sumNutrients } from '../diary/calc';
+import { emptyNutrients, scaleNutrients, sumNutrients } from '../diary/calc';
 import {
   portionGrams,
   resolvePortionCategory,
@@ -263,14 +263,51 @@ export function rowsFromSearch(
   return [{ ...row, source }];
 }
 
-/** 最近吃过：份量沿用上一次 */
+/** 最近吃过：份量沿用上一次；有组成快照就整道菜还原 */
 export function rowsFromMemory(
   memory: MemoryItem,
   index: { byCode: Map<string, IndexedFood> } | null,
 ): DraftRow[] {
+  // 复合菜 / 拆解过的记录：直接还原组成
+  if (memory.components?.length) {
+    const components = memory.components.map<DraftComponent>((component) => ({
+      ...component,
+      per100: component.per100 ?? null,
+      edible: null,
+    }));
+    const grams = components.reduce((sum, component) => sum + component.grams, 0) || memory.grams;
+    return [
+      {
+        id: nextId(),
+        name: memory.name,
+        grams,
+        basis: 'edible',
+        foodCode: null,
+        nutrients: sumNutrients(components.map((component) => component.nutrients)),
+        components,
+        source: 'memory',
+      },
+    ];
+  }
+
   const code = memory.foodKey.startsWith('name:') ? null : memory.foodKey;
   const food = code ? (index?.byCode.get(code) ?? null) : null;
-  if (!food) return [];
+
+  if (!food) {
+    // 老数据或已经查不到的条目：给一行空壳，点开能继续改
+    return [
+      {
+        id: nextId(),
+        name: memory.name,
+        grams: Math.max(1, Math.round(memory.grams || 100)),
+        basis: 'edible',
+        foodCode: null,
+        nutrients: emptyNutrients(),
+        unresolved: true,
+        source: 'memory',
+      },
+    ];
+  }
 
   const category = resolvePortionCategory(food);
   const grams = memory.grams > 0 ? memory.grams : portionGrams(category, 'medium');
@@ -341,7 +378,7 @@ export function rowsFromRecipe(
       per100: component.per100,
     })),
   };
-  return [rowFromResolved(resolveDish(index, draft, 'recipe'), 'search')];
+  return [rowFromResolved(resolveDish(index, draft, 'recipe'), 'recipe')];
 }
 
 function isSeasoningName(name: string): boolean {

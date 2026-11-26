@@ -12,7 +12,7 @@ import { AddHeader } from './AddHeader';
 export function AddRecentPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { index } = useFoodIndex();
+  const { index, loading } = useFoodIndex();
   const memories = useRankedFoods(120);
   const setRows = useDraft((state) => state.setRows);
   const [query, setQuery] = useState('');
@@ -24,6 +24,7 @@ export function AddRecentPage() {
   }, [memories, query]);
 
   function pick(foodKey: string) {
+    if (loading) return;
     const memory = memories.find((item) => item.foodKey === foodKey);
     if (!memory) return;
     const rows = rowsFromMemory(memory, index);

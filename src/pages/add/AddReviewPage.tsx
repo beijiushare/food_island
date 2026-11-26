@@ -125,7 +125,12 @@ export function AddReviewPage() {
       photoId,
     });
 
-    await rememberFood({ foodCode: row.foodCode, name: row.name, grams: row.grams });
+    await rememberFood({
+      foodCode: row.foodCode,
+      name: row.name,
+      grams: row.grams,
+      components: toComponents(row),
+    });
     await reset(false);
     navigate('/', { replace: true, state: { toast: t('entry.updated') } });
   }
@@ -156,6 +161,7 @@ export function AddReviewPage() {
       const firstPhoto = photos[0];
 
       for (const [index, row] of rows.entries()) {
+        const components = toComponents(row);
         const entry = await addEntry({
           date,
           meal,
@@ -164,7 +170,7 @@ export function AddReviewPage() {
           grams: Math.round(row.grams),
           basis: row.basis,
           nutrients: row.nutrients,
-          components: toComponents(row),
+          components,
           nutrientsManual: row.nutrientsManual,
           source: row.source,
           photoId: index === 0 && firstPhoto ? firstPhoto.id : undefined,
@@ -182,7 +188,7 @@ export function AddReviewPage() {
           });
         }
 
-        await rememberFood({ foodCode: row.foodCode, name: row.name, grams: row.grams });
+        await rememberFood({ foodCode: row.foodCode, name: row.name, grams: row.grams, components });
       }
 
       // 多出来的照片只用于识别，记完就真删，不留尸体

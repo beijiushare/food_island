@@ -1,11 +1,12 @@
 import { db } from '../../data/db';
-import type { MemoryItem, Portion } from '../../data/types';
+import type { EntryComponent, MemoryItem, Portion } from '../../data/types';
 
 export interface RememberInput {
   foodCode: string | null;
   name: string;
   grams: number;
   portion?: Portion;
+  components?: EntryComponent[];
 }
 
 /** 记忆库的键：有 foodCode 用 foodCode，没有就按名字 */
@@ -29,6 +30,7 @@ export async function rememberFood(input: RememberInput): Promise<void> {
       scene,
       grams: input.grams,
       portion: input.portion,
+      components: input.components,
       usedCount: 1,
       corrections: 0,
       lastUsedAt: now,
@@ -43,6 +45,7 @@ export async function rememberFood(input: RememberInput): Promise<void> {
     name: input.name,
     grams: input.grams,
     portion: input.portion,
+    components: input.components,
     usedCount: existing.usedCount + 1,
     corrections: existing.corrections + (corrected ? 1 : 0),
     lastUsedAt: now,

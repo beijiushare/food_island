@@ -181,16 +181,47 @@
   list-style: none;
 }
 
-.add__list--dishes {
+/* 搜索页的分栏 */
+.add__tabs {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
   margin-bottom: var(--sp-md);
+  background: var(--c-bg-secondary);
+  border-radius: var(--r-pill);
 }
 
-.add__section {
-  margin: var(--sp-md) 0 var(--sp-sm);
-  font-size: 12px;
-  font-weight: 800;
+.add__tab {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-text-body);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease), color var(--mo-fast) var(--mo-ease);
+}
+
+.add__tab--active {
+  color: var(--c-text);
+  background: var(--c-bg-content);
+  box-shadow: 0 2px 0 0 var(--shadow-btn);
+}
+
+.add__tab-count {
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--c-text-secondary);
-  letter-spacing: 0.04em;
+  background: var(--c-bg);
+  border-radius: 999px;
 }
 
 .add__badge {
@@ -324,6 +355,8 @@
 
 .add__textarea {
   width: 100%;
+  min-height: 108px;
+  flex: none;
   padding: var(--sp-md) var(--sp-lg);
   font-family: inherit;
   font-size: 15px;
@@ -405,6 +438,22 @@
   border-top-color: var(--c-primary);
   border-radius: 50%;
   animation: add-spin 0.9s linear infinite;
+}
+
+.add__spinner--sm {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+}
+
+.add__thinking {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: var(--sp-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
 }
 
 @keyframes add-spin {

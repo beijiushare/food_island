@@ -43,11 +43,12 @@
     "pendingShort": "tap to fill in",
     "savedCount": "Saved {{count}} entries",
     "source": {
-      "photo": "photo",
+      "photo": "input",
       "memory": "recent",
-      "text": "text",
+      "text": "input",
       "search": "search",
-      "manual": "manual"
+      "manual": "manual",
+      "recipe": "recipe"
     }
   },
   "stats": {
@@ -131,6 +132,8 @@
     "searchPlaceholder": "rice / mifan / tomato",
     "searchTip": "Type a keyword to start",
     "dishSection": "Dishes",
+    "tabFood": "Ingredients",
+    "tabEmpty": "Nothing here — {{count}} in the other tab",
     "dishBadge": "recipe",
     "dishMeta": "{{kcal}} kcal per 100 g",
     "dishPortion": "log {{grams}} g",
@@ -154,6 +157,7 @@
     "addPhoto": "Add photo",
     "textPlaceholder": "What did you eat? e.g. \"two people, extra rice\"",
     "askAi": "Ask AI",
+    "thinking": "AI is breaking down this dish…",
     "rowName": "Food name",
     "removeRow": "Remove",
     "parts": "{{count}} ingredients",

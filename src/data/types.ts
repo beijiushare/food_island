@@ -96,7 +96,7 @@ export interface DiaryEntry {
   errorCode?: string;
   scene?: string;
   photoId?: string;
-  source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
+  source: 'photo' | 'text' | 'search' | 'memory' | 'manual' | 'recipe';
   createdAt: number;
   /**
    * 只有照片、还没确定食物的占位记录。
@@ -136,6 +136,8 @@ export interface MemoryItem {
   usedCount: number;
   corrections: number;
   lastUsedAt: number;
+  /** 复合菜/拆解记录的组成快照，复用时直接还原 */
+  components?: EntryComponent[];
 }
 
 export interface PhotoRef {

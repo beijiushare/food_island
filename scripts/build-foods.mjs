@@ -2,7 +2,7 @@
 /**
  * data-src/food_composition_full.csv  →  src/assets/foods.json
  *
- * 清洗规则见 docs/01-技术文档.md §5.2：
+ * 清洗规则见 docs/ARCHITECTURE.md §5.2：
  *   —      未检出/无数据  → null
  *   Tr     微量           → 0，raw 记 'Tr'
  *   899*   计算值         → 899，标 calculated

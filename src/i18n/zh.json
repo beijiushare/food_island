@@ -43,11 +43,12 @@
     "pendingShort": "点一下补上",
     "savedCount": "记下 {{count}} 条",
     "source": {
-      "photo": "拍照",
-      "memory": "常吃",
-      "text": "文字",
+      "photo": "输入",
+      "memory": "最近",
+      "text": "输入",
       "search": "搜索",
-      "manual": "手动"
+      "manual": "手动",
+      "recipe": "菜谱"
     }
   },
   "stats": {
@@ -131,6 +132,8 @@
     "searchPlaceholder": "米饭 / mifan / 西红柿",
     "searchTip": "输入关键词开始搜",
     "dishSection": "菜谱",
+    "tabFood": "原料",
+    "tabEmpty": "这一栏没有结果，另一栏有 {{count}} 条",
     "dishBadge": "菜谱",
     "dishMeta": "每 100 g {{kcal}} kcal",
     "dishPortion": "按 {{grams}} g 记",
@@ -153,6 +156,7 @@
     "backHome": "返回首页",
     "addPhoto": "加照片",
     "textPlaceholder": "说说这餐吃了什么，比如「两个人吃的，米饭多了点」",
+    "thinking": "AI 正在拆解这道菜…",
     "askAi": "让 AI 看看",
     "rowName": "食物名",
     "removeRow": "去掉这条",
