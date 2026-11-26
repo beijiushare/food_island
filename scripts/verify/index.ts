@@ -40,12 +40,23 @@ group('search');
 const dataset = JSON.parse(fs.readFileSync('src/assets/foods.json', 'utf8'));
 const index = buildIndex(dataset);
 
-check('dataset has 1677 items', index.all.length === 1677, String(index.all.length));
+check('dataset has 1686 items', index.all.length === 1686, String(index.all.length));
 check('tomato alias (西红柿 -> 番茄)', searchFoods(index, '西红柿', 5)[0]?.item.baseName.includes('番茄'));
 check('pinyin mifan -> 米饭', searchFoods(index, 'mifan', 5)[0]?.item.baseName === '米饭');
 check('potato alias (土豆 -> 马铃薯)', searchFoods(index, '土豆', 5)[0]?.item.baseName === '马铃薯');
 check('dish not in table (宫保鸡丁)', searchFoods(index, '宫保鸡丁', 5).length === 0);
 check('blank query returns nothing', searchFoods(index, '   ', 5).length === 0);
+
+// 组成匹配：必须精确，不能短词模糊
+const exact = (q: string) => searchFoods(index, q, 6, { exact: true }).map((h) => h.item.baseName);
+check('exact 盐 -> 精盐', exact('盐').includes('精盐'), exact('盐').join(','));
+check('exact 糖 -> 白砂糖', exact('糖').includes('白砂糖'), exact('糖').join(','));
+check('exact 油 -> 豆油', exact('油').includes('豆油'), exact('油').join(','));
+check('exact 淀粉 -> 玉米淀粉', exact('淀粉').includes('玉米淀粉'), exact('淀粉').join(','));
+check('exact 醋 不会命中醋栗', !exact('醋').includes('醋栗'), exact('醋').join(','));
+check('exact 蒜 不会命中蒜肠', !exact('蒜').includes('蒜肠'), exact('蒜').join(','));
+check('exact 番茄炒蛋 查不到整菜', exact('番茄炒蛋').length === 0);
+check('调味品有 kind', searchFoods(index, '酱油', 1, { exact: true })[0]?.item.kind === 'seasoning');
 
 const noodle = searchFoods(index, '面条', 40);
 check(

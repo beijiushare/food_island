@@ -269,9 +269,10 @@ export function resolveComponentRow(
   fallbackCategory: string | undefined,
 ): ResolvedItem {
   const searchName = INGREDIENT_ALIAS[component.nameCn] ?? component.nameCn;
-  const hits = searchFoods(index, searchName, 6);
+  // 组成匹配必须是「精确名 / 别名」：短词模糊匹配会给出错误答案（醋→醋栗、蒜→蒜肠）
+  const hits = searchFoods(index, searchName, 6, { exact: true });
   const best = hits[0];
-  const food = best && best.score >= 0.7 ? best.item : null;
+  const food = best ? best.item : null;
 
   let grams = 0;
   let portion: Portion | undefined;

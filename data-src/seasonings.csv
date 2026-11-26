@@ -1,0 +1,10 @@
+category,foodCode,foodName,englishName,edible,water,energyKCal,energyKJ,protein,fat,CHO,dietaryFiber,cholesterol,ash,vitaminA,carotene,retinol,thiamin,riboflavin,niacin,vitaminC,vitaminETotal,vitaminE1,vitaminE2,vitaminE3,Ca,P,K,Na,Mg,Fe,Zn,Se,Cu,Mn,remark
+调味品-酱油,S0001,酱油,Soy sauce,100,,67,280,5.6,0.1,10.5,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-醋,S0002,醋,Vinegar,100,,18,75,0.1,0,4.9,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-糖,S0003,白砂糖,White sugar,100,,400,1674,0,0,99.9,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-盐,S0004,精盐,Salt,100,,0,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-酱,S0005,蚝油,Oyster sauce,100,,108,452,1.4,0.2,24.0,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-鲜味,S0006,鸡精,Chicken bouillon,100,,188,787,10.0,0.5,36.6,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-酱,S0007,番茄酱,Tomato paste,100,,82,343,1.9,0.2,18.4,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-酱,S0008,豆瓣酱,Fermented bean paste,100,,131,548,9.4,3.4,14.6,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）
+调味品-香辛料,S0009,花椒,Sichuan pepper,100,,258,1080,6.7,8.9,36.7,,,,,,,,,,,,,,,,,,,,,,参考 NutritionCalculatorOfHOC（MIT）

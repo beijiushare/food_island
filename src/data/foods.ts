@@ -15,6 +15,8 @@ export interface IndexedFood extends FoodItem {
   searchAliases: string[];
   /** 名称 bigram，用于模糊兜底 */
   bigrams: string[];
+  /** 原料 / 调味品：决定匹配策略与 UI 分组 */
+  kind: 'ingredient' | 'seasoning';
 }
 
 export interface FoodIndex {
@@ -52,6 +54,7 @@ export function buildIndex(dataset: FoodDataset): FoodIndex {
       baseName,
       searchAliases,
       bigrams: bigrams(baseName),
+      kind: item.cat1 === '调味品' ? 'seasoning' : 'ingredient',
     };
   });
 
@@ -78,6 +81,17 @@ export function loadFoodIndex(): Promise<FoodIndex> {
 
 export type MatchVia = 'name' | 'alias' | 'pinyin' | 'contains' | 'bigram' | 'token';
 
+export interface SearchOptions {
+  /**
+   * 精确模式：只接受「名字/核心名/别名完全相等」。
+   * 组成匹配（AI 拆出来的原料）必须用它——
+   * 否则「醋」会命中「醋栗」、「蒜」会命中「蒜肠」，还不如直接交给 AI。
+   */
+  exact?: boolean;
+  /** 只看原料或只看调味品 */
+  kind?: 'ingredient' | 'seasoning';
+}
+
 export interface SearchHit {
   item: IndexedFood;
   score: number;
@@ -101,7 +115,12 @@ function expandQuery(q: string): string[] {
 
 const isRepresentative = (item: IndexedFood) => /x$/.test(item.code);
 
-export function searchFoods(index: FoodIndex, query: string, limit = 30): SearchHit[] {
+export function searchFoods(
+  index: FoodIndex,
+  query: string,
+  limit = 30,
+  options: SearchOptions = {},
+): SearchHit[] {
   const q = normalize(query);
   if (q.length === 0) return [];
 
@@ -116,6 +135,23 @@ export function searchFoods(index: FoodIndex, query: string, limit = 30): Search
   const hits: SearchHit[] = [];
 
   for (const item of index.all) {
+    if (options.kind && item.kind !== options.kind) continue;
+
+    if (options.exact) {
+      const exact =
+        item.name === q || item.baseName === q
+          ? 1
+          : item.searchAliases.some((a) => normalize(a) === q)
+            ? 0.9
+            : qAliases.some((x) => x !== q && (item.baseName === x || item.name === x))
+              ? 0.88
+              : 0;
+      if (exact > 0) {
+        hits.push({ item, score: exact, via: exact === 1 ? 'name' : 'alias' });
+      }
+      continue;
+    }
+
     let score = 0;
     let via: MatchVia = 'bigram';
 

@@ -23,6 +23,7 @@ import { pinyin } from 'pinyin-pro';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'data-src', 'food_composition_full.csv');
+const EXTRA = path.join(ROOT, 'data-src', 'seasonings.csv');
 const OUT = path.join(ROOT, 'src', 'assets', 'foods.json');
 
 // ---------------------------------------------------------------- CSV 解析
@@ -191,7 +192,17 @@ function build() {
   const rows = parseCsv(csv);
   const header = rows[0].map((h) => h.trim());
   const col = Object.fromEntries(header.map((h, i) => [h, i]));
-  const body = rows.slice(1).filter((r) => r.some((c) => c.trim() !== ''));
+
+  // 成分表里没有调味品，单独维护一份（列结构与主表一致），构建时合并
+  const extraRows = fs.existsSync(EXTRA) ? parseCsv(fs.readFileSync(EXTRA, 'utf8')) : [];
+  const extraHeader = (extraRows[0] ?? []).map((h) => h.trim());
+  if (extraRows.length > 0 && extraHeader.join(',') !== header.join(',')) {
+    throw new Error('seasonings.csv 的列与主表不一致');
+  }
+
+  const body = [...rows.slice(1), ...extraRows.slice(1)].filter((r) =>
+    r.some((c) => c.trim() !== ''),
+  );
 
   const items = [];
   const warnings = [];
