@@ -3,6 +3,7 @@ import { getPhotoByEntry } from '../../data/dao/photos';
 import { getAIProfile } from '../../data/dao/settings';
 import { loadFoodIndex } from '../../data/foods';
 import { photoDataUrl } from '../../services/photo';
+import { AIError } from '../../services/ai-client';
 import { analyzeDish, mockDish, resolveDish, type DishDraft } from '../ai/recognize';
 
 /**
@@ -45,6 +46,7 @@ export async function analyzeEntry(entryId: string): Promise<void> {
     await updateEntry(entryId, {
       status: 'failed',
       error: error instanceof Error ? error.message : String(error),
+      errorCode: error instanceof AIError ? error.code : undefined,
     });
   }
 }

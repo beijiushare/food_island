@@ -3,8 +3,33 @@
   padding: var(--sp-lg);
 }
 
-/* 目标卡：两行，整块可点 */
-.me__targets {
+/* 语言切换 */
+.me__langs {
+  display: flex;
+  gap: var(--sp-sm);
+}
+
+.me__lang {
+  flex: 1;
+  min-height: 40px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-text-body);
+  background: var(--c-bg);
+  border: 2px solid var(--c-border-light);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--mo-fast) var(--mo-ease), color var(--mo-fast) var(--mo-ease);
+}
+
+.me__lang--active {
+  color: var(--c-text-on-primary);
+  background: var(--c-primary-active);
+  border-color: var(--c-primary-active);
+}
+
+/* 目标卡：两行，整块可点 */.me__targets {
   cursor: pointer;
   transition: transform 0.1s var(--mo-ease);
 }

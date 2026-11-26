@@ -26,6 +26,7 @@ function toComponents(row: DraftRow): EntryComponent[] | undefined {
     per100: component.per100 ?? null,
     source: component.source,
     kind: component.kind,
+    clamped: component.clamped,
   }));
 }
 
@@ -224,7 +225,11 @@ export function AddReviewPage() {
     const components = row.components;
     const part = (component: (typeof components)[number], index: number) => (
       <li className="rv__part" key={`${component.name}-${index}`}>
-        <span className="rv__part-name">{component.name}</span>
+        <span className="rv__part-name">
+          {component.name}
+          {component.source === 'ai' ? <span className="rv__badge">AI</span> : null}
+          {component.clamped ? <span className="rv__badge rv__badge--warn">{t('add.clamped')}</span> : null}
+        </span>
         <Stepper
           value={component.grams}
           min={1}

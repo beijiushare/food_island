@@ -103,6 +103,8 @@ export interface DiaryEntry {
   status?: EntryStatus;
   /** 识别失败的原因，显示在卡片上 */
   error?: string;
+  /** 失败原因的错误码（AI 侧），用于国际化文案 */
+  errorCode?: string;
   scene?: string;
   photoId?: string;
   source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
@@ -126,6 +128,8 @@ export interface EntryComponent {
   source?: 'table' | 'ai' | 'manual';
   /** 原料还是调料：决定 UI 分组 */
   kind?: 'ingredient' | 'seasoning';
+  /** AI 给的克数超出常识范围、被夹住过 */
+  clamped?: boolean;
 }
 
 /** 拍照后的识别状态 */

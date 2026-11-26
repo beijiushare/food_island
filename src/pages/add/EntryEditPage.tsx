@@ -87,7 +87,9 @@ export function EntryEditPage() {
       <div className="add__page">
         <AddHeader title={t('add.recognizeFailed')} />
         <div className="add__state">
-          <p className="add__state-text">{entry.error || t('add.recognizeFailedHint')}</p>
+          <p className="add__state-text">
+            {entry.errorCode ? t(`errors.${entry.errorCode}`) : entry.error || t('add.recognizeFailedHint')}
+          </p>
           <p className="add__hint">{t('add.recordKept')}</p>
           <Button
             type="primary"

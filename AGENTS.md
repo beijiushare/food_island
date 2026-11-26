@@ -44,6 +44,7 @@ npx cap run android            # 装到手机
 npx cap open android           # 打开 Android Studio
 
 npm run data:build             # data-src/*.csv → src/assets/foods.json
+npm run check:i18n             # 中英文案键与占位符对齐检查
 npm run verify                 # 纯逻辑回归（检索 / 解析 / 计算 / 统计 / AI 校验 / CSV）
 ```
 

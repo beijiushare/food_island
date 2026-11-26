@@ -314,6 +314,7 @@ export function rowsFromDish(index: FoodIndex, dish: DishDraft): DraftRow[] {
         edible: null,
         source: component.source,
         kind: component.kind,
+        clamped: component.clamped,
       })),
       source: 'photo',
     },
@@ -336,6 +337,7 @@ export function rowsFromEntry(entry: DiaryEntry, index: FoodIndex | null): Draft
       edible: componentFood?.edible ?? null,
       source: component.source,
       kind: component.kind,
+      clamped: component.clamped,
     };
   });
 

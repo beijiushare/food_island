@@ -8,7 +8,6 @@
     "me": "Me"
   },
   "today": {
-    "today": "today",
     "greetingMorning": "Good morning, eat well today",
     "greetingNoon": "Lunchtime — log your meal",
     "greetingAfternoon": "Good afternoon, snack time?",
@@ -67,7 +66,10 @@
     "empty": "No entries in this period"
   },
   "me": {
-    "title": "Me",
+    "title": "My",
+    "language": "Language",
+    "langZh": "中文",
+    "langEn": "English",
     "targetKcal": "Daily calorie target",
     "macros": "Protein / Carbs / Fat",
     "editTargets": "Adjust daily targets",
@@ -147,6 +149,7 @@
     "parts": "{{count}} ingredients",
     "partsWithSeasoning": "{{ingredients}} ingredients · {{seasonings}} seasonings",
     "seasoningLabel": "Seasonings",
+    "clamped": "limited",
     "unresolved": "Not in the table, fill nutrition manually",
     "editNutrition": "Edit nutrition",
     "restoreNutrition": "Restore from table",
@@ -164,6 +167,14 @@
   "search": {
     "empty": "Nothing found, try another word?",
     "hint": "{{count}} items"
+  },
+  "errors": {
+    "no-key": "No API key configured",
+    "unauthorized": "Invalid API key — check it in Me",
+    "rate-limit": "Too many requests, wait a minute",
+    "timeout": "Network is slow, try again later",
+    "network": "Network unreachable, check your connection",
+    "server": "AI service error"
   },
   "common": {
     "cancel": "Cancel"

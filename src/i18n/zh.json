@@ -67,6 +67,9 @@
   },
   "me": {
     "title": "我的",
+    "language": "语言",
+    "langZh": "中文",
+    "langEn": "English",
     "targetKcal": "每日热量目标",
     "macros": "蛋白 / 碳水 / 脂肪",
     "editTargets": "调整每日目标",
@@ -146,6 +149,7 @@
     "parts": "{{count}} 种原料",
     "partsWithSeasoning": "{{ingredients}} 种原料 · {{seasonings}} 种调料",
     "seasoningLabel": "调料",
+    "clamped": "已限量",
     "unresolved": "没查到成分表，请手填营养",
     "editNutrition": "改营养",
     "restoreNutrition": "恢复按成分表算",
@@ -163,6 +167,14 @@
   "search": {
     "empty": "没找到，换个说法试试？",
     "hint": "共 {{count}} 条"
+  },
+  "errors": {
+    "no-key": "还没配置 API Key",
+    "unauthorized": "API Key 无效，去「我的」检查一下",
+    "rate-limit": "请求太频繁，等一分钟再试",
+    "timeout": "网络慢，稍后重试",
+    "network": "网络不通，检查一下连接",
+    "server": "AI 服务出错了"
   },
   "common": {
     "cancel": "取消"

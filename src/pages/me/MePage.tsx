@@ -6,7 +6,7 @@ import { Sheet } from '../../components/Sheet/Sheet';
 import { Stepper } from '../../components/Stepper/Stepper';
 import { Toast } from '../../components/Toast/Toast';
 import { listAll } from '../../data/dao/diary';
-import {
+import i18n, { SUPPORTED_LANGS, setLanguage } from '../../i18n';import {
   clearAPIKey,
   getAIProfile,
   getAISettings,
@@ -251,6 +251,22 @@ export function MePage() {
         ) : null}
 
         {aiStatus ? <p className="me__status">{aiStatus}</p> : null}
+      </Card>
+
+      <h2 className="me__section">{t('me.language')}</h2>
+      <Card className="me__card">
+        <div className="me__langs">
+          {SUPPORTED_LANGS.map((lang) => (
+            <button
+              key={lang}
+              type="button"
+              className={`me__lang${i18n.language.startsWith(lang) ? ' me__lang--active' : ''}`}
+              onClick={() => setLanguage(lang)}
+            >
+              {t(lang === 'zh' ? 'me.langZh' : 'me.langEn')}
+            </button>
+          ))}
+        </div>
       </Card>
 
       <h2 className="me__section">{t('me.data')}</h2>

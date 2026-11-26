@@ -156,6 +156,29 @@ function aiNutrients(per100: Per100): Nutrients {
   return nut;
 }
 
+/** 调料的常识用量区间：AI 猜飞了就夹住，避免「盐 50 g」这种数 */
+const SEASONING_RANGE: { test: RegExp; min: number; max: number }[] = [
+  { test: /香油|芝麻油|花生油|菜籽油|橄榄油|猪油|黄油|油/, min: 1, max: 60 },
+  { test: /盐/, min: 0.2, max: 10 },
+  { test: /糖/, min: 0.5, max: 60 },
+  { test: /酱油|生抽|老抽|豉油/, min: 1, max: 40 },
+  { test: /醋/, min: 1, max: 40 },
+  { test: /料酒|黄酒|花雕/, min: 1, max: 40 },
+  { test: /蚝油/, min: 1, max: 40 },
+  { test: /豆瓣酱|黄豆酱|甜面酱|酱/, min: 1, max: 50 },
+  { test: /鸡精|味精/, min: 0.2, max: 10 },
+  { test: /淀粉|生粉/, min: 1, max: 30 },
+  { test: /番茄酱|番茄沙司/, min: 5, max: 60 },
+  { test: /花椒|胡椒|孜然|五香|咖喱|辣椒粉/, min: 0.1, max: 5 },
+];
+
+function clampSeasoning(name: string, grams: number): { grams: number; clamped: boolean } {
+  const range = SEASONING_RANGE.find((row) => row.test.test(name));
+  if (!range) return { grams, clamped: false };
+  const next = Math.min(range.max, Math.max(range.min, grams));
+  return { grams: Math.round(next * 10) / 10, clamped: Math.abs(next - grams) > 0.05 };
+}
+
 /**
  * 组成 → 本地表优先，查不到用 AI 的每 100g 值。
  * 全程精确匹配（「醋」不会命中醋栗）。
@@ -164,27 +187,33 @@ export function resolveDish(index: FoodIndex, dish: DishDraft): ResolvedDish {
   const components: EntryComponent[] = dish.components.map((component) => {
     const query = INGREDIENT_ALIAS[component.name] ?? component.name;
     const hit = searchFoods(index, query, 1, { exact: true })[0]?.item ?? null;
+    const isSeasoning = component.kind === 'seasoning' || hit?.kind === 'seasoning';
+    const amount = isSeasoning
+      ? clampSeasoning(component.name, component.grams)
+      : { grams: component.grams, clamped: false };
 
     if (hit) {
       return {
         name: hit.name,
-        grams: component.grams,
+        grams: amount.grams,
         foodCode: hit.code,
-        nutrients: scaleNutrients(hit.nut, component.grams, 'edible', hit.edible),
+        nutrients: scaleNutrients(hit.nut, amount.grams, 'edible', hit.edible),
         per100: hit.nut,
         source: 'table',
         kind: component.kind,
+        clamped: amount.clamped || undefined,
       };
     }
 
     return {
       name: component.name,
-      grams: component.grams,
+      grams: amount.grams,
       foodCode: null,
-      nutrients: scaleNutrients(aiNutrients(component.per100), component.grams, 'edible', null),
+      nutrients: scaleNutrients(aiNutrients(component.per100), amount.grams, 'edible', null),
       per100: aiNutrients(component.per100),
       source: 'ai',
       kind: component.kind,
+      clamped: amount.clamped || undefined,
     };
   });
 

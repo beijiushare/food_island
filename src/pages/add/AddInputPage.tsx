@@ -8,6 +8,7 @@ import { addPhotoRef } from '../../data/dao/photos';
 import { getAIProfile } from '../../data/dao/settings';
 import { useFoodIndex } from '../../data/useFoodIndex';
 import { analyzeDish } from '../../features/ai/recognize';
+import { AIError } from '../../services/ai-client';
 import { emptyNutrients } from '../../features/diary/calc';
 import { rowsFromDish, rowsFromSentence, useDraft } from '../../features/entry/draft';
 import { capturePhoto } from '../../services/photo';
@@ -91,7 +92,9 @@ export function AddInputPage() {
       }
       navigate('/add/review');
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : String(error));
+      setNotice(
+        error instanceof AIError ? t(`errors.${error.code}`) : error instanceof Error ? error.message : String(error),
+      );
     } finally {
       setBusy(false);
     }

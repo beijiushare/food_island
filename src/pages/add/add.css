@@ -509,6 +509,23 @@
   white-space: nowrap;
 }
 
+.rv__badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--c-primary-active);
+  vertical-align: 1px;
+  background: var(--c-primary-bg);
+  border-radius: 4px;
+}
+
+.rv__badge--warn {
+  color: var(--c-error);
+  background: var(--c-error-bg);
+}
+
 .rv__part-kcal {
   flex: none;
   font-size: 12px;
