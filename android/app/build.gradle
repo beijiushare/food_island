@@ -14,8 +14,8 @@ android {
         applicationId "top.beijiu.foodisland"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10001
-        versionName "1.0.1"
+        versionCode 10101
+        versionName "1.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // 自用机是 arm64，只打 v8a，省掉 x86 / armeabi 的冗余
         ndk {
