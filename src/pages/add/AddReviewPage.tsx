@@ -23,6 +23,9 @@ function toComponents(row: DraftRow): EntryComponent[] | undefined {
     grams: component.grams,
     foodCode: component.foodCode,
     nutrients: component.nutrients,
+    per100: component.per100 ?? null,
+    source: component.source,
+    kind: component.kind,
   }));
 }
 
@@ -217,21 +220,35 @@ export function AddReviewPage() {
   function renderComponents(row: DraftRow) {
     if (!row.components?.length) return null;
     if (!expanded[row.id]) return null;
+
+    const components = row.components;
+    const part = (component: (typeof components)[number], index: number) => (
+      <li className="rv__part" key={`${component.name}-${index}`}>
+        <span className="rv__part-name">{component.name}</span>
+        <Stepper
+          value={component.grams}
+          min={1}
+          max={2000}
+          step={component.grams <= 30 ? 1 : 10}
+          onChange={(next) => setComponentGrams(row.id, index, next)}
+        />
+        <span className="rv__part-kcal">{kcalOf(component.nutrients)} kcal</span>
+      </li>
+    );
+
+    const entries = components.map((component, index) => ({ component, index }));
+    const ingredients = entries.filter(({ component }) => component.kind !== 'seasoning');
+    const seasonings = entries.filter(({ component }) => component.kind === 'seasoning');
+
     return (
       <ul className="rv__parts">
-        {row.components.map((component, index) => (
-          <li className="rv__part" key={`${component.name}-${index}`}>
-            <span className="rv__part-name">{component.name}</span>
-            <Stepper
-              value={component.grams}
-              min={1}
-              max={2000}
-              step={component.grams <= 30 ? 1 : 10}
-              onChange={(next) => setComponentGrams(row.id, index, next)}
-            />
-            <span className="rv__part-kcal">{kcalOf(component.nutrients)} kcal</span>
-          </li>
-        ))}
+        {ingredients.map(({ component, index }) => part(component, index))}
+        {seasonings.length > 0 ? (
+          <>
+            <li className="rv__parts-label">{t('add.seasoningLabel')}</li>
+            {seasonings.map(({ component, index }) => part(component, index))}
+          </>
+        ) : null}
       </ul>
     );
   }
@@ -267,7 +284,16 @@ export function AddReviewPage() {
             className="rv__toggle"
             onClick={() => setExpanded((prev) => ({ ...prev, [row.id]: !prev[row.id] }))}
           >
-            {t('add.parts', { count: row.components.length })}
+            {t(
+              row.components.some((component) => component.kind === 'seasoning')
+                ? 'add.partsWithSeasoning'
+                : 'add.parts',
+              {
+                count: row.components.length,
+                ingredients: row.components.filter((c) => c.kind !== 'seasoning').length,
+                seasonings: row.components.filter((c) => c.kind === 'seasoning').length,
+              },
+            )}
             <span className="rv__toggle-mark" aria-hidden="true">
               {expanded[row.id] ? '▴' : '▾'}
             </span>

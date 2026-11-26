@@ -29,8 +29,12 @@ export async function listAll(): Promise<DiaryEntry[]> {
 
 export async function addEntry(input: NewEntryInput): Promise<DiaryEntry> {
   // 脏数据在写入时就拦住，不要等到列表里显示 NaN
-  // 例外：只有照片的占位记录（pending）允许 grams = 0
-  if (!input.pending && (!Number.isFinite(input.grams) || input.grams <= 0)) {
+  // 例外：只有照片的占位记录（pending / 识别中）允许 grams = 0
+  if (
+    !input.pending &&
+    input.status !== 'recognizing' &&
+    (!Number.isFinite(input.grams) || input.grams <= 0)
+  ) {
     throw new Error(`addEntry: 非法克数 ${String(input.grams)}`);
   }
   const entry: DiaryEntry = {
@@ -49,6 +53,18 @@ export async function updateEntry(id: string, patch: Partial<DiaryEntry>): Promi
 /** 整条替换：用来把可选字段（portion/scene）真的清掉 */
 export async function putEntry(entry: DiaryEntry): Promise<void> {
   await db.diary.put(entry);
+}
+
+/** 识别中卡住的记录（App 被杀、断网）→ 标记失败，允许重试 */
+export async function failStaleRecognitions(maxAgeMs = 120000): Promise<number> {
+  const cutoff = Date.now() - maxAgeMs;
+  const rows = await db.diary
+    .filter((entry) => entry.status === 'recognizing' && entry.createdAt < cutoff)
+    .toArray();
+  for (const row of rows) {
+    await db.diary.update(row.id, { status: 'failed', error: '识别中断，可以重试' });
+  }
+  return rows.length;
 }
 
 export async function deleteEntry(id: string): Promise<void> {

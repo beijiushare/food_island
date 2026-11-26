@@ -96,6 +96,13 @@ export interface DiaryEntry {
   nutrientsManual?: boolean;
   /** 复合菜的原料明细：外层只显示一道菜，展开能看到番茄 200g / 鸡蛋 100g */
   components?: EntryComponent[];
+  /**
+   * 识别状态。undefined 视为 ready（老记录）。
+   * recognizing 表示「照片已存、正在拆解」，failed 表示拆解失败，可重试。
+   */
+  status?: EntryStatus;
+  /** 识别失败的原因，显示在卡片上 */
+  error?: string;
   scene?: string;
   photoId?: string;
   source: 'photo' | 'text' | 'search' | 'memory' | 'manual';
@@ -113,7 +120,16 @@ export interface EntryComponent {
   grams: number;
   foodCode: string | null;
   nutrients: Nutrients;
+  /** 每 100 g 营养：改克数时就地重算，不用再问 AI */
+  per100?: Nutrients | null;
+  /** 数值来源：本地成分表 / AI 估算 / 手填 */
+  source?: 'table' | 'ai' | 'manual';
+  /** 原料还是调料：决定 UI 分组 */
+  kind?: 'ingredient' | 'seasoning';
 }
+
+/** 拍照后的识别状态 */
+export type EntryStatus = 'recognizing' | 'ready' | 'failed';
 
 export interface MemoryItem {
   id: string;

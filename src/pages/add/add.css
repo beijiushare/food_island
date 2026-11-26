@@ -323,6 +323,69 @@
   background: linear-gradient(to bottom, transparent, var(--c-bg) 40%);
 }
 
+/* 拍一张：整块大按钮 */
+.add__shoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+  margin: var(--sp-sm) 0 var(--sp-md);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--c-primary-active);
+  background: var(--c-bg-content);
+  border: 2px dashed var(--c-border-light);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: border-color var(--mo-fast) var(--mo-ease);
+}
+
+.add__shoot:active {
+  border-color: var(--c-primary);
+}
+
+.add__shoot:disabled {
+  opacity: 0.6;
+}
+
+/* 识别中 / 失败 */
+.add__state {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-md);
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xl) 0;
+  text-align: center;
+}
+
+.add__state-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text-body);
+}
+
+.add__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--c-border-light);
+  border-top-color: var(--c-primary);
+  border-radius: 50%;
+  animation: add-spin 0.9s linear infinite;
+}
+
+@keyframes add-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ---------- 结果卡 ---------- */
 
 .rv__list {
@@ -418,6 +481,15 @@
   padding: var(--sp-sm) 0 0;
   margin: 0;
   list-style: none;
+}
+
+.rv__parts-label {
+  padding-top: 2px;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+  border-top: 1px dashed var(--c-border-light);
 }
 
 .rv__part {

@@ -16,10 +16,9 @@ import { kcalOf, scaleNutrients, sumNutrients } from '../../src/features/diary/c
 import { portionGrams, resolvePortionCategory } from '../../src/features/diary/portion';
 import { diaryToCsv } from '../../src/features/diary/csv';
 import {
-  expandRecognized,
-  mockRecognition,
-  parseRecognition,
-  resolveRecognized,
+  mockDish,
+  parseDish,
+  resolveDish,
 } from '../../src/features/ai/recognize';
 import { parseExtraHeader } from '../../src/services/ai-client';
 
@@ -53,6 +52,7 @@ check('exact 盐 -> 精盐', exact('盐').includes('精盐'), exact('盐').join(
 check('exact 糖 -> 白砂糖', exact('糖').includes('白砂糖'), exact('糖').join(','));
 check('exact 油 -> 豆油', exact('油').includes('豆油'), exact('油').join(','));
 check('exact 淀粉 -> 玉米淀粉', exact('淀粉').includes('玉米淀粉'), exact('淀粉').join(','));
+check('exact 青椒 -> 甜椒', exact('青椒')[0] === '甜椒', exact('青椒').join(','));
 check('exact 醋 不会命中醋栗', !exact('醋').includes('醋栗'), exact('醋').join(','));
 check('exact 蒜 不会命中蒜肠', !exact('蒜').includes('蒜肠'), exact('蒜').join(','));
 check('exact 番茄炒蛋 查不到整菜', exact('番茄炒蛋').length === 0);
@@ -133,51 +133,59 @@ check('month buckets = 5', bucketByWeek(buildSummary([], '2026-11-01', '2026-11-
 // ---------------------------------------------------------------- AI 输出校验
 
 group('ai');
-check('plain json', parseRecognition('{"items":[{"name_cn":"米饭","portion":"medium"}]}').length === 1);
+const dishJson = JSON.stringify({
+  dish: '米饭',
+  grams: 200,
+  components: [
+    { name: '米饭', grams: 200, kind: 'ingredient', per100: { kcal: 116, protein: 2.6, carb: 25.9, fat: 0.3 } },
+  ],
+});
+check('plain dish json', parseDish(dishJson)?.name === '米饭');
 check(
   'code fence + surrounding text',
-  parseRecognition('result:\n```json\n{"items":[{"name_cn":"面条","portion":"large"}]}\n```\ndone').length === 1,
+  parseDish(`结果：\n\`\`\`json\n${dishJson}\n\`\`\`\n完毕`)?.name === '米饭',
 );
-const messy = parseRecognition('{"items":[{"name_cn":"炒饭","portion":"超大","confidence":3}]}')[0];
-check('invalid portion -> medium', messy?.portion === 'medium');
-check('confidence clamped to 1', messy?.confidence === 1);
-check('non-json -> empty', parseRecognition('看不清').length === 0);
-check(
-  'max 6 items',
-  parseRecognition(JSON.stringify({ items: Array.from({ length: 9 }, (_, i) => ({ name_cn: `f${i}` })) })).length === 6,
-);
-check('mock recognition maps to food table', resolveRecognized(index, mockRecognition()[0]).food !== null);
+check('missing dish -> null', parseDish('{"components":[]}') === null);
+check('non-json -> null', parseDish('看不清') === null);
+check('components required', parseDish('{"dish":"空盘子","components":[]}') === null);
 
-// 复合菜拆解（技术文档 §2.6）
-const mockDish = mockRecognition()[1];
-const expanded = expandRecognized(index, mockDish);
-check('composite dish expands to ingredients', expanded.length === 3, String(expanded.length));
-check(
-  'components resolved (tomato / egg / oil)',
-  expanded.every((row) => row.food !== null),
-  expanded.map((r) => `${r.name}:${r.food ? 'ok' : 'miss'}`).join(','),
+const messy = parseDish(
+  JSON.stringify({
+    dish: '测试',
+    components: [
+      { name: '盐', grams: '不是数字', kind: '乱写', per100: { kcal: '10' } },
+    ],
+  }),
 );
+check('bad grams falls back to 100', messy?.components[0]?.grams === 100, String(messy?.components[0]?.grams));
+check('bad kind -> ingredient', messy?.components[0]?.kind === 'ingredient');
+check('string per100 parsed', messy?.components[0]?.per100.kcal === 10, String(messy?.components[0]?.per100.kcal));
+
+const mock = resolveDish(index, mockDish());
+check('mock dish has 3 components', mock.components.length === 3, String(mock.components.length));
 check(
-  'grams from hints and tbsp',
-  expanded[0]?.grams === 200 && expanded[1]?.grams === 100 && expanded[2]?.grams === 14,
-  expanded.map((r) => `${r.name}=${r.grams}g`).join(' '),
+  'local table wins for tomato/egg/oil',
+  mock.components.every((component) => component.source === 'table'),
+  mock.components.map((c) => `${c.name}:${c.source}`).join(','),
 );
+check('oil resolved via alias to 豆油', mock.components[2]?.name.includes('豆油'), mock.components[2]?.name);
+
+const withMissing = resolveDish(index, {
+  name: '番茄炒蛋',
+  grams: 300,
+  components: [
+    { name: '番茄', grams: 200, kind: 'ingredient', per100: { kcal: 15, protein: 0.9, carb: 3.3, fat: 0.2 } },
+    { name: '料酒', grams: 10, kind: 'seasoning', per100: { kcal: 50, protein: 0.2, carb: 4, fat: 0 } },
+  ],
+});
+check('unknown component falls back to ai', withMissing.components[1]?.source === 'ai');
+check('parent totals sum components', withMissing.grams === 210, String(withMissing.grams));
 check(
-  'oil resolved via alias to 豆油',
-  expanded[2]?.food?.name.includes('豆油'),
-  expanded[2]?.food?.name,
+  'total kcal = local + ai',
+  Math.round(withMissing.nutrients.kcal ?? 0) ===
+    Math.round((withMissing.components[0].nutrients.kcal ?? 0) + (withMissing.components[1].nutrients.kcal ?? 0)),
 );
-check(
-  'single dish without components stays one row',
-  expandRecognized(index, { ...mockDish, isComposite: false, components: [] }).length === 1,
-);
-check(
-  'unresolvable composite falls back to one row',
-  expandRecognized(index, {
-    ...mockDish,
-    components: [{ nameCn: '不存在的东西' }, { nameCn: '也不存在' }],
-  }).length === 1,
-);
+
 check(
   'extra header parsed',
   JSON.stringify(parseExtraHeader('x-opencode-session: abc')) === '{"x-opencode-session":"abc"}',

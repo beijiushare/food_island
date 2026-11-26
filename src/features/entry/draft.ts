@@ -16,7 +16,7 @@ import {
   type PortionCategory,
 } from '../diary/portion';
 import { parseSentence, resolveParsed } from '../parse/sentence';
-import { resolveComponentRow, resolveRecognized, type RecognizedItem } from '../ai/recognize';
+import { resolveDish, type DishDraft } from '../ai/recognize';
 import type { FoodIndex } from '../../data/foods';
 import { deletePhotoFile } from '../../services/photo';
 
@@ -291,61 +291,33 @@ export function rowsFromMemory(
 }
 
 /**
+/**
  * AI 识别 → 草稿行。
- * 复合菜合成一条（一道菜一行），原料挂在 components 里；
- * 原料全查不到时保留整道菜，让用户手填。
+ * 一道菜一行，原料和调料都在 components 里；本地查不到的组成用 AI 的每 100g 值。
  */
-export function rowsFromRecognized(index: FoodIndex, items: RecognizedItem[]): DraftRow[] {
-  const rows: DraftRow[] = [];
-
-  for (const item of items) {
-    if (item.isComposite && item.components.length > 0) {
-      const components = item.components
-        .map((component) => resolveComponentRow(index, component, item.category))
-        .filter((resolved) => resolved.food !== null)
-        .map<DraftComponent>((resolved) => ({
-          name: resolved.food?.name ?? resolved.name,
-          grams: resolved.grams,
-          foodCode: resolved.food?.code ?? null,
-          nutrients: resolved.nutrients ?? emptyNutrients(),
-          per100: resolved.food?.nut ?? null,
-          edible: resolved.food?.edible ?? null,
-        }));
-
-      if (components.length > 0) {
-        rows.push({
-          id: nextId(),
-          name: item.nameCn,
-          grams: components.reduce((total, component) => total + component.grams, 0),
-          basis: 'edible',
-          foodCode: null,
-          nutrients: sumNutrients(components.map((component) => component.nutrients)),
-          components,
-          source: 'photo',
-        });
-        continue;
-      }
-    }
-
-    const resolved = resolveRecognized(index, item);
-    const food = resolved.food;
-
-    rows.push({
+export function rowsFromDish(index: FoodIndex, dish: DishDraft): DraftRow[] {
+  const resolved = resolveDish(index, dish);
+  return [
+    {
       id: nextId(),
-      name: food?.name ?? item.nameCn,
-      grams: food ? resolved.grams : 0,
-      category: food ? resolvePortionCategory(food) : undefined,
+      name: resolved.name,
+      grams: resolved.grams,
       basis: 'edible',
-      foodCode: food?.code ?? null,
-      nutrients: resolved.nutrients ?? emptyNutrients(),
-      unresolved: !food,
+      foodCode: null,
+      nutrients: resolved.nutrients,
+      components: resolved.components.map<DraftComponent>((component) => ({
+        name: component.name,
+        grams: component.grams,
+        foodCode: component.foodCode,
+        nutrients: component.nutrients,
+        per100: component.per100 ?? null,
+        edible: null,
+        source: component.source,
+        kind: component.kind,
+      })),
       source: 'photo',
-      per100: food?.nut ?? null,
-      edible: food?.edible ?? null,
-    });
-  }
-
-  return rows;
+    },
+  ];
 }
 
 /** 已有记录 → 草稿行（编辑页用），保留原营养快照与原料明细 */
@@ -360,8 +332,10 @@ export function rowsFromEntry(entry: DiaryEntry, index: FoodIndex | null): Draft
       grams: component.grams,
       foodCode: component.foodCode,
       nutrients: component.nutrients,
-      per100: componentFood?.nut ?? null,
+      per100: component.per100 ?? componentFood?.nut ?? null,
       edible: componentFood?.edible ?? null,
+      source: component.source,
+      kind: component.kind,
     };
   });
 

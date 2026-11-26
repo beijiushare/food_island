@@ -147,7 +147,9 @@ export function searchFoods(
               ? 0.88
               : 0;
       if (exact > 0) {
-        hits.push({ item, score: exact, via: exact === 1 ? 'name' : 'alias' });
+        // 罐头 / 脱水 是特定变体，不该压过新鲜的同名食物
+        const variant = item.state === '罐头' || item.state === '脱水' ? 0.95 : 1;
+        hits.push({ item, score: exact * variant, via: exact === 1 ? 'name' : 'alias' });
       }
       continue;
     }

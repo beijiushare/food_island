@@ -3,49 +3,67 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { addEntry } from '../../data/dao/diary';
+import { addPhotoRef } from '../../data/dao/photos';
 import { getAIProfile } from '../../data/dao/settings';
 import { useFoodIndex } from '../../data/useFoodIndex';
-import {
-  mockRecognition,
-  recognizePhotos,
-  recognizeText,
-} from '../../features/ai/recognize';
-import {
-  rowsFromRecognized,
-  rowsFromSentence,
-  useDraft,
-} from '../../features/entry/draft';
-import { capturePhoto, photoDataUrl } from '../../services/photo';
+import { analyzeDish } from '../../features/ai/recognize';
+import { emptyNutrients } from '../../features/diary/calc';
+import { rowsFromDish, rowsFromSentence, useDraft } from '../../features/entry/draft';
+import { capturePhoto } from '../../services/photo';
 import { AddHeader } from './AddHeader';
-
-const MAX_PHOTOS = 4;
 
 export function AddInputPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { index } = useFoodIndex();
 
-  const photos = useDraft((state) => state.photos);
+  const date = useDraft((state) => state.date);
+  const meal = useDraft((state) => state.meal);
   const text = useDraft((state) => state.text);
-  const addPhoto = useDraft((state) => state.addPhoto);
-  const removePhoto = useDraft((state) => state.removePhoto);
   const setText = useDraft((state) => state.setText);
   const setRows = useDraft((state) => state.setRows);
+  const reset = useDraft((state) => state.reset);
 
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
+  /** 拍照 → 立刻建档（识别在记录内部完成，失败也留得住） */
   async function takePhoto() {
-    if (busy || photos.length >= MAX_PHOTOS) return;
+    if (busy) return;
     setBusy(true);
     setNotice(null);
     try {
       const draft = await capturePhoto('prompt');
-      const dataUrl = await photoDataUrl(draft.relPath);
-      addPhoto({ id: crypto.randomUUID(), ...draft, dataUrl });
+      const photoId = crypto.randomUUID();
+
+      const entry = await addEntry({
+        date,
+        meal,
+        foodCode: null,
+        name: '',
+        grams: 0,
+        basis: 'edible',
+        nutrients: emptyNutrients(),
+        source: 'photo',
+        photoId,
+        status: 'recognizing',
+      });
+
+      await addPhotoRef({
+        id: photoId,
+        entryId: entry.id,
+        relPath: draft.relPath,
+        width: draft.width,
+        height: draft.height,
+        bytes: draft.bytes,
+        createdAt: Date.now(),
+      });
+
+      await reset(false);
+      navigate(`/add/entry/${entry.id}`, { replace: true });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      // 用户主动取消不算错误
       if (!/取消|没有选图|cancel/i.test(message)) {
         setNotice(t('entry.photoFailed', { message }));
       }
@@ -54,37 +72,23 @@ export function AddInputPage() {
     }
   }
 
-  async function submit() {
-    if (!index || busy) return;
-    if (photos.length === 0 && !text.trim()) return;
-
+  /** 只有文字时走「描述 → 拆组成」 */
+  async function submitText() {
+    if (!index || busy || !text.trim()) return;
     setBusy(true);
     setNotice(null);
     try {
       const profile = await getAIProfile();
-      let rows;
-
       if (profile.apiKey) {
-        const items = photos.length
-          ? await recognizePhotos(
-              profile,
-              photos.map((photo) => photo.dataUrl),
-              text,
-            )
-          : await recognizeText(profile, text);
-        rows = rowsFromRecognized(index, items);
+        const dish = await analyzeDish(profile, { text });
+        if (!dish) {
+          setNotice(t('entry.recognizeEmpty'));
+          return;
+        }
+        setRows(rowsFromDish(index, dish));
       } else {
-        setNotice(t('entry.noKey'));
-        rows = photos.length
-          ? rowsFromRecognized(index, mockRecognition())
-          : rowsFromSentence(index, text);
+        setRows(rowsFromSentence(index, text));
       }
-
-      if (rows.length === 0) {
-        setNotice(t('entry.recognizeEmpty'));
-        return;
-      }
-      setRows(rows);
       navigate('/add/review');
     } catch (error) {
       setNotice(error instanceof Error ? error.message : String(error));
@@ -93,42 +97,20 @@ export function AddInputPage() {
     }
   }
 
-  const canSubmit = photos.length > 0 || text.trim().length > 0;
-
   return (
     <div className="add__page">
-      <AddHeader title={t('add.menuInput')} subtitle={t('add.inputHint')} />
+      <AddHeader title={t('add.menuInput')} subtitle={t('add.photoFirstHint')} />
 
-      <div className="add__photos">
-        {photos.map((photo) => (
-          <div className="add__photo" key={photo.id}>
-            <img className="add__photo-img" src={photo.dataUrl} alt="" />
-            <button
-              type="button"
-              className="add__photo-del"
-              aria-label={t('entry.removePhoto')}
-              onClick={() => void removePhoto(photo.id)}
-            >
-              ×
-            </button>
-          </div>
-        ))}
+      <button type="button" className="add__shoot" onClick={takePhoto} disabled={busy}>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="6" width="18" height="14" rx="3" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="12" cy="13" r="3.6" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M8.5 6 10 3.8h4L15.5 6" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+        </svg>
+        <span>{t('add.shoot')}</span>
+      </button>
 
-        {photos.length < MAX_PHOTOS ? (
-          <button type="button" className="add__photo-add" onClick={takePhoto} disabled={busy}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            <span>{t('add.addPhoto')}</span>
-          </button>
-        ) : null}
-      </div>
-
-      <p className="add__hint">
-        {photos.length > 0
-          ? t('add.photoCount', { count: photos.length, max: MAX_PHOTOS })
-          : t('add.photoTip')}
-      </p>
+      <p className="add__hint">{t('add.shootHint')}</p>
 
       <textarea
         className="add__textarea"
@@ -141,7 +123,13 @@ export function AddInputPage() {
       {notice ? <p className="add__notice">{notice}</p> : null}
 
       <div className="add__footer">
-        <Button type="primary" block loading={busy} disabled={!canSubmit} onClick={submit}>
+        <Button
+          type="primary"
+          block
+          loading={busy}
+          disabled={!text.trim()}
+          onClick={submitText}
+        >
           {t('add.askAi')}
         </Button>
       </div>

@@ -11,6 +11,7 @@ import { MacroBar } from '../../components/MacroBar/MacroBar';
 import { MonthCalendar } from '../../components/MonthCalendar/MonthCalendar';
 import { Toast } from '../../components/Toast/Toast';
 import type { DiaryEntry, Meal } from '../../data/types';
+import { failStaleRecognitions } from '../../data/dao/diary';
 import { kcalOf, sumNutrients } from '../../features/diary/calc';
 import { useDayEntries, useMarkedDates, useTargets } from '../../features/diary/hooks';
 import { addDays, monthDayLabel, todayISO } from '../../lib/date';
@@ -95,6 +96,11 @@ export function TodayPage() {
     navigate(location.pathname, { replace: true, state: null });
   }, [location, navigate]);
 
+  // 上次识别中卡住的记录（App 被杀、断网）→ 标失败，允许重试
+  useEffect(() => {
+    void failStaleRecognitions();
+  }, []);
+
   function openAdd(meal: Meal) {
     navigate(`/add?date=${date}&meal=${meal}`);
   }
@@ -166,23 +172,38 @@ export function TodayPage() {
               <span className="today__meal-kcal">{mealKcal} kcal</span>
             </div>
             <div className="today__meal-list">
-              {list.map((entry) => (
-                <ListItem
-                  key={entry.id}
-                  name={entry.pending ? t('entry.pendingName') : entry.name}
-                  sub={
-                    entry.pending
-                      ? t('entry.pendingShort')
-                      : entry.portion
-                        ? t(PORTION_LABEL[entry.portion])
-                        : t(SOURCE_LABEL[entry.source])
-                  }
-                  grams={entry.grams}
-                  kcal={kcalOf(entry.nutrients)}
-                  hideNumbers={entry.pending}
-                  onClick={() => openEdit(entry)}
-                />
-              ))}
+              {list.map((entry) => {
+                const status = entry.status;
+                return (
+                  <ListItem
+                    key={entry.id}
+                    name={
+                      status === 'recognizing'
+                        ? t('add.recognizing')
+                        : status === 'failed'
+                          ? t('add.recognizeFailed')
+                          : entry.pending
+                            ? t('entry.pendingName')
+                            : entry.name
+                    }
+                    sub={
+                      status === 'recognizing'
+                        ? t('add.recognizingShort')
+                        : status === 'failed'
+                          ? t('add.retryShort')
+                          : entry.pending
+                            ? t('entry.pendingShort')
+                            : entry.portion
+                              ? t(PORTION_LABEL[entry.portion])
+                              : t(SOURCE_LABEL[entry.source])
+                    }
+                    grams={entry.grams}
+                    kcal={kcalOf(entry.nutrients)}
+                    hideNumbers={Boolean(status) || entry.pending}
+                    onClick={() => openEdit(entry)}
+                  />
+                );
+              })}
               <button type="button" className="today__meal-add" onClick={() => openAdd(meal)}>
                 ＋ {t('today.addOne')}
               </button>
