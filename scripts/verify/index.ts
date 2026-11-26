@@ -11,7 +11,6 @@ import fs from 'node:fs';
 import { buildIndex, searchFoods } from '../../src/data/foods';
 import type { DiaryEntry, Nutrients } from '../../src/data/types';
 import { buildSummary, bucketByWeek } from '../../src/features/stats/summary';
-import { parseSentence, resolveParsed } from '../../src/features/parse/sentence';
 import { kcalOf, scaleNutrients, sumNutrients } from '../../src/features/diary/calc';
 import { portionGrams, resolvePortionCategory } from '../../src/features/diary/portion';
 import { diaryToCsv } from '../../src/features/diary/csv';
@@ -63,18 +62,6 @@ const noodle = searchFoods(index, '面条', 40);
 check(
   'raw + cooked noodles both listed',
   noodle.some((h) => h.item.name.includes('生')) && noodle.some((h) => h.item.name.includes('煮')),
-);
-
-// ---------------------------------------------------------------- 文字解析
-
-group('parse');
-const parsed = parseSentence('二两米饭、一个鸡蛋').map((p) => resolveParsed(index, p));
-check('splits into two items', parsed.length === 2, String(parsed.length));
-check('2 liang rice = 100 g', parsed[0]?.grams === 100, String(parsed[0]?.grams));
-check('one egg = 50 g', parsed[1]?.grams === 50, String(parsed[1]?.grams));
-check(
-  '300g noodles default to cooked',
-  resolveParsed(index, parseSentence('300g面条')[0]).food?.name.includes('煮'),
 );
 
 // ---------------------------------------------------------------- 计算

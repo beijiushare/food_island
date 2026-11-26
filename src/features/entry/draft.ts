@@ -10,13 +10,12 @@ import type {
   MemoryItem,
   Nutrients,
 } from '../../data/types';
-import { emptyNutrients, scaleNutrients, sumNutrients } from '../diary/calc';
+import { scaleNutrients, sumNutrients } from '../diary/calc';
 import {
   portionGrams,
   resolvePortionCategory,
   type PortionCategory,
 } from '../diary/portion';
-import { parseSentence, resolveParsed } from '../parse/sentence';
 import { resolveDish, type DishDraft } from '../ai/recognize';
 import type { FoodIndex } from '../../data/foods';
 import { deletePhotoFile } from '../../services/photo';
@@ -386,25 +385,4 @@ export function rowsFromEntry(entry: DiaryEntry, index: FoodIndex | null): Draft
       edible: food?.edible ?? null,
     },
   ];
-}
-
-/** 没配 Key 时的文字兜底：本地规则解析 */
-export function rowsFromSentence(index: FoodIndex, sentence: string): DraftRow[] {
-  return parseSentence(sentence).map((parsed) => {
-    const item = resolveParsed(index, parsed);
-    const food = item.food;
-    return {
-      id: nextId(),
-      name: food?.name ?? item.name,
-      grams: food ? item.grams : 0,
-      category: food ? resolvePortionCategory(food) : undefined,
-      basis: 'edible',
-      foodCode: food?.code ?? null,
-      nutrients: item.nutrients ?? emptyNutrients(),
-      unresolved: !food,
-      source: 'text',
-      per100: food?.nut ?? null,
-      edible: food?.edible ?? null,
-    };
-  });
 }

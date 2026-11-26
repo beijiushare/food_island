@@ -3,7 +3,7 @@ import { searchFoods } from '../../data/foods';
 import type { EntryComponent, Nutrients } from '../../data/types';
 import { chat, type AIProfile } from '../../services/ai-client';
 import { emptyNutrients, scaleNutrients, sumNutrients } from '../diary/calc';
-import { INGREDIENT_ALIAS } from '../parse/sentence';
+import { INGREDIENT_ALIAS } from '../../data/ingredient-alias';
 
 /**
  * 「一道菜 → 组成」的识别。

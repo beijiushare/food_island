@@ -10,7 +10,7 @@ import { useFoodIndex } from '../../data/useFoodIndex';
 import { analyzeDish } from '../../features/ai/recognize';
 import { AIError } from '../../services/ai-client';
 import { emptyNutrients } from '../../features/diary/calc';
-import { rowsFromDish, rowsFromSentence, useDraft } from '../../features/entry/draft';
+import { rowsFromDish, useDraft } from '../../features/entry/draft';
 import { capturePhoto } from '../../services/photo';
 import { AddHeader } from './AddHeader';
 
@@ -80,16 +80,16 @@ export function AddInputPage() {
     setNotice(null);
     try {
       const profile = await getAIProfile();
-      if (profile.apiKey) {
-        const dish = await analyzeDish(profile, { text });
-        if (!dish) {
-          setNotice(t('entry.recognizeEmpty'));
-          return;
-        }
-        setRows(rowsFromDish(index, dish));
-      } else {
-        setRows(rowsFromSentence(index, text));
+      if (!profile.apiKey) {
+        setNotice(t('errors.no-key'));
+        return;
       }
+      const dish = await analyzeDish(profile, { text });
+      if (!dish) {
+        setNotice(t('entry.recognizeEmpty'));
+        return;
+      }
+      setRows(rowsFromDish(index, dish));
       navigate('/add/review');
     } catch (error) {
       setNotice(
