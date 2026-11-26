@@ -17,6 +17,7 @@
 - **离线可用**：除 AI 识别外，其余功能不依赖网络
 - **数据自持**：IndexedDB + 私有目录，支持导出 CSV
 - **中英双语**：可切换语言，文案键有对齐检查
+- **检查更新**：从 GitHub Releases 比较版本，打开浏览器下载
 
 ## 录入流程
 
@@ -67,6 +68,17 @@ npm run typecheck         # 类型检查
 npm run check:i18n        # 中英文案键与占位符对齐
 npm run verify            # 纯逻辑回归：检索 / 解析 / 计算 / 统计 / AI 校验 / CSV / 菜谱
 ```
+
+### 发布
+
+```bash
+npm run release -- 1.1.0                 # 改版本号 → 构建 → 打包 → 上传 GitHub Release
+npm run release -- 1.1.0 --skip-publish  # 只出包，不上传
+```
+
+- `versionCode = major*10000 + minor*100 + patch`，不需要手改
+- 上传需要安装 [GitHub CLI](https://cli.github.com/) 并 `gh auth login`
+- APK 归档到 `.claude_dist/apk/`，App 的「我的 → 检查更新」读 Release 的 latest
 
 ## 项目结构
 

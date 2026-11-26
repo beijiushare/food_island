@@ -1,7 +1,7 @@
 {
   "name": "food-island",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "typecheck": "tsc -b --noEmit",
     "check:i18n": "node scripts/check-i18n.mjs",
     "verify": "node scripts/check-i18n.mjs && node scripts/verify.mjs",
+    "release": "node scripts/release.mjs",
     "data:build": "node scripts/build-foods.mjs",
     "cap:sync": "cap sync android",
     "cap:run": "cap run android",

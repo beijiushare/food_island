@@ -95,6 +95,16 @@
       "keyCleared": "Key cleared"
     },
     "data": "Data",
+    "update": {
+      "title": "Update",
+      "hint": "Current version {{version}}. Checks GitHub Releases for a newer build.",
+      "check": "Check for updates",
+      "checking": "Checking…",
+      "latest": "You are on the latest version",
+      "available": "New version {{version}} available",
+      "download": "Download",
+      "error": "Check failed, try again later"
+    },
     "exportHint": "Export all entries as CSV. Do it before switching phones or upgrading the OS.",
     "exportCsv": "Export CSV (all entries)",
     "exporting": "Exporting…",
@@ -124,7 +134,7 @@
     "dishSection": "Dishes",
     "dishBadge": "recipe",
     "dishMeta": "{{kcal}} kcal per 100 g",
-    "dishPortion": "log 250 g",
+    "dishPortion": "log {{grams}} g",
     "loading": "Loading food table…",
     "recentHint": "Most eaten first, then most recent",
     "recentSearch": "Search your recent foods",

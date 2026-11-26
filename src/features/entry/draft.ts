@@ -326,8 +326,12 @@ export function rowsFromDish(index: FoodIndex, dish: DishDraft): DraftRow[] {
   return [rowFromResolved(resolveDish(index, dish), 'photo')];
 }
 
-/** 从菜品库选一道菜：按每 100 g 比例换算成指定克数 */
-export function rowsFromRecipe(index: FoodIndex, dish: DishItem, grams = 250): DraftRow[] {
+/** 从菜品库选一道菜：按每 100 g 比例换算成指定克数（默认用配方的一份） */
+export function rowsFromRecipe(
+  index: FoodIndex,
+  dish: DishItem,
+  grams = dish.servingGrams || 250,
+): DraftRow[] {
   const draft: DishDraft = {
     name: dish.name,
     grams,

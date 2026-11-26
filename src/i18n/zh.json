@@ -95,6 +95,16 @@
       "keyCleared": "Key 已清除"
     },
     "data": "数据",
+    "update": {
+      "title": "更新",
+      "hint": "当前版本 {{version}}，从 GitHub Releases 检查新版",
+      "check": "检查更新",
+      "checking": "检查中…",
+      "latest": "已是最新版本",
+      "available": "发现新版本 {{version}}",
+      "download": "下载",
+      "error": "检查失败，稍后再试"
+    },
     "exportHint": "导出全部饮食记录为 CSV。手机换机、系统升级前记得导一次。",
     "exportCsv": "导出 CSV（全部记录）",
     "exporting": "正在导出…",
@@ -124,7 +134,7 @@
     "dishSection": "菜谱",
     "dishBadge": "菜谱",
     "dishMeta": "每 100 g {{kcal}} kcal",
-    "dishPortion": "按 250 g 记",
+    "dishPortion": "按 {{grams}} g 记",
     "loading": "成分表加载中…",
     "recentHint": "吃过次数多的在前，其次按最近时间",
     "recentSearch": "在最近吃过的里搜",

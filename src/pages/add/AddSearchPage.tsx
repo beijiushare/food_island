@@ -84,7 +84,9 @@ export function AddSearchPage() {
                       {dish.category} · {t('add.dishMeta', { kcal: Math.round(dishPer100(dish).kcal) })}
                     </span>
                   </span>
-                  <span className="add__row-kcal">{t('add.dishPortion')}</span>
+                  <span className="add__row-kcal">
+                    {t('add.dishPortion', { grams: dish.servingGrams })}
+                  </span>
                 </button>
               </li>
             ))}

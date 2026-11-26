@@ -6,6 +6,7 @@
    "id": "xihongshi-chao-jidan",
    "name": "西红柿炒鸡蛋",
    "category": "炒菜",
+   "servingGrams": 444,
    "components": [
     {
      "name": "大豆油",
@@ -73,6 +74,7 @@
    "id": "gongbao-jiding",
    "name": "宫保鸡丁",
    "category": "炒菜",
+   "servingGrams": 372,
    "components": [
     {
      "name": "大豆油",
@@ -150,6 +152,7 @@
    "id": "yuxiang-rousi",
    "name": "鱼香肉丝",
    "category": "炒菜",
+   "servingGrams": 363,
    "components": [
     {
      "name": "大豆油",
@@ -217,6 +220,7 @@
    "id": "suanla-tudousi",
    "name": "酸辣土豆丝",
    "category": "炒菜",
+   "servingGrams": 358,
    "components": [
     {
      "name": "大豆油",
@@ -284,6 +288,7 @@
    "id": "tangcu-paigu",
    "name": "糖醋排骨",
    "category": "炒菜",
+   "servingGrams": 576,
    "components": [
     {
      "name": "排骨",
@@ -321,6 +326,7 @@
    "id": "qingjiao-chao-douya",
    "name": "青椒炒豆芽",
    "category": "炒菜",
+   "servingGrams": 317,
    "components": [
     {
      "name": "大豆油",
@@ -368,6 +374,7 @@
    "id": "suanni-bocai",
    "name": "蒜泥菠菜",
    "category": "炒菜",
+   "servingGrams": 269,
    "components": [
     {
      "name": "大豆油",
@@ -415,6 +422,7 @@
    "id": "shengchao-shanghaiging",
    "name": "生炒上海青",
    "category": "炒菜",
+   "servingGrams": 269,
    "components": [
     {
      "name": "大豆油",
@@ -462,6 +470,7 @@
    "id": "qingchao-qingcai",
    "name": "清炒青菜",
    "category": "炒菜",
+   "servingGrams": 268,
    "components": [
     {
      "name": "大豆油",
@@ -509,6 +518,7 @@
    "id": "qingchao-wosunpian",
    "name": "清炒莴笋片",
    "category": "炒菜",
+   "servingGrams": 268,
    "components": [
     {
      "name": "大豆油",
@@ -556,6 +566,7 @@
    "id": "qingchao-chuncai",
    "name": "清炒春菜",
    "category": "炒菜",
+   "servingGrams": 268,
    "components": [
     {
      "name": "大豆油",
@@ -603,6 +614,7 @@
    "id": "qingchao-maobaicai",
    "name": "清炒毛白菜",
    "category": "炒菜",
+   "servingGrams": 268,
    "components": [
     {
      "name": "大豆油",
@@ -650,6 +662,7 @@
    "id": "huluobo-chao-muer",
    "name": "胡萝卜炒木耳",
    "category": "炒菜",
+   "servingGrams": 266,
    "components": [
     {
      "name": "大豆油",
@@ -697,6 +710,7 @@
    "id": "huluobo-chao-jidan",
    "name": "胡萝卜炒鸡蛋",
    "category": "炒菜",
+   "servingGrams": 271,
    "components": [
     {
      "name": "大豆油",
@@ -744,6 +758,7 @@
    "id": "huluobo-chao-roupian",
    "name": "胡萝卜炒肉片",
    "category": "炒菜",
+   "servingGrams": 217,
    "components": [
     {
      "name": "大豆油",
@@ -791,6 +806,7 @@
    "id": "xiaochao-huacai",
    "name": "小炒花菜",
    "category": "炒菜",
+   "servingGrams": 303,
    "components": [
     {
      "name": "大豆油",
@@ -848,6 +864,7 @@
    "id": "xiaochao-xianggan",
    "name": "小炒香干",
    "category": "炒菜",
+   "servingGrams": 265,
    "components": [
     {
      "name": "大豆油",
@@ -895,6 +912,7 @@
    "id": "xiaochao-mianjin",
    "name": "小炒面筋",
    "category": "炒菜",
+   "servingGrams": 253,
    "components": [
     {
      "name": "大豆油",
@@ -942,6 +960,7 @@
    "id": "qincai-chao-xianggan",
    "name": "芹菜炒香干",
    "category": "炒菜",
+   "servingGrams": 266,
    "components": [
     {
      "name": "大豆油",
@@ -989,6 +1008,7 @@
    "id": "qincai-xianggan-chao-rousi",
    "name": "芹菜香干炒肉丝",
    "category": "炒菜",
+   "servingGrams": 236,
    "components": [
     {
      "name": "大豆油",
@@ -1036,6 +1056,7 @@
    "id": "wosunsi-chao-jidan",
    "name": "莴笋丝炒鸡蛋",
    "category": "炒菜",
+   "servingGrams": 271,
    "components": [
     {
      "name": "大豆油",
@@ -1083,6 +1104,7 @@
    "id": "duojiao-muer-chao-jidan",
    "name": "剁椒木耳炒鸡蛋",
    "category": "炒菜",
+   "servingGrams": 233,
    "components": [
     {
      "name": "大豆油",
@@ -1130,6 +1152,7 @@
    "id": "waipocai-chao-jidan",
    "name": "外婆菜炒鸡蛋",
    "category": "炒菜",
+   "servingGrams": 215,
    "components": [
     {
      "name": "大豆油",
@@ -1167,6 +1190,7 @@
    "id": "jiachang-tudoupian",
    "name": "家常土豆片",
    "category": "炒菜",
+   "servingGrams": 291,
    "components": [
     {
      "name": "大豆油",
@@ -1214,6 +1238,7 @@
    "id": "xiaochao-huangniurou",
    "name": "小炒黄牛肉",
    "category": "炒菜",
+   "servingGrams": 434,
    "components": [
     {
      "name": "大豆油",
@@ -1301,6 +1326,7 @@
    "id": "xiaochao-hexia",
    "name": "小炒河虾",
    "category": "炒菜",
+   "servingGrams": 240,
    "components": [
     {
      "name": "大豆油",
@@ -1348,6 +1374,7 @@
    "id": "feichang-ji",
    "name": "肥肠鸡",
    "category": "炒菜",
+   "servingGrams": 260,
    "components": [
     {
      "name": "大豆油",
@@ -1405,6 +1432,7 @@
    "id": "yuer-ji",
    "name": "芋儿鸡",
    "category": "炒菜",
+   "servingGrams": 274,
    "components": [
     {
      "name": "大豆油",
@@ -1452,6 +1480,7 @@
    "id": "boluo-gulaorou",
    "name": "菠萝咕咾肉",
    "category": "炒菜",
+   "servingGrams": 290,
    "components": [
     {
      "name": "大豆油",
@@ -1519,6 +1548,7 @@
    "id": "shijin-dan-chaofan",
    "name": "什锦蛋炒饭",
    "category": "炒菜",
+   "servingGrams": 417,
    "components": [
     {
      "name": "大豆油",
@@ -1606,6 +1636,7 @@
    "id": "sunzi-jiding-gaifan",
    "name": "笋子鸡丁盖饭",
    "category": "炒菜",
+   "servingGrams": 430,
    "components": [
     {
      "name": "大豆油",
@@ -1663,6 +1694,7 @@
    "id": "nongjia-xiaochaorou",
    "name": "农家小炒肉",
    "category": "炒菜",
+   "servingGrams": 230,
    "components": [
     {
      "name": "大豆油",
@@ -1710,6 +1742,7 @@
    "id": "jiachang-xiaochao",
    "name": "家常小炒",
    "category": "炒菜",
+   "servingGrams": 196,
    "components": [
     {
      "name": "大豆油",
@@ -1767,6 +1800,7 @@
    "id": "mapo-doufu",
    "name": "麻婆豆腐",
    "category": "炖菜",
+   "servingGrams": 397,
    "components": [
     {
      "name": "豆腐",
@@ -1824,6 +1858,7 @@
    "id": "baicai-dun-doufu",
    "name": "白菜炖豆腐",
    "category": "炖菜",
+   "servingGrams": 284,
    "components": [
     {
      "name": "豆腐",
@@ -1871,6 +1906,7 @@
    "id": "hongshao-yukuai",
    "name": "红烧鱼块",
    "category": "炖菜",
+   "servingGrams": 239,
    "components": [
     {
      "name": "鱼",
@@ -1928,6 +1964,7 @@
    "id": "tudou-niulan",
    "name": "土豆牛腩",
    "category": "炖菜",
+   "servingGrams": 278,
    "components": [
     {
      "name": "牛肉",
@@ -1975,6 +2012,7 @@
    "id": "xiangla-jiza",
    "name": "香辣鸡杂",
    "category": "炖菜",
+   "servingGrams": 190,
    "components": [
     {
      "name": "鸡杂",
@@ -2012,6 +2050,7 @@
    "id": "jixue-tang",
    "name": "鸡血汤",
    "category": "炖菜",
+   "servingGrams": 504,
    "components": [
     {
      "name": "鸡血",
@@ -2059,6 +2098,7 @@
    "id": "meigancai-fengzhaochi",
    "name": "梅干菜凤爪翅",
    "category": "炖菜",
+   "servingGrams": 205,
    "components": [
     {
      "name": "鸡爪",
@@ -2106,6 +2146,7 @@
    "id": "zha-jipai",
    "name": "炸鸡排",
    "category": "炸品",
+   "servingGrams": 180,
    "components": [
     {
      "name": "鸡胸肉",
@@ -2133,6 +2174,7 @@
    "id": "zha-jitui",
    "name": "炸鸡腿",
    "category": "炸品",
+   "servingGrams": 240,
    "components": [
     {
      "name": "鸡腿",
@@ -2160,6 +2202,7 @@
    "id": "shengzha-da-jitui",
    "name": "生炸大鸡腿",
    "category": "炸品",
+   "servingGrams": 336,
    "components": [
     {
      "name": "鸡腿",
@@ -2187,6 +2230,7 @@
    "id": "shouqiang-da-jitui",
    "name": "手枪大鸡腿",
    "category": "炸品",
+   "servingGrams": 360,
    "components": [
     {
      "name": "鸡腿",
@@ -2214,6 +2258,7 @@
    "id": "xiangsu-jimihua",
    "name": "香酥鸡米花",
    "category": "炸品",
+   "servingGrams": 180,
    "components": [
     {
      "name": "鸡米花",
@@ -2241,6 +2286,7 @@
    "id": "bangbang-xia",
    "name": "棒棒虾",
    "category": "炸品",
+   "servingGrams": 165,
    "components": [
     {
      "name": "虾",
@@ -2278,6 +2324,7 @@
    "id": "xinxing-jipai",
    "name": "心形鸡排",
    "category": "炸品",
+   "servingGrams": 156,
    "components": [
     {
      "name": "鸡胸肉",
@@ -2305,6 +2352,7 @@
    "id": "xiangyu-digua-wan",
    "name": "香芋地瓜丸",
    "category": "炸品",
+   "servingGrams": 195,
    "components": [
     {
      "name": "红薯",
@@ -2352,6 +2400,7 @@
    "id": "xiangcui-shubing",
    "name": "香脆薯饼",
    "category": "炸品",
+   "servingGrams": 120,
    "components": [
     {
      "name": "土豆",
@@ -2379,6 +2428,7 @@
    "id": "aojiao-fengwei-chijian",
    "name": "傲椒风味翅尖",
    "category": "炸品",
+   "servingGrams": 200,
    "components": [
     {
      "name": "鸡翅",
@@ -2416,6 +2466,7 @@
    "id": "jirou-yangcongquan",
    "name": "鸡肉洋葱圈",
    "category": "炸品",
+   "servingGrams": 145,
    "components": [
     {
      "name": "鸡胸肉",
@@ -2453,6 +2504,7 @@
    "id": "meicai-kourou",
    "name": "梅菜扣肉",
    "category": "蒸菜",
+   "servingGrams": 246,
    "components": [
     {
      "name": "五花肉",
@@ -2510,6 +2562,7 @@
    "id": "fenzheng-rou",
    "name": "粉蒸肉",
    "category": "蒸菜",
+   "servingGrams": 188,
    "components": [
     {
      "name": "五花肉",
@@ -2557,6 +2610,7 @@
    "id": "suanrong-fensixia",
    "name": "蒜蓉粉丝虾",
    "category": "蒸菜",
+   "servingGrams": 250,
    "components": [
     {
      "name": "虾",
@@ -2604,6 +2658,7 @@
    "id": "baiqie-ji",
    "name": "白切鸡",
    "category": "蒸菜",
+   "servingGrams": 224,
    "components": [
     {
      "name": "鸡肉",
@@ -2651,6 +2706,7 @@
    "id": "congyou-ji",
    "name": "葱油鸡",
    "category": "蒸菜",
+   "servingGrams": 245,
    "components": [
     {
      "name": "鸡肉",
@@ -2698,6 +2754,7 @@
    "id": "nongjia-zhengdan",
    "name": "农家蒸蛋",
    "category": "蒸菜",
+   "servingGrams": 245,
    "components": [
     {
      "name": "鸡蛋",
@@ -2735,6 +2792,7 @@
    "id": "xiaren-zheng-jidan",
    "name": "虾仁蒸鸡蛋",
    "category": "蒸菜",
+   "servingGrams": 230,
    "components": [
     {
      "name": "鸡蛋",
@@ -2772,6 +2830,7 @@
    "id": "roubing-zhengdan",
    "name": "肉饼蒸蛋",
    "category": "蒸菜",
+   "servingGrams": 145,
    "components": [
     {
      "name": "猪肉",
@@ -2809,6 +2868,7 @@
    "id": "suanrong-wawacai",
    "name": "蒜蓉娃娃菜",
    "category": "蒸菜",
+   "servingGrams": 220,
    "components": [
     {
      "name": "白菜",
@@ -2846,6 +2906,7 @@
    "id": "duojiao-yutou",
    "name": "剁椒鱼头",
    "category": "蒸菜",
+   "servingGrams": 310,
    "components": [
     {
      "name": "鱼",
@@ -2883,6 +2944,7 @@
    "id": "aoerliang-jichi",
    "name": "奥尔良鸡翅",
    "category": "蒸菜",
+   "servingGrams": 165,
    "components": [
     {
      "name": "鸡翅",
@@ -2910,6 +2972,7 @@
    "id": "zhusun-zheng-jichi",
    "name": "竹笋蒸鸡翅",
    "category": "蒸菜",
+   "servingGrams": 240,
    "components": [
     {
      "name": "鸡翅",
@@ -2947,6 +3010,7 @@
    "id": "xiangyu-zheng-paigu",
    "name": "香芋蒸排骨",
    "category": "蒸菜",
+   "servingGrams": 240,
    "components": [
     {
      "name": "排骨",
@@ -2984,6 +3048,7 @@
    "id": "sanse-xiaren",
    "name": "三色虾仁",
    "category": "蒸菜",
+   "servingGrams": 210,
    "components": [
     {
      "name": "虾",
@@ -3031,6 +3096,7 @@
    "id": "mizhi-lurou-fan",
    "name": "秘汁卤肉饭",
    "category": "蒸菜",
+   "servingGrams": 430,
    "components": [
     {
      "name": "五花肉",
@@ -3088,6 +3154,7 @@
    "id": "jiangzheng-doufu",
    "name": "酱蒸豆腐",
    "category": "蒸菜",
+   "servingGrams": 250,
    "components": [
     {
      "name": "豆腐",
@@ -3125,6 +3192,7 @@
    "id": "jiangzheng-baigan",
    "name": "酱蒸白干",
    "category": "蒸菜",
+   "servingGrams": 200,
    "components": [
     {
      "name": "香干",
@@ -3162,6 +3230,7 @@
    "id": "fenggan-niurou-zheng-baigan",
    "name": "风干牛肉蒸白干",
    "category": "蒸菜",
+   "servingGrams": 215,
    "components": [
     {
      "name": "香干",
@@ -3199,6 +3268,7 @@
    "id": "fengzhua-zheng-doumi",
    "name": "凤爪蒸豆米",
    "category": "蒸菜",
+   "servingGrams": 190,
    "components": [
     {
      "name": "鸡爪",
@@ -3236,6 +3306,7 @@
    "id": "xiangchang-zheng-doumi",
    "name": "香肠蒸豆米",
    "category": "蒸菜",
+   "servingGrams": 160,
    "components": [
     {
      "name": "香肠",
@@ -3263,6 +3334,7 @@
    "id": "huluobo-niurou",
    "name": "胡萝卜牛肉",
    "category": "蒸菜",
+   "servingGrams": 190,
    "components": [
     {
      "name": "牛肉",
@@ -3300,6 +3372,7 @@
    "id": "jiangxiang-xiaohexia",
    "name": "酱香小河虾",
    "category": "蒸菜",
+   "servingGrams": 115,
    "components": [
     {
      "name": "虾",
@@ -3327,6 +3400,7 @@
    "id": "jiangjiao-suanxiang-pianpianyu",
    "name": "酱椒蒜香片片鱼",
    "category": "蒸菜",
+   "servingGrams": 185,
    "components": [
     {
      "name": "鱼",
@@ -3364,6 +3438,7 @@
    "id": "jizhi-layu",
    "name": "鸡汁辣鱼",
    "category": "蒸菜",
+   "servingGrams": 200,
    "components": [
     {
      "name": "鱼",
@@ -3401,6 +3476,7 @@
    "id": "xiangla-xuewang",
    "name": "香辣血旺",
    "category": "蒸菜",
+   "servingGrams": 240,
    "components": [
     {
      "name": "鸡血",
@@ -3438,6 +3514,7 @@
    "id": "mizhi-nangua",
    "name": "蜜汁南瓜",
    "category": "蒸菜",
+   "servingGrams": 220,
    "components": [
     {
      "name": "南瓜",
@@ -3465,6 +3542,7 @@
    "id": "culiang-he",
    "name": "粗粮盒",
    "category": "蒸菜",
+   "servingGrams": 290,
    "components": [
     {
      "name": "玉米",
@@ -3502,6 +3580,7 @@
    "id": "songgao",
    "name": "松糕",
    "category": "蒸菜",
+   "servingGrams": 150,
    "components": [
     {
      "name": "松糕",
@@ -3519,6 +3598,7 @@
    "id": "huozhuzi",
    "name": "活珠子",
    "category": "蒸菜",
+   "servingGrams": 65,
    "components": [
     {
      "name": "鸡蛋",
@@ -3536,6 +3616,7 @@
    "id": "shaguo-niuza-bao",
    "name": "砂锅牛杂煲",
    "category": "砂锅菜",
+   "servingGrams": 320,
    "components": [
     {
      "name": "牛杂",
@@ -3573,6 +3654,7 @@
    "id": "shaguo-fuzhu",
    "name": "砂锅腐竹",
    "category": "砂锅菜",
+   "servingGrams": 330,
    "components": [
     {
      "name": "腐竹",
@@ -3610,6 +3692,7 @@
    "id": "shaguo-yanjiuji",
    "name": "砂锅盐焗鸡",
    "category": "砂锅菜",
+   "servingGrams": 255,
    "components": [
     {
      "name": "鸡肉",
@@ -3637,6 +3720,7 @@
    "id": "shaguo-suancaiyu",
    "name": "砂锅酸菜鱼",
    "category": "砂锅菜",
+   "servingGrams": 550,
    "components": [
     {
      "name": "鱼",
@@ -3674,6 +3758,7 @@
    "id": "shaguo-yuanwei-jitang-mixian",
    "name": "砂锅原味鸡汤米线",
    "category": "砂锅菜",
+   "servingGrams": 680,
    "components": [
     {
      "name": "米线",
@@ -3711,6 +3796,7 @@
    "id": "shaguo-suanrong-fensi-xia",
    "name": "砂锅蒜蓉粉丝虾",
    "category": "砂锅菜",
+   "servingGrams": 220,
    "components": [
     {
      "name": "虾",
@@ -3748,6 +3834,7 @@
    "id": "shaguo-paojiao-jimihua-mixian",
    "name": "砂锅泡椒鸡米花米线",
    "category": "砂锅菜",
+   "servingGrams": 310,
    "components": [
     {
      "name": "米线",
@@ -3785,6 +3872,7 @@
    "id": "shaguo-fanqie-mixian",
    "name": "砂锅番茄米线",
    "category": "砂锅菜",
+   "servingGrams": 400,
    "components": [
     {
      "name": "米线",
@@ -3822,6 +3910,7 @@
    "id": "shaguo-mugua",
    "name": "砂锅木瓜",
    "category": "砂锅菜",
+   "servingGrams": 365,
    "components": [
     {
      "name": "木瓜",
@@ -3859,6 +3948,7 @@
    "id": "shaguo-sanxian-doufu",
    "name": "砂锅三鲜豆腐",
    "category": "砂锅菜",
+   "servingGrams": 480,
    "components": [
     {
      "name": "豆腐",
@@ -3906,6 +3996,7 @@
    "id": "suancai-feichang-bao",
    "name": "酸菜肥肠煲",
    "category": "砂锅菜",
+   "servingGrams": 270,
    "components": [
     {
      "name": "肥肠",
@@ -3943,6 +4034,7 @@
    "id": "shuizhu-dan",
    "name": "水煮蛋",
    "category": "早餐",
+   "servingGrams": 60,
    "components": [
     {
      "name": "鸡蛋",
@@ -3960,6 +4052,7 @@
    "id": "chaye-dan",
    "name": "茶叶蛋",
    "category": "早餐",
+   "servingGrams": 63,
    "components": [
     {
      "name": "鸡蛋",
@@ -3987,6 +4080,7 @@
    "id": "mantou",
    "name": "馒头",
    "category": "早餐",
+   "servingGrams": 80,
    "components": [
     {
      "name": "馒头",
@@ -4004,6 +4098,7 @@
    "id": "huajuan",
    "name": "花卷",
    "category": "早餐",
+   "servingGrams": 80,
    "components": [
     {
      "name": "花卷",
@@ -4021,6 +4116,7 @@
    "id": "xianzha-dayoutiao",
    "name": "现炸大油条",
    "category": "早餐",
+   "servingGrams": 95,
    "components": [
     {
      "name": "油条",
@@ -4048,6 +4144,7 @@
    "id": "jizhi-tangbao",
    "name": "鸡汁汤包",
    "category": "早餐",
+   "servingGrams": 150,
    "components": [
     {
      "name": "包子",
@@ -4065,6 +4162,7 @@
    "id": "baozi",
    "name": "包子",
    "category": "早餐",
+   "servingGrams": 100,
    "components": [
     {
      "name": "包子",
@@ -4082,6 +4180,7 @@
    "id": "naihuang-jibao",
    "name": "奶黄鸡包",
    "category": "早餐",
+   "servingGrams": 80,
    "components": [
     {
      "name": "包子",
@@ -4099,6 +4198,7 @@
    "id": "shougong-shaomai",
    "name": "手工烧麦",
    "category": "早餐",
+   "servingGrams": 120,
    "components": [
     {
      "name": "烧麦",
@@ -4116,6 +4216,7 @@
    "id": "jicai-xianrou-zhengjiao",
    "name": "荠菜鲜肉蒸饺",
    "category": "早餐",
+   "servingGrams": 120,
    "components": [
     {
      "name": "蒸饺",
@@ -4133,6 +4234,7 @@
    "id": "danbing",
    "name": "蛋饼",
    "category": "早餐",
+   "servingGrams": 100,
    "components": [
     {
      "name": "蛋饼",
@@ -4150,6 +4252,7 @@
    "id": "fantuan",
    "name": "饭团",
    "category": "早餐",
+   "servingGrams": 150,
    "components": [
     {
      "name": "饭团",
@@ -4167,6 +4270,7 @@
    "id": "zifangao",
    "name": "粢饭糕",
    "category": "早餐",
+   "servingGrams": 115,
    "components": [
     {
      "name": "饭团",
@@ -4194,6 +4298,7 @@
    "id": "shougong-chunjuan",
    "name": "手工春卷",
    "category": "早餐",
+   "servingGrams": 95,
    "components": [
     {
      "name": "春卷",
@@ -4221,6 +4326,7 @@
    "id": "xiangsu-niurou-bing",
    "name": "香酥牛肉饼",
    "category": "早餐",
+   "servingGrams": 110,
    "components": [
     {
      "name": "馅饼",
@@ -4248,6 +4354,7 @@
    "id": "supi-luobosi-xianbing",
    "name": "酥皮萝卜丝馅饼",
    "category": "早餐",
+   "servingGrams": 90,
    "components": [
     {
      "name": "馅饼",
@@ -4275,6 +4382,7 @@
    "id": "niurou-he",
    "name": "牛肉盒",
    "category": "早餐",
+   "servingGrams": 110,
    "components": [
     {
      "name": "馅饼",
@@ -4302,6 +4410,7 @@
    "id": "baimi-zhou",
    "name": "白米粥",
    "category": "早餐",
+   "servingGrams": 300,
    "components": [
     {
      "name": "粥",
@@ -4319,6 +4428,7 @@
    "id": "xiaomi-nangua-zhou",
    "name": "小米南瓜粥",
    "category": "早餐",
+   "servingGrams": 300,
    "components": [
     {
      "name": "粥",
@@ -4336,6 +4446,7 @@
    "id": "xianao-douzhou",
    "name": "现熬豆粥",
    "category": "早餐",
+   "servingGrams": 300,
    "components": [
     {
      "name": "粥",
@@ -4353,6 +4464,7 @@
    "id": "chidou-hu-yuanxiao",
    "name": "赤豆糊元宵",
    "category": "早餐",
+   "servingGrams": 130,
    "components": [
     {
      "name": "元宵",
@@ -4380,6 +4492,7 @@
    "id": "mifan",
    "name": "米饭",
    "category": "主食",
+   "servingGrams": 200,
    "components": [
     {
      "name": "米饭",
@@ -4397,6 +4510,7 @@
    "id": "zaliang-fan",
    "name": "杂粮饭",
    "category": "主食",
+   "servingGrams": 200,
    "components": [
     {
      "name": "米饭",
@@ -4414,6 +4528,7 @@
    "id": "sumian",
    "name": "素面",
    "category": "主食",
+   "servingGrams": 605,
    "components": [
     {
      "name": "面条",
@@ -4451,6 +4566,7 @@
    "id": "fanqie-jidan-mian",
    "name": "番茄鸡蛋面",
    "category": "主食",
+   "servingGrams": 370,
    "components": [
     {
      "name": "面条",
@@ -4498,6 +4614,7 @@
    "id": "xiangla-niurou-mian",
    "name": "香辣牛肉面",
    "category": "主食",
+   "servingGrams": 860,
    "components": [
     {
      "name": "面条",
@@ -4555,6 +4672,7 @@
    "id": "xianggu-jitang-mian",
    "name": "香菇鸡汤面",
    "category": "主食",
+   "servingGrams": 780,
    "components": [
     {
      "name": "面条",
@@ -4602,6 +4720,7 @@
    "id": "dada-niulan-mian",
    "name": "大大大块牛腩面",
    "category": "主食",
+   "servingGrams": 835,
    "components": [
     {
      "name": "面条",
@@ -4649,6 +4768,7 @@
    "id": "dapai-mian",
    "name": "大排面",
    "category": "主食",
+   "servingGrams": 800,
    "components": [
     {
      "name": "面条",
@@ -4686,6 +4806,7 @@
    "id": "xuecai-rousi-mian",
    "name": "雪菜肉丝面",
    "category": "主食",
+   "servingGrams": 770,
    "components": [
     {
      "name": "面条",
@@ -4733,6 +4854,7 @@
    "id": "tese-jitang-huntun",
    "name": "特色鸡汤馄饨",
    "category": "主食",
+   "servingGrams": 605,
    "components": [
     {
      "name": "馄饨",
@@ -4770,6 +4892,7 @@
    "id": "shaguo-jicai-huntun",
    "name": "砂锅荠菜鲜肉馄饨",
    "category": "主食",
+   "servingGrams": 600,
    "components": [
     {
      "name": "馄饨",
@@ -4797,6 +4920,7 @@
    "id": "xiangla-jiding-banmian",
    "name": "香辣鸡丁拌面",
    "category": "主食",
+   "servingGrams": 330,
    "components": [
     {
      "name": "面条",
@@ -4844,6 +4968,7 @@
    "id": "lu-jitui",
    "name": "卤鸡腿",
    "category": "卤菜",
+   "servingGrams": 230,
    "components": [
     {
      "name": "鸡腿",
@@ -4871,6 +4996,7 @@
    "id": "lu-jizhua",
    "name": "卤鸡爪",
    "category": "卤菜",
+   "servingGrams": 170,
    "components": [
     {
      "name": "鸡爪",
@@ -4898,6 +5024,7 @@
    "id": "lu-chigen",
    "name": "卤翅根",
    "category": "卤菜",
+   "servingGrams": 170,
    "components": [
     {
      "name": "鸡翅",
@@ -4925,6 +5052,7 @@
    "id": "lu-dapai",
    "name": "卤大排",
    "category": "卤菜",
+   "servingGrams": 230,
    "components": [
     {
      "name": "排骨",
@@ -4952,6 +5080,7 @@
    "id": "lu-fanggan",
    "name": "卤方干",
    "category": "卤菜",
+   "servingGrams": 165,
    "components": [
     {
      "name": "香干",
@@ -4979,6 +5108,7 @@
    "id": "koushuiji",
    "name": "口水鸡",
    "category": "凉拌",
+   "servingGrams": 265,
    "components": [
     {
      "name": "鸡肉",
@@ -5016,6 +5146,7 @@
    "id": "liangban-wosunsi",
    "name": "凉拌莴笋丝",
    "category": "凉拌",
+   "servingGrams": 215,
    "components": [
     {
      "name": "莴笋",
@@ -5053,6 +5184,7 @@
    "id": "ningmeng-fengzhua",
    "name": "柠檬凤爪",
    "category": "凉拌",
+   "servingGrams": 175,
    "components": [
     {
      "name": "鸡爪",
@@ -5090,6 +5222,7 @@
    "id": "xiqin-huashengmi",
    "name": "西芹花生米",
    "category": "凉拌",
+   "servingGrams": 155,
    "components": [
     {
      "name": "芹菜",
@@ -5127,6 +5260,7 @@
    "id": "mala-jikuai",
    "name": "麻辣鸡块",
    "category": "烫菜",
+   "servingGrams": 250,
    "components": [
     {
      "name": "鸡肉",
@@ -5174,6 +5308,7 @@
    "id": "congyou-caixin",
    "name": "葱油菜心",
    "category": "烫菜",
+   "servingGrams": 225,
    "components": [
     {
      "name": "青菜",
@@ -5221,6 +5356,7 @@
    "id": "congyou-caitai",
    "name": "葱油菜苔",
    "category": "烫菜",
+   "servingGrams": 220,
    "components": [
     {
      "name": "菜苔",
@@ -5258,6 +5394,7 @@
    "id": "jiaozhi-xilanhua",
    "name": "浇汁西兰花",
    "category": "烫菜",
+   "servingGrams": 215,
    "components": [
     {
      "name": "西兰花",
@@ -5295,6 +5432,7 @@
    "id": "bocai-danpisi",
    "name": "菠菜蛋皮丝",
    "category": "烫菜",
+   "servingGrams": 203,
    "components": [
     {
      "name": "菠菜",
@@ -5332,6 +5470,7 @@
    "id": "xiangcui-muer",
    "name": "香脆木耳",
    "category": "烫菜",
+   "servingGrams": 163,
    "components": [
     {
      "name": "木耳",
@@ -5369,6 +5508,7 @@
    "id": "jitang-wawacai",
    "name": "鸡汤娃娃菜",
    "category": "烫菜",
+   "servingGrams": 405,
    "components": [
     {
      "name": "白菜",
@@ -5406,6 +5546,7 @@
    "id": "congyou-banmian",
    "name": "葱油拌面",
    "category": "烫菜",
+   "servingGrams": 240,
    "components": [
     {
      "name": "面条",
@@ -5453,6 +5594,7 @@
    "id": "tese-reganmian",
    "name": "特色热干面",
    "category": "烫菜",
+   "servingGrams": 235,
    "components": [
     {
      "name": "面条",
@@ -5500,6 +5642,7 @@
    "id": "feixi-laomuji-tang",
    "name": "肥西老母鸡汤",
    "category": "汤",
+   "servingGrams": 1703,
    "components": [
     {
      "name": "鸡肉",
@@ -5547,6 +5690,7 @@
    "id": "laoji-tang",
    "name": "老鸡汤",
    "category": "汤",
+   "servingGrams": 1508,
    "components": [
     {
      "name": "鸡肉",
@@ -5584,6 +5728,7 @@
    "id": "zhusun-luronggu-jitang",
    "name": "竹荪鹿茸菇鸡汤",
    "category": "汤",
+   "servingGrams": 1231,
    "components": [
     {
      "name": "鸡肉",
@@ -5631,6 +5776,7 @@
    "id": "jintang-suancaiyu",
    "name": "金汤酸菜鱼",
    "category": "煮锅",
+   "servingGrams": 487,
    "components": [
     {
      "name": "鱼",
@@ -5688,6 +5834,7 @@
    "id": "mao-kaoya",
    "name": "冒烤鸭",
    "category": "煮锅",
+   "servingGrams": 450,
    "components": [
     {
      "name": "烤鸭",
@@ -5745,6 +5892,7 @@
    "id": "yuanwei-doujiang",
    "name": "原味豆浆",
    "category": "饮品",
+   "servingGrams": 300,
    "components": [
     {
      "name": "豆浆",
@@ -5762,6 +5910,7 @@
    "id": "re-naicha",
    "name": "热奶茶",
    "category": "饮品",
+   "servingGrams": 303,
    "components": [
     {
      "name": "红茶",
@@ -5799,6 +5948,7 @@
    "id": "jilong-xiang-ningmengcha",
    "name": "鸡笼香柠檬茶",
    "category": "饮品",
+   "servingGrams": 318,
    "components": [
     {
      "name": "红茶",
@@ -5836,6 +5986,7 @@
    "id": "pingguo-shanzha-hongcha",
    "name": "苹果山楂红茶",
    "category": "饮品",
+   "servingGrams": 313,
    "components": [
     {
      "name": "红茶",
@@ -5873,6 +6024,7 @@
    "id": "kaochang",
    "name": "烤肠",
    "category": "烤类",
+   "servingGrams": 80,
    "components": [
     {
      "name": "香肠",

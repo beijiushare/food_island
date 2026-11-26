@@ -6,7 +6,8 @@ import { Sheet } from '../../components/Sheet/Sheet';
 import { Stepper } from '../../components/Stepper/Stepper';
 import { Toast } from '../../components/Toast/Toast';
 import { listAll } from '../../data/dao/diary';
-import i18n, { SUPPORTED_LANGS, setLanguage } from '../../i18n';import {
+import i18n, { SUPPORTED_LANGS, setLanguage } from '../../i18n';
+import { checkForUpdate, getAppVersion, openInBrowser, type UpdateInfo } from '../../services/update';import {
   clearAPIKey,
   getAIProfile,
   getAISettings,
@@ -49,6 +50,29 @@ export function MePage() {
   const [hasKey, setHasKey] = useState(false);
   const [aiBusy, setAiBusy] = useState(false);
   const [aiStatus, setAiStatus] = useState<string | null>(null);
+
+  const [appVersion, setAppVersion] = useState('');
+  const [checking, setChecking] = useState(false);
+  const [update, setUpdate] = useState<UpdateInfo | null>(null);
+  const [updateMessage, setUpdateMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    void getAppVersion().then(setAppVersion);
+  }, []);
+
+  async function checkUpdate() {
+    setChecking(true);
+    setUpdateMessage(null);
+    try {
+      const info = await checkForUpdate();
+      setUpdate(info);
+      if (!info) setUpdateMessage(t('me.update.latest'));
+    } catch {
+      setUpdateMessage(t('me.update.error'));
+    } finally {
+      setChecking(false);
+    }
+  }
 
   useEffect(() => {
     let alive = true;
@@ -275,6 +299,24 @@ export function MePage() {
         <Button type="primary" block loading={busy} onClick={handleExport}>
           {busy ? t('me.exporting') : t('me.exportCsv')}
         </Button>
+      </Card>
+
+      <h2 className="me__section">{t('me.update.title')}</h2>
+      <Card className="me__card">
+        <p className="me__hint">{t('me.update.hint', { version: appVersion })}</p>
+        {update ? (
+          <>
+            <p className="me__status">{t('me.update.available', { version: update.version })}</p>
+            <Button type="primary" block onClick={() => openInBrowser(update.url)}>
+              {t('me.update.download')}
+            </Button>
+          </>
+        ) : (
+          <Button type="default" block loading={checking} onClick={checkUpdate}>
+            {checking ? t('me.update.checking') : t('me.update.check')}
+          </Button>
+        )}
+        {updateMessage ? <p className="me__status">{updateMessage}</p> : null}
       </Card>
 
       <Divider />

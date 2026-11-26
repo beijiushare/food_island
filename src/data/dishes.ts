@@ -14,6 +14,8 @@ export interface DishItem {
   id: string;
   name: string;
   category: string;
+  /** 出去吃饭常见的一份克数，只当默认值用 */
+  servingGrams: number;
   components: RecipeComponent[];
 }
 

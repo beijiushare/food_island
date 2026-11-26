@@ -60,6 +60,7 @@ for (const block of blocks) {
   const name = block.match(/name:\s*'([^']+)'/)?.[1];
   const category = block.match(/category:\s*'([^']+)'/)?.[1] ?? '';
   const id = block.match(/id:\s*'([^']+)'/)?.[1] ?? name;
+  const servings = Number(block.match(/servings:\s*(\d+)/)?.[1] ?? 1) || 1;
   if (!name) continue;
 
   const ingredientsBlock = block.slice(block.indexOf('ingredients:'), block.indexOf(']', block.indexOf('ingredients:')) + 1);
@@ -92,7 +93,14 @@ for (const block of blocks) {
     };
   });
 
-  dishes.push({ id, name, category, components });
+  dishes.push({
+    id,
+    name,
+    category,
+    // 出去吃饭常见的一份克数（配方总量 / 份数），只作为默认值，用户可改
+    servingGrams: Math.max(50, Math.round(total / servings)),
+    components,
+  });
 }
 
 const payload = {
