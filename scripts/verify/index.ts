@@ -21,6 +21,7 @@ import {
   resolveDish,
 } from '../../src/features/ai/recognize';
 import { parseExtraHeader } from '../../src/services/ai-client';
+import { dishPer100, searchDishes } from '../../src/data/dishes';
 
 let failed = 0;
 
@@ -191,6 +192,26 @@ check(
   JSON.stringify(parseExtraHeader('x-opencode-session: abc')) === '{"x-opencode-session":"abc"}',
 );
 check('malformed header ignored', Object.keys(parseExtraHeader('abc')).length === 0);
+
+// ---------------------------------------------------------------- 菜品库
+
+group('dishes');
+const dishData = JSON.parse(fs.readFileSync('data-src/dishes.json', 'utf8')) as {
+  items: import('../../src/data/dishes').DishItem[];
+};
+check('dish library has 152 items', dishData.items.length === 152, String(dishData.items.length));
+
+const tomatoEgg = dishData.items.find((dish) => dish.name === '西红柿炒鸡蛋');
+check('西红柿炒鸡蛋 imported', Boolean(tomatoEgg));
+const ratioSum = tomatoEgg?.components.reduce((sum, component) => sum + component.ratio, 0) ?? 0;
+check('ratios sum to 100', Math.abs(ratioSum - 100) < 0.5, String(ratioSum));
+check(
+  'per 100 g ≈ 130 kcal',
+  Math.abs(Math.round(dishPer100(tomatoEgg!)!.kcal) - 130) <= 3,
+  String(Math.round(dishPer100(tomatoEgg!).kcal)),
+);
+check('search by alias 番茄炒蛋', searchDishes(dishData.items, '番茄炒蛋').length === 1);
+check('search 鸡 finds dishes', searchDishes(dishData.items, '鸡').length > 0);
 
 // ---------------------------------------------------------------- CSV
 

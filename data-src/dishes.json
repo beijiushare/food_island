@@ -1,0 +1,5890 @@
+{
+ "source": "NutritionCalculatorOfHOC (MIT) · 配方来自 CookLikeHOC / 老乡鸡菜品溯源报告",
+ "note": "ratio 是每 100 g 成品中该配料的克数；份量由用户决定",
+ "items": [
+  {
+   "id": "xihongshi-chao-jidan",
+   "name": "西红柿炒鸡蛋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 9.38,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 21.58,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "西红柿",
+     "ratio": 67.54,
+     "per100": {
+      "kcal": 19,
+      "protein": 0.9,
+      "carb": 3.9,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.3,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "鸡精",
+     "ratio": 0.3,
+     "per100": {
+      "kcal": 188,
+      "protein": 10,
+      "carb": 36.6,
+      "fat": 0.5
+     }
+    },
+    {
+     "name": "淀粉",
+     "ratio": 0.9,
+     "per100": {
+      "kcal": 345,
+      "protein": 0.3,
+      "carb": 85,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "gongbao-jiding",
+   "name": "宫保鸡丁",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.07,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡腿",
+     "ratio": 47.09,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 11.21,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 0.9,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "花生米",
+     "ratio": 11.21,
+     "per100": {
+      "kcal": 567,
+      "protein": 24.8,
+      "carb": 21.7,
+      "fat": 44.3
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 11.21,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "宫保鸡丁调味酱",
+     "ratio": 10.31,
+     "per100": {
+      "kcal": 120,
+      "protein": 2,
+      "carb": 16,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "yuxiang-rousi",
+   "name": "鱼香肉丝",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.26,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 22.94,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "笋",
+     "ratio": 27.52,
+     "per100": {
+      "kcal": 21,
+      "protein": 2.6,
+      "carb": 3.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 13.76,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "木耳",
+     "ratio": 13.76,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鱼香风味酱",
+     "ratio": 13.76,
+     "per100": {
+      "kcal": 130,
+      "protein": 2.5,
+      "carb": 15,
+      "fat": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "suanla-tudousi",
+   "name": "酸辣土豆丝",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.58,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "土豆",
+     "ratio": 83.74,
+     "per100": {
+      "kcal": 76,
+      "protein": 2,
+      "carb": 17,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 6.98,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 1.05,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "醋",
+     "ratio": 2.09,
+     "per100": {
+      "kcal": 18,
+      "protein": 0.1,
+      "carb": 4.9,
+      "fat": 0
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.56,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "tangcu-paigu",
+   "name": "糖醋排骨",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "排骨",
+     "ratio": 53.82,
+     "per100": {
+      "kcal": 278,
+      "protein": 17.4,
+      "carb": 5.8,
+      "fat": 20.4
+     }
+    },
+    {
+     "name": "糖醋汁",
+     "ratio": 45.14,
+     "per100": {
+      "kcal": 78,
+      "protein": 1,
+      "carb": 17,
+      "fat": 0.5
+     }
+    },
+    {
+     "name": "醋",
+     "ratio": 1.04,
+     "per100": {
+      "kcal": 18,
+      "protein": 0.1,
+      "carb": 4.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qingjiao-chao-douya",
+   "name": "青椒炒豆芽",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.74,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "豆芽",
+     "ratio": 78.99,
+     "per100": {
+      "kcal": 18,
+      "protein": 2.1,
+      "carb": 2.9,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 15.8,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "suanni-bocai",
+   "name": "蒜泥菠菜",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 3.72,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "菠菜",
+     "ratio": 93.02,
+     "per100": {
+      "kcal": 24,
+      "protein": 2.6,
+      "carb": 3.6,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 2.79,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shengchao-shanghaiging",
+   "name": "生炒上海青",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.65,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "上海青",
+     "ratio": 93.02,
+     "per100": {
+      "kcal": 15,
+      "protein": 1.3,
+      "carb": 2.4,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.86,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qingchao-qingcai",
+   "name": "清炒青菜",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "青菜",
+     "ratio": 93.46,
+     "per100": {
+      "kcal": 15,
+      "protein": 1.5,
+      "carb": 2.2,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.4,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qingchao-wosunpian",
+   "name": "清炒莴笋片",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "莴笋",
+     "ratio": 93.46,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.4,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qingchao-chuncai",
+   "name": "清炒春菜",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "春菜",
+     "ratio": 93.46,
+     "per100": {
+      "kcal": 17,
+      "protein": 1.2,
+      "carb": 3.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.4,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qingchao-maobaicai",
+   "name": "清炒毛白菜",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "毛白菜",
+     "ratio": 93.46,
+     "per100": {
+      "kcal": 14,
+      "protein": 1.3,
+      "carb": 2.4,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.4,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "huluobo-chao-muer",
+   "name": "胡萝卜炒木耳",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.63,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 56.34,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "木耳",
+     "ratio": 37.56,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "huluobo-chao-jidan",
+   "name": "胡萝卜炒鸡蛋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 7.37,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 55.3,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 36.87,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.46,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "huluobo-chao-roupian",
+   "name": "胡萝卜炒肉片",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 7.37,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 55.3,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 36.87,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.46,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaochao-huacai",
+   "name": "小炒花菜",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.96,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "花菜",
+     "ratio": 82.64,
+     "per100": {
+      "kcal": 24,
+      "protein": 2.1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 8.26,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 2.48,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 1.65,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaochao-xianggan",
+   "name": "小炒香干",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.66,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "香干",
+     "ratio": 56.6,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 18.87,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 18.87,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaochao-mianjin",
+   "name": "小炒面筋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.94,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "面筋",
+     "ratio": 59.41,
+     "per100": {
+      "kcal": 141,
+      "protein": 23.5,
+      "carb": 12.3,
+      "fat": 0.5
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 19.8,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 14.85,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "qincai-chao-xianggan",
+   "name": "芹菜炒香干",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.63,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "芹菜",
+     "ratio": 56.34,
+     "per100": {
+      "kcal": 16,
+      "protein": 0.7,
+      "carb": 3.4,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "香干",
+     "ratio": 37.56,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.47,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "qincai-xianggan-chao-rousi",
+   "name": "芹菜香干炒肉丝",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 6.78,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "芹菜",
+     "ratio": 42.37,
+     "per100": {
+      "kcal": 16,
+      "protein": 0.7,
+      "carb": 3.4,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "香干",
+     "ratio": 25.42,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 25.42,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "wosunsi-chao-jidan",
+   "name": "莴笋丝炒鸡蛋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 7.37,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "莴笋",
+     "ratio": 55.3,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 36.87,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.46,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "duojiao-muer-chao-jidan",
+   "name": "剁椒木耳炒鸡蛋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.6,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "木耳",
+     "ratio": 43.01,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 43.01,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 5.38,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "waipocai-chao-jidan",
+   "name": "外婆菜炒鸡蛋",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 6.98,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "外婆菜",
+     "ratio": 46.51,
+     "per100": {
+      "kcal": 50,
+      "protein": 2,
+      "carb": 5,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 46.51,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiachang-tudoupian",
+   "name": "家常土豆片",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 5.15,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "土豆",
+     "ratio": 85.84,
+     "per100": {
+      "kcal": 76,
+      "protein": 2,
+      "carb": 17,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 8.58,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.43,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaochao-huangniurou",
+   "name": "小炒黄牛肉",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.29,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "牛油",
+     "ratio": 2.76,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.8
+     }
+    },
+    {
+     "name": "牛肉",
+     "ratio": 32.26,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 6.91,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 9.22,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "木耳",
+     "ratio": 18.43,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 13.82,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "小炒黄牛肉汁",
+     "ratio": 8.29,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 12,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaochao-hexia",
+   "name": "小炒河虾",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 13.89,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "虾",
+     "ratio": 69.44,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 13.89,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 2.78,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "feichang-ji",
+   "name": "肥肠鸡",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 11.54,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡肉",
+     "ratio": 46.15,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "肥肠",
+     "ratio": 30.77,
+     "per100": {
+      "kcal": 196,
+      "protein": 6.9,
+      "carb": 0,
+      "fat": 18.7
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 7.69,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 3.85,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "yuer-ji",
+   "name": "芋儿鸡",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.76,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡肉",
+     "ratio": 51.09,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "芋头",
+     "ratio": 36.5,
+     "per100": {
+      "kcal": 79,
+      "protein": 2.2,
+      "carb": 18.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 3.65,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "boluo-gulaorou",
+   "name": "菠萝咕咾肉",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 13.79,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 41.38,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "菠萝",
+     "ratio": 20.69,
+     "per100": {
+      "kcal": 44,
+      "protein": 0.5,
+      "carb": 10.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 13.79,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "番茄酱",
+     "ratio": 6.9,
+     "per100": {
+      "kcal": 82,
+      "protein": 1.9,
+      "carb": 18.4,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 3.45,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shijin-dan-chaofan",
+   "name": "什锦蛋炒饭",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 3.6,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 12,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "米饭",
+     "ratio": 72.01,
+     "per100": {
+      "kcal": 116,
+      "protein": 2.6,
+      "carb": 25.6,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "香肠",
+     "ratio": 4.8,
+     "per100": {
+      "kcal": 508,
+      "protein": 24.1,
+      "carb": 11.2,
+      "fat": 40.7
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 2.4,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "玉米",
+     "ratio": 2.4,
+     "per100": {
+      "kcal": 112,
+      "protein": 4,
+      "carb": 22.8,
+      "fat": 1.2
+     }
+    },
+    {
+     "name": "蚕豆",
+     "ratio": 2.4,
+     "per100": {
+      "kcal": 104,
+      "protein": 8.8,
+      "carb": 17.6,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.38,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "sunzi-jiding-gaifan",
+   "name": "笋子鸡丁盖饭",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 4.65,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "鸡腿",
+     "ratio": 27.91,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "笋",
+     "ratio": 18.6,
+     "per100": {
+      "kcal": 21,
+      "protein": 2.6,
+      "carb": 3.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 2.33,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "米饭",
+     "ratio": 46.51,
+     "per100": {
+      "kcal": 116,
+      "protein": 2.6,
+      "carb": 25.6,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "nongjia-xiaochaorou",
+   "name": "农家小炒肉",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.7,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 60.87,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "青椒",
+     "ratio": 26.09,
+     "per100": {
+      "kcal": 22,
+      "protein": 1,
+      "carb": 4.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 4.35,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiachang-xiaochao",
+   "name": "家常小炒",
+   "category": "炒菜",
+   "components": [
+    {
+     "name": "大豆油",
+     "ratio": 8.16,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 30.61,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "木耳",
+     "ratio": 20.41,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 20.41,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 20.41,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "mapo-doufu",
+   "name": "麻婆豆腐",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "豆腐",
+     "ratio": 50.4,
+     "per100": {
+      "kcal": 73,
+      "protein": 8.1,
+      "carb": 2.8,
+      "fat": 3.7
+     }
+    },
+    {
+     "name": "麻婆豆腐料",
+     "ratio": 10.08,
+     "per100": {
+      "kcal": 145,
+      "protein": 3,
+      "carb": 14,
+      "fat": 8
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 0.2,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "淀粉",
+     "ratio": 4.03,
+     "per100": {
+      "kcal": 345,
+      "protein": 0.3,
+      "carb": 85,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 35.28,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "baicai-dun-doufu",
+   "name": "白菜炖豆腐",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "豆腐",
+     "ratio": 52.86,
+     "per100": {
+      "kcal": 73,
+      "protein": 8.1,
+      "carb": 2.8,
+      "fat": 3.7
+     }
+    },
+    {
+     "name": "白菜",
+     "ratio": 44.05,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 2.64,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.44,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "hongshao-yukuai",
+   "name": "红烧鱼块",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 83.77,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 10.47,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 3.14,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 1.57,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    },
+    {
+     "name": "姜",
+     "ratio": 1.05,
+     "per100": {
+      "kcal": 41,
+      "protein": 1.3,
+      "carb": 7.6,
+      "fat": 0.6
+     }
+    }
+   ]
+  },
+  {
+   "id": "tudou-niulan",
+   "name": "土豆牛腩",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "牛肉",
+     "ratio": 57.55,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "土豆",
+     "ratio": 35.97,
+     "per100": {
+      "kcal": 76,
+      "protein": 2,
+      "carb": 17,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 4.32,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 2.16,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangla-jiza",
+   "name": "香辣鸡杂",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "鸡杂",
+     "ratio": 78.95,
+     "per100": {
+      "kcal": 167,
+      "protein": 18,
+      "carb": 4,
+      "fat": 8
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 13.16,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 7.89,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "jixue-tang",
+   "name": "鸡血汤",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "鸡血",
+     "ratio": 19.86,
+     "per100": {
+      "kcal": 49,
+      "protein": 7.8,
+      "carb": 4.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 79.43,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.32,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 0.4,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "meigancai-fengzhaochi",
+   "name": "梅干菜凤爪翅",
+   "category": "炖菜",
+   "components": [
+    {
+     "name": "鸡爪",
+     "ratio": 48.78,
+     "per100": {
+      "kcal": 254,
+      "protein": 23.9,
+      "carb": 2.7,
+      "fat": 16.4
+     }
+    },
+    {
+     "name": "鸡翅",
+     "ratio": 36.59,
+     "per100": {
+      "kcal": 194,
+      "protein": 17.4,
+      "carb": 4.6,
+      "fat": 11.8
+     }
+    },
+    {
+     "name": "梅干菜",
+     "ratio": 12.2,
+     "per100": {
+      "kcal": 62,
+      "protein": 3.7,
+      "carb": 11.8,
+      "fat": 0.5
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 2.44,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "zha-jipai",
+   "name": "炸鸡排",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡胸肉",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 115,
+      "protein": 24.6,
+      "carb": 0.9,
+      "fat": 1.9
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "zha-jitui",
+   "name": "炸鸡腿",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡腿",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "shengzha-da-jitui",
+   "name": "生炸大鸡腿",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡腿",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "shouqiang-da-jitui",
+   "name": "手枪大鸡腿",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡腿",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangsu-jimihua",
+   "name": "香酥鸡米花",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡米花",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 223,
+      "protein": 15,
+      "carb": 14,
+      "fat": 12
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "bangbang-xia",
+   "name": "棒棒虾",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "虾",
+     "ratio": 72.73,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 15.15,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "淀粉",
+     "ratio": 12.12,
+     "per100": {
+      "kcal": 345,
+      "protein": 0.3,
+      "carb": 85,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "xinxing-jipai",
+   "name": "心形鸡排",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡胸肉",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 115,
+      "protein": 24.6,
+      "carb": 0.9,
+      "fat": 1.9
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangyu-digua-wan",
+   "name": "香芋地瓜丸",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "红薯",
+     "ratio": 51.28,
+     "per100": {
+      "kcal": 86,
+      "protein": 1.6,
+      "carb": 20.1,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "芋头",
+     "ratio": 25.64,
+     "per100": {
+      "kcal": 79,
+      "protein": 2.2,
+      "carb": 18.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 15.38,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 7.69,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangcui-shubing",
+   "name": "香脆薯饼",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "土豆",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 76,
+      "protein": 2,
+      "carb": 17,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 16.67,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "aojiao-fengwei-chijian",
+   "name": "傲椒风味翅尖",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡翅",
+     "ratio": 75,
+     "per100": {
+      "kcal": 194,
+      "protein": 17.4,
+      "carb": 4.6,
+      "fat": 11.8
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 15,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 10,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jirou-yangcongquan",
+   "name": "鸡肉洋葱圈",
+   "category": "炸品",
+   "components": [
+    {
+     "name": "鸡胸肉",
+     "ratio": 55.17,
+     "per100": {
+      "kcal": 115,
+      "protein": 24.6,
+      "carb": 0.9,
+      "fat": 1.9
+     }
+    },
+    {
+     "name": "洋葱",
+     "ratio": 27.59,
+     "per100": {
+      "kcal": 39,
+      "protein": 1.1,
+      "carb": 9,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 17.24,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "meicai-kourou",
+   "name": "梅菜扣肉",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "五花肉",
+     "ratio": 73.17,
+     "per100": {
+      "kcal": 395,
+      "protein": 14,
+      "carb": 1,
+      "fat": 37
+     }
+    },
+    {
+     "name": "梅干菜",
+     "ratio": 16.26,
+     "per100": {
+      "kcal": 62,
+      "protein": 3.7,
+      "carb": 11.8,
+      "fat": 0.5
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 2.44,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蚝油",
+     "ratio": 6.5,
+     "per100": {
+      "kcal": 108,
+      "protein": 1.4,
+      "carb": 24,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡精",
+     "ratio": 1.63,
+     "per100": {
+      "kcal": 188,
+      "protein": 10,
+      "carb": 36.6,
+      "fat": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "fenzheng-rou",
+   "name": "粉蒸肉",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "五花肉",
+     "ratio": 42.55,
+     "per100": {
+      "kcal": 395,
+      "protein": 14,
+      "carb": 1,
+      "fat": 37
+     }
+    },
+    {
+     "name": "蒸肉米粉",
+     "ratio": 15.96,
+     "per100": {
+      "kcal": 340,
+      "protein": 7,
+      "carb": 77,
+      "fat": 1
+     }
+    },
+    {
+     "name": "蒸肉酱",
+     "ratio": 4.26,
+     "per100": {
+      "kcal": 180,
+      "protein": 5,
+      "carb": 10,
+      "fat": 12
+     }
+    },
+    {
+     "name": "红薯",
+     "ratio": 37.23,
+     "per100": {
+      "kcal": 86,
+      "protein": 1.6,
+      "carb": 20.1,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "suanrong-fensixia",
+   "name": "蒜蓉粉丝虾",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "虾",
+     "ratio": 48,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "粉丝",
+     "ratio": 34,
+     "per100": {
+      "kcal": 338,
+      "protein": 0.5,
+      "carb": 83.7,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 10,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 8,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "baiqie-ji",
+   "name": "白切鸡",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 89.29,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 8.93,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 1.34,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 0.45,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "congyou-ji",
+   "name": "葱油鸡",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 81.63,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 8.16,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 4.08,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 6.12,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "nongjia-zhengdan",
+   "name": "农家蒸蛋",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡蛋",
+     "ratio": 48.98,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 48.98,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 2.04,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaren-zheng-jidan",
+   "name": "虾仁蒸鸡蛋",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡蛋",
+     "ratio": 43.48,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "虾",
+     "ratio": 13.04,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 43.48,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "roubing-zhengdan",
+   "name": "肉饼蒸蛋",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "猪肉",
+     "ratio": 55.17,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 41.38,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 3.45,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "suanrong-wawacai",
+   "name": "蒜蓉娃娃菜",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "白菜",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 6.82,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 2.27,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "duojiao-yutou",
+   "name": "剁椒鱼头",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 80.65,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 16.13,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 3.23,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "aoerliang-jichi",
+   "name": "奥尔良鸡翅",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡翅",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 194,
+      "protein": 17.4,
+      "carb": 4.6,
+      "fat": 11.8
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "zhusun-zheng-jichi",
+   "name": "竹笋蒸鸡翅",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡翅",
+     "ratio": 62.5,
+     "per100": {
+      "kcal": 194,
+      "protein": 17.4,
+      "carb": 4.6,
+      "fat": 11.8
+     }
+    },
+    {
+     "name": "笋",
+     "ratio": 33.33,
+     "per100": {
+      "kcal": 21,
+      "protein": 2.6,
+      "carb": 3.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 4.17,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangyu-zheng-paigu",
+   "name": "香芋蒸排骨",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "排骨",
+     "ratio": 62.5,
+     "per100": {
+      "kcal": 278,
+      "protein": 17.4,
+      "carb": 5.8,
+      "fat": 20.4
+     }
+    },
+    {
+     "name": "芋头",
+     "ratio": 33.33,
+     "per100": {
+      "kcal": 79,
+      "protein": 2.2,
+      "carb": 18.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 4.17,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "sanse-xiaren",
+   "name": "三色虾仁",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "虾",
+     "ratio": 47.62,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 23.81,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "玉米",
+     "ratio": 14.29,
+     "per100": {
+      "kcal": 112,
+      "protein": 4,
+      "carb": 22.8,
+      "fat": 1.2
+     }
+    },
+    {
+     "name": "蚕豆",
+     "ratio": 14.29,
+     "per100": {
+      "kcal": 104,
+      "protein": 8.8,
+      "carb": 17.6,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "mizhi-lurou-fan",
+   "name": "秘汁卤肉饭",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "五花肉",
+     "ratio": 23.26,
+     "per100": {
+      "kcal": 395,
+      "protein": 14,
+      "carb": 1,
+      "fat": 37
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 13.95,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "菜苔",
+     "ratio": 11.63,
+     "per100": {
+      "kcal": 20,
+      "protein": 1.8,
+      "carb": 3.2,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "米饭",
+     "ratio": 46.51,
+     "per100": {
+      "kcal": 116,
+      "protein": 2.6,
+      "carb": 25.6,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 4.65,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiangzheng-doufu",
+   "name": "酱蒸豆腐",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "豆腐",
+     "ratio": 80,
+     "per100": {
+      "kcal": 73,
+      "protein": 8.1,
+      "carb": 2.8,
+      "fat": 3.7
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 12,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 8,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiangzheng-baigan",
+   "name": "酱蒸白干",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "香干",
+     "ratio": 75,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 15,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 10,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "fenggan-niurou-zheng-baigan",
+   "name": "风干牛肉蒸白干",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "香干",
+     "ratio": 69.77,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "牛肉",
+     "ratio": 23.26,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 6.98,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "fengzhua-zheng-doumi",
+   "name": "凤爪蒸豆米",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡爪",
+     "ratio": 52.63,
+     "per100": {
+      "kcal": 254,
+      "protein": 23.9,
+      "carb": 2.7,
+      "fat": 16.4
+     }
+    },
+    {
+     "name": "蚕豆",
+     "ratio": 42.11,
+     "per100": {
+      "kcal": 104,
+      "protein": 8.8,
+      "carb": 17.6,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 5.26,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangchang-zheng-doumi",
+   "name": "香肠蒸豆米",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "香肠",
+     "ratio": 37.5,
+     "per100": {
+      "kcal": 508,
+      "protein": 24.1,
+      "carb": 11.2,
+      "fat": 40.7
+     }
+    },
+    {
+     "name": "蚕豆",
+     "ratio": 62.5,
+     "per100": {
+      "kcal": 104,
+      "protein": 8.8,
+      "carb": 17.6,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "huluobo-niurou",
+   "name": "胡萝卜牛肉",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "牛肉",
+     "ratio": 52.63,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "胡萝卜",
+     "ratio": 42.11,
+     "per100": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carb": 9.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 5.26,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiangxiang-xiaohexia",
+   "name": "酱香小河虾",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "虾",
+     "ratio": 86.96,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 13.04,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiangjiao-suanxiang-pianpianyu",
+   "name": "酱椒蒜香片片鱼",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 81.08,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 8.11,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 10.81,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "jizhi-layu",
+   "name": "鸡汁辣鱼",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 75,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 15,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 10,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangla-xuewang",
+   "name": "香辣血旺",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡血",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 49,
+      "protein": 7.8,
+      "carb": 4.1,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 12.5,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 4.17,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "mizhi-nangua",
+   "name": "蜜汁南瓜",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "南瓜",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 22,
+      "protein": 0.7,
+      "carb": 5.3,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "culiang-he",
+   "name": "粗粮盒",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "玉米",
+     "ratio": 34.48,
+     "per100": {
+      "kcal": 112,
+      "protein": 4,
+      "carb": 22.8,
+      "fat": 1.2
+     }
+    },
+    {
+     "name": "南瓜",
+     "ratio": 31.03,
+     "per100": {
+      "kcal": 22,
+      "protein": 0.7,
+      "carb": 5.3,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "红薯",
+     "ratio": 34.48,
+     "per100": {
+      "kcal": 86,
+      "protein": 1.6,
+      "carb": 20.1,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "songgao",
+   "name": "松糕",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "松糕",
+     "ratio": 100,
+     "per100": {
+      "kcal": 238,
+      "protein": 4,
+      "carb": 49,
+      "fat": 3.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "huozhuzi",
+   "name": "活珠子",
+   "category": "蒸菜",
+   "components": [
+    {
+     "name": "鸡蛋",
+     "ratio": 100,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-niuza-bao",
+   "name": "砂锅牛杂煲",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "牛杂",
+     "ratio": 65.63,
+     "per100": {
+      "kcal": 172,
+      "protein": 19,
+      "carb": 5,
+      "fat": 8
+     }
+    },
+    {
+     "name": "萝卜",
+     "ratio": 31.25,
+     "per100": {
+      "kcal": 21,
+      "protein": 0.9,
+      "carb": 4.2,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 3.13,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-fuzhu",
+   "name": "砂锅腐竹",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "腐竹",
+     "ratio": 24.24,
+     "per100": {
+      "kcal": 461,
+      "protein": 44.6,
+      "carb": 22.3,
+      "fat": 21.7
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 15.15,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 60.61,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-yanjiuji",
+   "name": "砂锅盐焗鸡",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 98.04,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 1.96,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-suancaiyu",
+   "name": "砂锅酸菜鱼",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 27.27,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "酸菜",
+     "ratio": 18.18,
+     "per100": {
+      "kcal": 22,
+      "protein": 2,
+      "carb": 3.3,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 54.55,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-yuanwei-jitang-mixian",
+   "name": "砂锅原味鸡汤米线",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "米线",
+     "ratio": 29.41,
+     "per100": {
+      "kcal": 107,
+      "protein": 2,
+      "carb": 25,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "鸡肉",
+     "ratio": 11.76,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 58.82,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-suanrong-fensi-xia",
+   "name": "砂锅蒜蓉粉丝虾",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "虾",
+     "ratio": 54.55,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "粉丝",
+     "ratio": 36.36,
+     "per100": {
+      "kcal": 338,
+      "protein": 0.5,
+      "carb": 83.7,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-paojiao-jimihua-mixian",
+   "name": "砂锅泡椒鸡米花米线",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "米线",
+     "ratio": 64.52,
+     "per100": {
+      "kcal": 107,
+      "protein": 2,
+      "carb": 25,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "鸡米花",
+     "ratio": 25.81,
+     "per100": {
+      "kcal": 223,
+      "protein": 15,
+      "carb": 14,
+      "fat": 12
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 9.68,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-fanqie-mixian",
+   "name": "砂锅番茄米线",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "米线",
+     "ratio": 50,
+     "per100": {
+      "kcal": 107,
+      "protein": 2,
+      "carb": 25,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "西红柿",
+     "ratio": 37.5,
+     "per100": {
+      "kcal": 19,
+      "protein": 0.9,
+      "carb": 3.9,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 12.5,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-mugua",
+   "name": "砂锅木瓜",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "木瓜",
+     "ratio": 54.79,
+     "per100": {
+      "kcal": 27,
+      "protein": 0.4,
+      "carb": 6.2,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "牛奶",
+     "ratio": 41.1,
+     "per100": {
+      "kcal": 54,
+      "protein": 3,
+      "carb": 3.4,
+      "fat": 3.2
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 4.11,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-sanxian-doufu",
+   "name": "砂锅三鲜豆腐",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "豆腐",
+     "ratio": 41.67,
+     "per100": {
+      "kcal": 73,
+      "protein": 8.1,
+      "carb": 2.8,
+      "fat": 3.7
+     }
+    },
+    {
+     "name": "虾",
+     "ratio": 6.25,
+     "per100": {
+      "kcal": 87,
+      "protein": 18.6,
+      "carb": 1,
+      "fat": 0.8
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 10.42,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 41.67,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "suancai-feichang-bao",
+   "name": "酸菜肥肠煲",
+   "category": "砂锅菜",
+   "components": [
+    {
+     "name": "肥肠",
+     "ratio": 55.56,
+     "per100": {
+      "kcal": 196,
+      "protein": 6.9,
+      "carb": 0,
+      "fat": 18.7
+     }
+    },
+    {
+     "name": "酸菜",
+     "ratio": 37.04,
+     "per100": {
+      "kcal": 22,
+      "protein": 2,
+      "carb": 3.3,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 7.41,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "shuizhu-dan",
+   "name": "水煮蛋",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "鸡蛋",
+     "ratio": 100,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "chaye-dan",
+   "name": "茶叶蛋",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "鸡蛋",
+     "ratio": 95.24,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 4.76,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "mantou",
+   "name": "馒头",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "馒头",
+     "ratio": 100,
+     "per100": {
+      "kcal": 223,
+      "protein": 7,
+      "carb": 47,
+      "fat": 1.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "huajuan",
+   "name": "花卷",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "花卷",
+     "ratio": 100,
+     "per100": {
+      "kcal": 211,
+      "protein": 6.9,
+      "carb": 43.7,
+      "fat": 1.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "xianzha-dayoutiao",
+   "name": "现炸大油条",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "油条",
+     "ratio": 84.21,
+     "per100": {
+      "kcal": 386,
+      "protein": 6.9,
+      "carb": 51,
+      "fat": 17.6
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 15.79,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "jizhi-tangbao",
+   "name": "鸡汁汤包",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "包子",
+     "ratio": 100,
+     "per100": {
+      "kcal": 227,
+      "protein": 7.2,
+      "carb": 39.6,
+      "fat": 4.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "baozi",
+   "name": "包子",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "包子",
+     "ratio": 100,
+     "per100": {
+      "kcal": 227,
+      "protein": 7.2,
+      "carb": 39.6,
+      "fat": 4.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "naihuang-jibao",
+   "name": "奶黄鸡包",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "包子",
+     "ratio": 100,
+     "per100": {
+      "kcal": 227,
+      "protein": 7.2,
+      "carb": 39.6,
+      "fat": 4.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "shougong-shaomai",
+   "name": "手工烧麦",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "烧麦",
+     "ratio": 100,
+     "per100": {
+      "kcal": 186,
+      "protein": 5.5,
+      "carb": 32,
+      "fat": 4.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "jicai-xianrou-zhengjiao",
+   "name": "荠菜鲜肉蒸饺",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "蒸饺",
+     "ratio": 100,
+     "per100": {
+      "kcal": 198,
+      "protein": 8.2,
+      "carb": 29.5,
+      "fat": 5.6
+     }
+    }
+   ]
+  },
+  {
+   "id": "danbing",
+   "name": "蛋饼",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "蛋饼",
+     "ratio": 100,
+     "per100": {
+      "kcal": 244,
+      "protein": 8,
+      "carb": 28.5,
+      "fat": 11
+     }
+    }
+   ]
+  },
+  {
+   "id": "fantuan",
+   "name": "饭团",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "饭团",
+     "ratio": 100,
+     "per100": {
+      "kcal": 168,
+      "protein": 3.5,
+      "carb": 34,
+      "fat": 2.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "zifangao",
+   "name": "粢饭糕",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "饭团",
+     "ratio": 86.96,
+     "per100": {
+      "kcal": 168,
+      "protein": 3.5,
+      "carb": 34,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 13.04,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "shougong-chunjuan",
+   "name": "手工春卷",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "春卷",
+     "ratio": 84.21,
+     "per100": {
+      "kcal": 262,
+      "protein": 5.5,
+      "carb": 32,
+      "fat": 13
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 15.79,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangsu-niurou-bing",
+   "name": "香酥牛肉饼",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "馅饼",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 252,
+      "protein": 7.5,
+      "carb": 34,
+      "fat": 10
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "supi-luobosi-xianbing",
+   "name": "酥皮萝卜丝馅饼",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "馅饼",
+     "ratio": 88.89,
+     "per100": {
+      "kcal": 252,
+      "protein": 7.5,
+      "carb": 34,
+      "fat": 10
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 11.11,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "niurou-he",
+   "name": "牛肉盒",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "馅饼",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 252,
+      "protein": 7.5,
+      "carb": 34,
+      "fat": 10
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "baimi-zhou",
+   "name": "白米粥",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "粥",
+     "ratio": 100,
+     "per100": {
+      "kcal": 46,
+      "protein": 1.1,
+      "carb": 9.8,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiaomi-nangua-zhou",
+   "name": "小米南瓜粥",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "粥",
+     "ratio": 100,
+     "per100": {
+      "kcal": 46,
+      "protein": 1.1,
+      "carb": 9.8,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "xianao-douzhou",
+   "name": "现熬豆粥",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "粥",
+     "ratio": 100,
+     "per100": {
+      "kcal": 46,
+      "protein": 1.1,
+      "carb": 9.8,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "chidou-hu-yuanxiao",
+   "name": "赤豆糊元宵",
+   "category": "早餐",
+   "components": [
+    {
+     "name": "元宵",
+     "ratio": 76.92,
+     "per100": {
+      "kcal": 311,
+      "protein": 5.3,
+      "carb": 55,
+      "fat": 8
+     }
+    },
+    {
+     "name": "红豆",
+     "ratio": 23.08,
+     "per100": {
+      "kcal": 309,
+      "protein": 20.2,
+      "carb": 55.7,
+      "fat": 0.6
+     }
+    }
+   ]
+  },
+  {
+   "id": "mifan",
+   "name": "米饭",
+   "category": "主食",
+   "components": [
+    {
+     "name": "米饭",
+     "ratio": 100,
+     "per100": {
+      "kcal": 116,
+      "protein": 2.6,
+      "carb": 25.6,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "zaliang-fan",
+   "name": "杂粮饭",
+   "category": "主食",
+   "components": [
+    {
+     "name": "米饭",
+     "ratio": 100,
+     "per100": {
+      "kcal": 116,
+      "protein": 2.6,
+      "carb": 25.6,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "sumian",
+   "name": "素面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 33.06,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 66.12,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 0.83,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "fanqie-jidan-mian",
+   "name": "番茄鸡蛋面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 54.05,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "西红柿",
+     "ratio": 27.03,
+     "per100": {
+      "kcal": 19,
+      "protein": 0.9,
+      "carb": 3.9,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 16.22,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 2.7,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangla-niurou-mian",
+   "name": "香辣牛肉面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 25.58,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "牛肉",
+     "ratio": 5.81,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 6.98,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "青菜",
+     "ratio": 3.49,
+     "per100": {
+      "kcal": 15,
+      "protein": 1.5,
+      "carb": 2.2,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 58.14,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xianggu-jitang-mian",
+   "name": "香菇鸡汤面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 25.64,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "鸡肉",
+     "ratio": 6.41,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "蘑菇",
+     "ratio": 3.85,
+     "per100": {
+      "kcal": 26,
+      "protein": 2.7,
+      "carb": 5.2,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 64.1,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "dada-niulan-mian",
+   "name": "大大大块牛腩面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 26.35,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "牛肉",
+     "ratio": 11.98,
+     "per100": {
+      "kcal": 125,
+      "protein": 19.9,
+      "carb": 2,
+      "fat": 4.2
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 59.88,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 1.8,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "dapai-mian",
+   "name": "大排面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 25,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "排骨",
+     "ratio": 12.5,
+     "per100": {
+      "kcal": 278,
+      "protein": 17.4,
+      "carb": 5.8,
+      "fat": 20.4
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 62.5,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xuecai-rousi-mian",
+   "name": "雪菜肉丝面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 25.97,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "猪肉",
+     "ratio": 5.19,
+     "per100": {
+      "kcal": 155,
+      "protein": 20.3,
+      "carb": 1.5,
+      "fat": 6.2
+     }
+    },
+    {
+     "name": "雪菜",
+     "ratio": 3.9,
+     "per100": {
+      "kcal": 28,
+      "protein": 2.3,
+      "carb": 4.5,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 64.94,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "tese-jitang-huntun",
+   "name": "特色鸡汤馄饨",
+   "category": "主食",
+   "components": [
+    {
+     "name": "馄饨",
+     "ratio": 33.06,
+     "per100": {
+      "kcal": 145,
+      "protein": 5.5,
+      "carb": 24,
+      "fat": 3
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 66.12,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 0.83,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "shaguo-jicai-huntun",
+   "name": "砂锅荠菜鲜肉馄饨",
+   "category": "主食",
+   "components": [
+    {
+     "name": "馄饨",
+     "ratio": 33.33,
+     "per100": {
+      "kcal": 145,
+      "protein": 5.5,
+      "carb": 24,
+      "fat": 3
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 66.67,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangla-jiding-banmian",
+   "name": "香辣鸡丁拌面",
+   "category": "主食",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 60.61,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "鸡腿",
+     "ratio": 24.24,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 6.06,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "调味酱",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 90,
+      "protein": 2,
+      "carb": 11,
+      "fat": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "lu-jitui",
+   "name": "卤鸡腿",
+   "category": "卤菜",
+   "components": [
+    {
+     "name": "鸡腿",
+     "ratio": 86.96,
+     "per100": {
+      "kcal": 181,
+      "protein": 16,
+      "carb": 0,
+      "fat": 13
+     }
+    },
+    {
+     "name": "卤料",
+     "ratio": 13.04,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 10,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "lu-jizhua",
+   "name": "卤鸡爪",
+   "category": "卤菜",
+   "components": [
+    {
+     "name": "鸡爪",
+     "ratio": 88.24,
+     "per100": {
+      "kcal": 254,
+      "protein": 23.9,
+      "carb": 2.7,
+      "fat": 16.4
+     }
+    },
+    {
+     "name": "卤料",
+     "ratio": 11.76,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 10,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "lu-chigen",
+   "name": "卤翅根",
+   "category": "卤菜",
+   "components": [
+    {
+     "name": "鸡翅",
+     "ratio": 88.24,
+     "per100": {
+      "kcal": 194,
+      "protein": 17.4,
+      "carb": 4.6,
+      "fat": 11.8
+     }
+    },
+    {
+     "name": "卤料",
+     "ratio": 11.76,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 10,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "lu-dapai",
+   "name": "卤大排",
+   "category": "卤菜",
+   "components": [
+    {
+     "name": "排骨",
+     "ratio": 86.96,
+     "per100": {
+      "kcal": 278,
+      "protein": 17.4,
+      "carb": 5.8,
+      "fat": 20.4
+     }
+    },
+    {
+     "name": "卤料",
+     "ratio": 13.04,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 10,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "lu-fanggan",
+   "name": "卤方干",
+   "category": "卤菜",
+   "components": [
+    {
+     "name": "香干",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 147,
+      "protein": 16.2,
+      "carb": 4.9,
+      "fat": 7.4
+     }
+    },
+    {
+     "name": "卤料",
+     "ratio": 9.09,
+     "per100": {
+      "kcal": 95,
+      "protein": 2,
+      "carb": 10,
+      "fat": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "koushuiji",
+   "name": "口水鸡",
+   "category": "凉拌",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 75.47,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "口水鸡底料",
+     "ratio": 22.64,
+     "per100": {
+      "kcal": 210,
+      "protein": 3,
+      "carb": 12,
+      "fat": 15
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 1.89,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "liangban-wosunsi",
+   "name": "凉拌莴笋丝",
+   "category": "凉拌",
+   "components": [
+    {
+     "name": "莴笋",
+     "ratio": 93.02,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 4.65,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 2.33,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "ningmeng-fengzhua",
+   "name": "柠檬凤爪",
+   "category": "凉拌",
+   "components": [
+    {
+     "name": "鸡爪",
+     "ratio": 85.71,
+     "per100": {
+      "kcal": 254,
+      "protein": 23.9,
+      "carb": 2.7,
+      "fat": 16.4
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 8.57,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "醋",
+     "ratio": 5.71,
+     "per100": {
+      "kcal": 18,
+      "protein": 0.1,
+      "carb": 4.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiqin-huashengmi",
+   "name": "西芹花生米",
+   "category": "凉拌",
+   "components": [
+    {
+     "name": "芹菜",
+     "ratio": 64.52,
+     "per100": {
+      "kcal": 16,
+      "protein": 0.7,
+      "carb": 3.4,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "花生米",
+     "ratio": 32.26,
+     "per100": {
+      "kcal": 567,
+      "protein": 24.8,
+      "carb": 21.7,
+      "fat": 44.3
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 3.23,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "mala-jikuai",
+   "name": "麻辣鸡块",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 80,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 10,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "红油",
+     "ratio": 6,
+     "per100": {
+      "kcal": 700,
+      "protein": 0.5,
+      "carb": 5,
+      "fat": 75
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 4,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "id": "congyou-caixin",
+   "name": "葱油菜心",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "青菜",
+     "ratio": 88.89,
+     "per100": {
+      "kcal": 15,
+      "protein": 1.5,
+      "carb": 2.2,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 4.44,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 4.44,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 2.22,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "congyou-caitai",
+   "name": "葱油菜苔",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "菜苔",
+     "ratio": 90.91,
+     "per100": {
+      "kcal": 20,
+      "protein": 1.8,
+      "carb": 3.2,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 4.55,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 4.55,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "jiaozhi-xilanhua",
+   "name": "浇汁西兰花",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "西兰花",
+     "ratio": 93.02,
+     "per100": {
+      "kcal": 34,
+      "protein": 4.1,
+      "carb": 4.3,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 2.33,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "蚝油",
+     "ratio": 4.65,
+     "per100": {
+      "kcal": 108,
+      "protein": 1.4,
+      "carb": 24,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "bocai-danpisi",
+   "name": "菠菜蛋皮丝",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "菠菜",
+     "ratio": 73.89,
+     "per100": {
+      "kcal": 24,
+      "protein": 2.6,
+      "carb": 3.6,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "鸡蛋",
+     "ratio": 24.63,
+     "per100": {
+      "kcal": 144,
+      "protein": 13.3,
+      "carb": 2.8,
+      "fat": 8.8
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 1.48,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "xiangcui-muer",
+   "name": "香脆木耳",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "木耳",
+     "ratio": 92.02,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.5,
+      "carb": 6,
+      "fat": 0.2
+     }
+    },
+    {
+     "name": "辣椒",
+     "ratio": 6.13,
+     "per100": {
+      "kcal": 32,
+      "protein": 1.3,
+      "carb": 5.4,
+      "fat": 0.4
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 1.84,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "jitang-wawacai",
+   "name": "鸡汤娃娃菜",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "白菜",
+     "ratio": 49.38,
+     "per100": {
+      "kcal": 14,
+      "protein": 1,
+      "carb": 2.8,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 49.38,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "鸡精",
+     "ratio": 1.23,
+     "per100": {
+      "kcal": 188,
+      "protein": 10,
+      "carb": 36.6,
+      "fat": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "congyou-banmian",
+   "name": "葱油拌面",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 83.33,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "大豆油",
+     "ratio": 6.25,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.9
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 6.25,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "葱",
+     "ratio": 4.17,
+     "per100": {
+      "kcal": 27,
+      "protein": 1.7,
+      "carb": 5,
+      "fat": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "tese-reganmian",
+   "name": "特色热干面",
+   "category": "烫菜",
+   "components": [
+    {
+     "name": "面条",
+     "ratio": 85.11,
+     "per100": {
+      "kcal": 137,
+      "protein": 4.5,
+      "carb": 28.5,
+      "fat": 0.6
+     }
+    },
+    {
+     "name": "花生米",
+     "ratio": 4.26,
+     "per100": {
+      "kcal": 567,
+      "protein": 24.8,
+      "carb": 21.7,
+      "fat": 44.3
+     }
+    },
+    {
+     "name": "芝麻香油",
+     "ratio": 4.26,
+     "per100": {
+      "kcal": 898,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99.7
+     }
+    },
+    {
+     "name": "酱油",
+     "ratio": 6.38,
+     "per100": {
+      "kcal": 67,
+      "protein": 5.6,
+      "carb": 10.5,
+      "fat": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "feixi-laomuji-tang",
+   "name": "肥西老母鸡汤",
+   "category": "汤",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 17.62,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "鸡油",
+     "ratio": 1.1,
+     "per100": {
+      "kcal": 884,
+      "protein": 0,
+      "carb": 0,
+      "fat": 99
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 80.74,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.54,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "laoji-tang",
+   "name": "老鸡汤",
+   "category": "汤",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 16.58,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 82.92,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.5,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "zhusun-luronggu-jitang",
+   "name": "竹荪鹿茸菇鸡汤",
+   "category": "汤",
+   "components": [
+    {
+     "name": "鸡肉",
+     "ratio": 16.24,
+     "per100": {
+      "kcal": 167,
+      "protein": 19.3,
+      "carb": 1.3,
+      "fat": 9.4
+     }
+    },
+    {
+     "name": "蘑菇",
+     "ratio": 2.03,
+     "per100": {
+      "kcal": 26,
+      "protein": 2.7,
+      "carb": 5.2,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 81.22,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "盐",
+     "ratio": 0.51,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "jintang-suancaiyu",
+   "name": "金汤酸菜鱼",
+   "category": "煮锅",
+   "components": [
+    {
+     "name": "鱼",
+     "ratio": 30.8,
+     "per100": {
+      "kcal": 104,
+      "protein": 17.7,
+      "carb": 2,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "酸菜",
+     "ratio": 20.53,
+     "per100": {
+      "kcal": 22,
+      "protein": 2,
+      "carb": 3.3,
+      "fat": 0.3
+     }
+    },
+    {
+     "name": "金汤",
+     "ratio": 8.62,
+     "per100": {
+      "kcal": 55,
+      "protein": 1.5,
+      "carb": 6.5,
+      "fat": 2.5
+     }
+    },
+    {
+     "name": "红油",
+     "ratio": 3.08,
+     "per100": {
+      "kcal": 700,
+      "protein": 0.5,
+      "carb": 5,
+      "fat": 75
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 36.96,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "mao-kaoya",
+   "name": "冒烤鸭",
+   "category": "煮锅",
+   "components": [
+    {
+     "name": "烤鸭",
+     "ratio": 66.67,
+     "per100": {
+      "kcal": 240,
+      "protein": 16,
+      "carb": 1.5,
+      "fat": 19
+     }
+    },
+    {
+     "name": "豆芽",
+     "ratio": 11.11,
+     "per100": {
+      "kcal": 18,
+      "protein": 2.1,
+      "carb": 2.9,
+      "fat": 0.1
+     }
+    },
+    {
+     "name": "千张",
+     "ratio": 11.11,
+     "per100": {
+      "kcal": 204,
+      "protein": 24.5,
+      "carb": 8.4,
+      "fat": 8.4
+     }
+    },
+    {
+     "name": "红油",
+     "ratio": 6.67,
+     "per100": {
+      "kcal": 700,
+      "protein": 0.5,
+      "carb": 5,
+      "fat": 75
+     }
+    },
+    {
+     "name": "蒜",
+     "ratio": 4.44,
+     "per100": {
+      "kcal": 126,
+      "protein": 4.5,
+      "carb": 27.6,
+      "fat": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "id": "yuanwei-doujiang",
+   "name": "原味豆浆",
+   "category": "饮品",
+   "components": [
+    {
+     "name": "豆浆",
+     "ratio": 100,
+     "per100": {
+      "kcal": 31,
+      "protein": 1.8,
+      "carb": 4.8,
+      "fat": 0.7
+     }
+    }
+   ]
+  },
+  {
+   "id": "re-naicha",
+   "name": "热奶茶",
+   "category": "饮品",
+   "components": [
+    {
+     "name": "红茶",
+     "ratio": 0.99,
+     "per100": {
+      "kcal": 1,
+      "protein": 0,
+      "carb": 0.3,
+      "fat": 0
+     }
+    },
+    {
+     "name": "椰乳",
+     "ratio": 49.5,
+     "per100": {
+      "kcal": 120,
+      "protein": 1,
+      "carb": 6,
+      "fat": 10
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 49.5,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "jilong-xiang-ningmengcha",
+   "name": "鸡笼香柠檬茶",
+   "category": "饮品",
+   "components": [
+    {
+     "name": "红茶",
+     "ratio": 0.94,
+     "per100": {
+      "kcal": 1,
+      "protein": 0,
+      "carb": 0.3,
+      "fat": 0
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 94.34,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 4.72,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "pingguo-shanzha-hongcha",
+   "name": "苹果山楂红茶",
+   "category": "饮品",
+   "components": [
+    {
+     "name": "红茶",
+     "ratio": 0.96,
+     "per100": {
+      "kcal": 1,
+      "protein": 0,
+      "carb": 0.3,
+      "fat": 0
+     }
+    },
+    {
+     "name": "水",
+     "ratio": 95.85,
+     "per100": {
+      "kcal": 0,
+      "protein": 0,
+      "carb": 0,
+      "fat": 0
+     }
+    },
+    {
+     "name": "白砂糖",
+     "ratio": 3.19,
+     "per100": {
+      "kcal": 400,
+      "protein": 0,
+      "carb": 99.9,
+      "fat": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "kaochang",
+   "name": "烤肠",
+   "category": "烤类",
+   "components": [
+    {
+     "name": "香肠",
+     "ratio": 100,
+     "per100": {
+      "kcal": 508,
+      "protein": 24.1,
+      "carb": 11.2,
+      "fat": 40.7
+     }
+    }
+   ]
+  }
+ ]
+}

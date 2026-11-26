@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import type { IndexedFood } from '../../data/foods';
+import type { DishItem } from '../../data/dishes';
 import type {
   Basis,
   DiaryEntry,
@@ -290,35 +291,58 @@ export function rowsFromMemory(
   ];
 }
 
-/**
+/** 结果 → 一行草稿（AI 识别与菜品库共用） */
+function rowFromResolved(
+  resolved: { name: string; grams: number; components: EntryComponent[]; nutrients: Nutrients },
+  source: DiaryEntry['source'],
+): DraftRow {
+  return {
+    id: nextId(),
+    name: resolved.name,
+    grams: resolved.grams,
+    basis: 'edible',
+    foodCode: null,
+    nutrients: resolved.nutrients,
+    components: resolved.components.map<DraftComponent>((component) => ({
+      name: component.name,
+      grams: component.grams,
+      foodCode: component.foodCode,
+      nutrients: component.nutrients,
+      per100: component.per100 ?? null,
+      edible: null,
+      source: component.source,
+      kind: component.kind,
+      clamped: component.clamped,
+    })),
+    source,
+  };
+}
+
 /**
  * AI 识别 → 草稿行。
  * 一道菜一行，原料和调料都在 components 里；本地查不到的组成用 AI 的每 100g 值。
  */
 export function rowsFromDish(index: FoodIndex, dish: DishDraft): DraftRow[] {
-  const resolved = resolveDish(index, dish);
-  return [
-    {
-      id: nextId(),
-      name: resolved.name,
-      grams: resolved.grams,
-      basis: 'edible',
-      foodCode: null,
-      nutrients: resolved.nutrients,
-      components: resolved.components.map<DraftComponent>((component) => ({
-        name: component.name,
-        grams: component.grams,
-        foodCode: component.foodCode,
-        nutrients: component.nutrients,
-        per100: component.per100 ?? null,
-        edible: null,
-        source: component.source,
-        kind: component.kind,
-        clamped: component.clamped,
-      })),
-      source: 'photo',
-    },
-  ];
+  return [rowFromResolved(resolveDish(index, dish), 'photo')];
+}
+
+/** 从菜品库选一道菜：按每 100 g 比例换算成指定克数 */
+export function rowsFromRecipe(index: FoodIndex, dish: DishItem, grams = 250): DraftRow[] {
+  const draft: DishDraft = {
+    name: dish.name,
+    grams,
+    components: dish.components.map((component) => ({
+      name: component.name,
+      grams: Math.max(1, Math.round((component.ratio * grams) / 100)),
+      kind: isSeasoningName(component.name) ? 'seasoning' : 'ingredient',
+      per100: component.per100,
+    })),
+  };
+  return [rowFromResolved(resolveDish(index, draft, 'recipe'), 'search')];
+}
+
+function isSeasoningName(name: string): boolean {
+  return /油|盐|糖|醋|酱|精|淀粉|料酒|花椒|胡椒|咖喱|汁|料/.test(name);
 }
 
 /** 已有记录 → 草稿行（编辑页用），保留原营养快照与原料明细 */

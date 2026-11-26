@@ -183,7 +183,11 @@ function clampSeasoning(name: string, grams: number): { grams: number; clamped: 
  * 组成 → 本地表优先，查不到用 AI 的每 100g 值。
  * 全程精确匹配（「醋」不会命中醋栗）。
  */
-export function resolveDish(index: FoodIndex, dish: DishDraft): ResolvedDish {
+export function resolveDish(
+  index: FoodIndex,
+  dish: DishDraft,
+  fallbackSource: 'ai' | 'recipe' = 'ai',
+): ResolvedDish {
   const components: EntryComponent[] = dish.components.map((component) => {
     const query = INGREDIENT_ALIAS[component.name] ?? component.name;
     const hit = searchFoods(index, query, 1, { exact: true })[0]?.item ?? null;
@@ -211,7 +215,7 @@ export function resolveDish(index: FoodIndex, dish: DishDraft): ResolvedDish {
       foodCode: null,
       nutrients: scaleNutrients(aiNutrients(component.per100), amount.grams, 'edible', null),
       per100: aiNutrients(component.per100),
-      source: 'ai',
+      source: fallbackSource,
       kind: component.kind,
       clamped: amount.clamped || undefined,
     };

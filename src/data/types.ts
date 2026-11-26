@@ -124,8 +124,8 @@ export interface EntryComponent {
   nutrients: Nutrients;
   /** 每 100 g 营养：改克数时就地重算，不用再问 AI */
   per100?: Nutrients | null;
-  /** 数值来源：本地成分表 / AI 估算 / 手填 */
-  source?: 'table' | 'ai' | 'manual';
+  /** 数值来源：本地成分表 / AI 估算 / 菜谱导入 / 手填 */
+  source?: 'table' | 'ai' | 'recipe' | 'manual';
   /** 原料还是调料：决定 UI 分组 */
   kind?: 'ingredient' | 'seasoning';
   /** AI 给的克数超出常识范围、被夹住过 */

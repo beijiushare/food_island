@@ -14,6 +14,8 @@
   flex-direction: column;
   min-height: 0;
   padding-top: calc(var(--sp-md) + env(safe-area-inset-top));
+  /* 给吸底按钮留位置，避免盖住最后一屏内容 */
+  padding-bottom: 88px;
 }
 
 /* ---------- 页头 ---------- */
@@ -179,6 +181,30 @@
   list-style: none;
 }
 
+.add__list--dishes {
+  margin-bottom: var(--sp-md);
+}
+
+.add__section {
+  margin: var(--sp-md) 0 var(--sp-sm);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--c-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.add__badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--c-primary-active);
+  vertical-align: 1px;
+  background: var(--c-primary-bg);
+  border-radius: 4px;
+}
+
 .add__row {
   display: flex;
   align-items: center;
@@ -318,9 +344,10 @@
 .add__footer {
   position: sticky;
   bottom: 0;
-  padding-top: var(--sp-md);
+  padding-top: var(--sp-sm);
+  padding-bottom: env(safe-area-inset-bottom);
   margin-top: auto;
-  background: linear-gradient(to bottom, transparent, var(--c-bg) 40%);
+  background: var(--c-bg);
 }
 
 /* 拍一张：整块大按钮 */

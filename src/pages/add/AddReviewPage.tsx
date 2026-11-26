@@ -228,6 +228,7 @@ export function AddReviewPage() {
         <span className="rv__part-name">
           {component.name}
           {component.source === 'ai' ? <span className="rv__badge">AI</span> : null}
+          {component.source === 'recipe' ? <span className="rv__badge">{t('add.dishBadge')}</span> : null}
           {component.clamped ? <span className="rv__badge rv__badge--warn">{t('add.clamped')}</span> : null}
         </span>
         <Stepper

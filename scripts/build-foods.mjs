@@ -315,6 +315,37 @@ function build() {
     process.exit(1);
   }
   console.log('✓ 自检通过');
+  buildDishes();
+}
+
+// ---------------------------------------------------------------- 菜品库
+// data-src/dishes.json 由 scripts/import-dishes.mjs 生成（一次性导入参考项目）
+
+function buildDishes() {
+  const SRC_DISHES = path.join(ROOT, 'data-src', 'dishes.json');
+  const OUT_DISHES = path.join(ROOT, 'src', 'assets', 'dishes.json');
+  if (!fs.existsSync(SRC_DISHES)) {
+    console.log('（跳过菜品库：没有 data-src/dishes.json）');
+    return;
+  }
+
+  const raw = JSON.parse(fs.readFileSync(SRC_DISHES, 'utf8'));
+  const problems = [];
+  for (const dish of raw.items) {
+    const sum = dish.components.reduce((acc, component) => acc + component.ratio, 0);
+    if (Math.abs(sum - 100) > 0.5) problems.push(`${dish.name} 比例合计 ${sum}`);
+    if (dish.components.some((component) => component.ratio <= 0)) {
+      problems.push(`${dish.name} 有 0 比例配料`);
+    }
+  }
+
+  fs.writeFileSync(OUT_DISHES, JSON.stringify(raw), 'utf8');
+  console.log(`菜品库        ${raw.items.length} 道 → ${(fs.statSync(OUT_DISHES).size / 1024).toFixed(1)} KB`);
+
+  if (problems.length) {
+    console.error('✗ 菜品库自检失败：' + problems.slice(0, 5).join('；'));
+    process.exit(1);
+  }
 }
 
 build();

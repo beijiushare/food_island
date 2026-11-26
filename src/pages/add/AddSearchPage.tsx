@@ -1,11 +1,12 @@
 import { Input } from 'animal-island-ui';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { dishPer100, loadDishes, searchDishes, type DishItem } from '../../data/dishes';
 import { searchFoods } from '../../data/foods';
 import { useFoodIndex } from '../../data/useFoodIndex';
-import { rowsFromSearch, useDraft } from '../../features/entry/draft';
+import { rowsFromRecipe, rowsFromSearch, useDraft } from '../../features/entry/draft';
 import { AddHeader } from './AddHeader';
 
 export function AddSearchPage() {
@@ -14,13 +15,31 @@ export function AddSearchPage() {
   const { index, loading, error } = useFoodIndex();
   const setRows = useDraft((state) => state.setRows);
   const [query, setQuery] = useState('');
+  const [dishes, setDishes] = useState<DishItem[]>([]);
+
+  useEffect(() => {
+    let alive = true;
+    void loadDishes().then((list) => {
+      if (alive) setDishes(list);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const hits = useMemo(() => (index && query.trim() ? searchFoods(index, query, 30) : []), [index, query]);
+  const dishHits = useMemo(() => searchDishes(dishes, query), [dishes, query]);
 
   function pick(code: string) {
     const item = index?.byCode.get(code);
     if (!item) return;
     setRows(rowsFromSearch(item, 'search'));
+    navigate('/add/review');
+  }
+
+  function pickDish(dish: DishItem) {
+    if (!index) return;
+    setRows(rowsFromRecipe(index, dish));
     navigate('/add/review');
   }
 
@@ -48,6 +67,30 @@ export function AddSearchPage() {
       ) : (
         <p className="add__hint">{t('add.searchTip')}</p>
       )}
+
+      {dishHits.length > 0 ? (
+        <>
+          <p className="add__section">{t('add.dishSection')}</p>
+          <ul className="add__list add__list--dishes">
+            {dishHits.map((dish) => (
+              <li key={dish.id}>
+                <button type="button" className="add__row" onClick={() => pickDish(dish)}>
+                  <span className="add__row-main">
+                    <span className="add__row-name">
+                      {dish.name}
+                      <span className="add__badge">{t('add.dishBadge')}</span>
+                    </span>
+                    <span className="add__row-meta">
+                      {dish.category} · {t('add.dishMeta', { kcal: Math.round(dishPer100(dish).kcal) })}
+                    </span>
+                  </span>
+                  <span className="add__row-kcal">{t('add.dishPortion')}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
 
       <ul className="add__list">
         {hits.map((hit) => (
