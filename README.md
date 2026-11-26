@@ -26,16 +26,6 @@
 | [`docs/03-交接提示词.md`](./docs/03-交接提示词.md) | 新会话启动提示词 |
 | [`data-src/README.md`](./data-src/README.md) | 成分表原始数据说明 |
 
-## 技术栈
-
-```
-Vite 8 · React 19 · TypeScript
-Capacitor 8（Android）
-Zustand · Dexie · react-router-dom
-pinyin-pro · dayjs · i18next
-animal-island-ui
-```
-
 ## 快速开始
 
 ```bash
@@ -56,3 +46,24 @@ npx cap run android       # 真机
 ## 状态
 
 P1 数据层完成（1677 条 → `src/assets/foods.json`，检索验收通过），当前在做 P2 记录层。进度见 `AGENTS.md` 末尾。
+
+## 致谢
+
+**数据**
+
+- 《中国食物成分表 标准版（第 6 版）》— 中国疾病预防控制中心营养与健康所
+- [china-food-composition-data](https://github.com/Sanotsu/china-food-composition-data) — 成分表的数字化整理
+- [NutritionCalculatorOfHOC](https://github.com/Sibuxiangx/NutritionCalculatorOfHOC) — 调料数值与菜品配方比例（MIT）
+- [CookLikeHOC](https://github.com/Gar-b-age/CookLikeHOC) — 菜品配方来源
+
+**组件库**
+
+- [animal-island-ui](https://github.com/guokaigdg/animal-island-ui) — 动森风格组件库（MIT）
+
+**技术栈**
+
+- [Vite](https://vite.dev) · [React](https://react.dev/) · [Capacitor](https://capacitorjs.com) · [Dexie](https://dexie.org) · [Zustand](https://github.com/pmndrs/zustand) · [i18next](https://www.i18next.com) · [pinyin-pro](https://pinyin-pro.cn) · [dayjs](https://day.js.org)
+
+**参考**
+
+- [Fud AI](https://github.com/apoorvdarshan/fud-ai) — API Key 加密存储与录入流程参考（MIT）
